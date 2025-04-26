@@ -1,0 +1,25 @@
+{
+  "name": "discordbots",
+  "version": "0.0.0",
+  "description": "Discord Bots",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TechThrives/DiscordBots.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TechThrives/DiscordBots/issues"
+  },
+  "homepage": "https://github.com/TechThrives/DiscordBots#readme",
+  "packageManager": "npm@11.2.0",
+  "workspaces": [
+    "bots/*"
+  ],
+  "devDependencies": {
+    "nodemon": "^3.1.10",
+    "turbo": "^2.5.2"
+  }
+}
