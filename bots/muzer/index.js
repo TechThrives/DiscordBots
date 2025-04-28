@@ -12,6 +12,24 @@ const { Spotify } = require("riffy-spotify");
 const config = require("./config.js");
 const messages = require("./utils/messages.js");
 const emojis = require("./emojis.js");
+const express = require("express");
+
+const app = express();
+const port = config.server.port;
+
+app.use(express.json());
+
+app.get("/", (req, res) => {
+  res.json({ message: "Muzer is running!" });
+});
+
+app.get("/ping", (req, res) => {
+  res.json({ message: "Pong!" });
+});
+
+app.listen(port, () => {
+  console.log(`Listening on port ${port}`);
+});
 
 const client = new Client({
   intents: [

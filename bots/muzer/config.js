@@ -20,4 +20,7 @@ module.exports = {
     commandsChannelId: process.env.COMMANDS_CHANNEL_ID,
     voiceChannelId: process.env.VOICE_CHANNEL_ID,
   },
+  server:{
+    port: process.env.PORT || 8080,
+  }
 };
