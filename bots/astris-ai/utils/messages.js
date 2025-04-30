@@ -4,23 +4,23 @@ const config = require("../config.js");
 const path = require("path");
 
 // Helper function to handle both message and interaction responses
-function sendResponse(target, content) {
+async function sendResponse(target, content) {
   if (target.reply && target.editReply) {
     // This is an interaction
     if (target.deferred || target.replied) {
-      return target.editReply(content);
+      return await target.editReply(content);
     } else {
-      return target.reply(content);
+      return await target.reply(content);
     }
   } else {
     // This is a channel
-    return target.send(content);
+    return await target.send(content);
   }
 }
 
 module.exports = {
   send: async function (target, content) {
-    sendResponse(target, content);
+    await sendResponse(target, content);
   },
 
   image: async function (target, imagePath, prompt) {
