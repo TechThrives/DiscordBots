@@ -20,7 +20,10 @@ function sendResponse(target, content) {
 
 module.exports = {
   send: (target, content) => {
-    sendResponse(target, content);
+    const maxLength = 4000;
+    for (let i = 0; i < content.length; i += maxLength) {
+      sendResponse(target, content);
+    }
   },
 
   image: (target, imagePath, prompt) => {
