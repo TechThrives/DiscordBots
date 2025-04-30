@@ -126,12 +126,19 @@ client.on("messageCreate", async (message) => {
   // Check if this is an AI-enabled channel
   if (aiTextChannels.has(message.channelId)) {
     try {
-      message.channel.sendTyping();
+      await message.channel.sendTyping();
       const response = await ai.chatWithGemini(message.content);
-      message.reply(response);
+      if (response.length > 2000) {
+        const chunks = ai.chunkMessage(response);
+        for (const chunk of chunks) {
+          await message.reply(chunk);
+        }
+      } else {
+        await message.reply(response);
+      }
     } catch (error) {
       console.error("Error processing AI channel message:", error);
-      message.reply("I encountered an error processing your message. Please try again later.");
+      await message.reply("I encountered an error processing your message. Please try again later.");
     }
   }
 
@@ -142,13 +149,13 @@ client.on("messageCreate", async (message) => {
       await message.channel.sendTyping();
       loadingMessage = await message.reply(`${emojis.loading} Generating image...`);
       const imagePath = await ai.generateImage(message.content);
-      loadingMessage.edit({
+      await loadingMessage.edit({
         content: `${emojis.image} Here is your generated image:`,
         files: [imagePath],
       });
     } catch (error) {
       console.error("Error processing AI image channel message:", error);
-      loadingMessage.edit("I encountered an error generating the image. Please try again later.");
+      await loadingMessage.edit("I encountered an error generating the image. Please try again later.");
     }
   }
 });
@@ -166,7 +173,7 @@ client.on("interactionCreate", async (interaction) => {
       }));
 
       await interaction.deferReply();
-      messages.help(interaction, helpCommands);
+      await messages.help(interaction, helpCommands);
       break;
     }
 
@@ -176,10 +183,10 @@ client.on("interactionCreate", async (interaction) => {
       try {
         const message = interaction.options.getString("message");
         const response = await ai.chatWithGemini(message);
-        messages.send(interaction, response);
+        await messages.send(interaction, response);
       } catch (error) {
         console.error("Error in chat command:", error);
-        messages.send(interaction, "An error occurred while processing your request.");
+        await messages.send(interaction, "An error occurred while processing your request.");
       }
       break;
     }
@@ -190,10 +197,10 @@ client.on("interactionCreate", async (interaction) => {
       try {
         const category = interaction.options.getString("category") || "general";
         const joke = await ai.generateJoke(category);
-        messages.send(interaction, joke);
+        await messages.send(interaction, joke);
       } catch (error) {
         console.error("Error in joke command:", error);
-        messages.send(interaction, "An error occurred while generating the joke.");
+        await messages.send(interaction, "An error occurred while generating the joke.");
       }
       break;
     }
@@ -207,10 +214,10 @@ client.on("interactionCreate", async (interaction) => {
         const [width, height] = size.split(":").map(Number);
         const imagePath = await ai.generateImage(prompt, width, height);
 
-        messages.image(interaction, imagePath, prompt);
+        await messages.image(interaction, imagePath, prompt);
       } catch (error) {
         console.error("Error in generate command:", error);
-        messages.send(interaction, "An error occurred while generating the image.");
+        await messages.send(interaction, "An error occurred while generating the image.");
       }
       break;
     }
@@ -218,13 +225,13 @@ client.on("interactionCreate", async (interaction) => {
     case "reset": {
       // Check if this is an AI channel
       if (!aiTextChannels.has(interaction.channelId)) {
-        messages.send(interaction, "This command can only be used in AI-enabled channels.");
+        await messages.send(interaction, "This command can only be used in AI-enabled channels.");
         return;
       }
 
       // Clear conversation history
       ai.clearConversationHistory(interaction.channelId);
-      messages.send(interaction, `Conversation history has been reset. The AI will start fresh.`);
+      await messages.send(interaction, `Conversation history has been reset. The AI will start fresh.`);
       break;
     }
   }

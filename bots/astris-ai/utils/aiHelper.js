@@ -18,18 +18,18 @@ module.exports = {
     try {
       // Get the generative model
       const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
-      
+
       let prompt = message;
-      
+
       // If channelId is provided, use conversation history
       if (channelId) {
         // Get or initialize conversation history for this channel
         if (!channelConversations.has(channelId)) {
           channelConversations.set(channelId, []);
         }
-        
+
         const history = channelConversations.get(channelId);
-        
+
         // Create chat session with history
         const chat = model.startChat({
           history: history,
@@ -37,24 +37,21 @@ module.exports = {
             maxOutputTokens: 1000,
           },
         });
-        
+
         // Send message and get response
         const result = await chat.sendMessage(message);
         const responseText = result.response.text();
-        
+
         // Update conversation history
         history.push({ role: "user", parts: [{ text: message }] });
         history.push({ role: "model", parts: [{ text: responseText }] });
-        
+
         // Trim history if it gets too long
         if (history.length > MAX_HISTORY_LENGTH * 2) {
           // Remove oldest messages but keep at least one exchange
-          channelConversations.set(
-            channelId,
-            history.slice(-MAX_HISTORY_LENGTH * 2)
-          );
+          channelConversations.set(channelId, history.slice(-MAX_HISTORY_LENGTH * 2));
         }
-        
+
         return responseText;
       } else {
         // Simple one-off generation without history
@@ -68,7 +65,34 @@ module.exports = {
     }
   },
 
-  clearConversationHistory: function(channelId) {
+  chunkMessage: function (message, maxLength = 2000) {
+    const chunks = [];
+    let currentChunk = "";
+
+    // Split the message by words, keeping code blocks intact
+    const lines = message.split("\n");
+
+    for (const line of lines) {
+      // Check if the line is too long to fit in the current chunk
+      if (currentChunk.length + line.length + 1 > maxLength) {
+        // Push the current chunk to the chunks array and reset the chunk
+        chunks.push(currentChunk);
+        currentChunk = line;
+      } else {
+        // Otherwise, add the line to the current chunk
+        currentChunk += (currentChunk ? "\n" : "") + line;
+      }
+    }
+
+    // Push any remaining content in the last chunk
+    if (currentChunk) {
+      chunks.push(currentChunk);
+    }
+
+    return chunks;
+  },
+
+  clearConversationHistory: function (channelId) {
     if (channelConversations.has(channelId)) {
       channelConversations.delete(channelId);
       return true;
@@ -98,12 +122,9 @@ module.exports = {
         safe: true,
         nologo: true,
       });
-      const response = await axios.get(
-        `${config.imageGeneration.apiEndpoint}/${prompt}?${params.toString()}`,
-        {
-          responseType: "arraybuffer",
-        }
-      );
+      const response = await axios.get(`${config.imageGeneration.apiEndpoint}/${prompt}?${params.toString()}`, {
+        responseType: "arraybuffer",
+      });
       // Save the image temporarily
       const imagePath = path.join(__dirname, "..", "temp", `generated-${Date.now()}.png`);
       // Ensure temp directory exists
