@@ -2,29 +2,25 @@ const { EmbedBuilder, AttachmentBuilder } = require("discord.js");
 const emojis = require("../emojis.js");
 const config = require("../config.js");
 const path = require("path");
-const ai = require("./aiHelper.js");
 
 // Helper function to handle both message and interaction responses
-async function sendResponse(target, content) {
+function sendResponse(target, content) {
   if (target.reply && target.editReply) {
     // This is an interaction
     if (target.deferred || target.replied) {
-      return await target.editReply(content);
+      return target.editReply(content);
     } else {
-      return await target.reply(content);
+      return target.reply(content);
     }
   } else {
     // This is a channel
-    return await target.send(content);
+    return target.send(content);
   }
 }
 
 module.exports = {
   send: async function (target, content) {
-    const chunks = ai.chunkMessage(content);
-    for (const chunk of chunks) {
-      await sendResponse(target, chunk);
-    }
+    sendResponse(target, content);
   },
 
   image: async function (target, imagePath, prompt) {
