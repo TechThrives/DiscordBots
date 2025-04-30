@@ -131,7 +131,7 @@ client.on("messageCreate", async (message) => {
       message.reply(response);
     } catch (error) {
       console.error("Error processing AI channel message:", error);
-      messages.reply("I encountered an error processing your message. Please try again later.");
+      message.reply("I encountered an error processing your message. Please try again later.");
     }
   }
 
@@ -176,10 +176,10 @@ client.on("interactionCreate", async (interaction) => {
       try {
         const message = interaction.options.getString("message");
         const response = await ai.chatWithGemini(message);
-        messages.success(interaction, response);
+        messages.send(interaction, response);
       } catch (error) {
         console.error("Error in chat command:", error);
-        messages.error(interaction, "An error occurred while processing your request.");
+        messages.send(interaction, "An error occurred while processing your request.");
       }
       break;
     }
@@ -190,10 +190,10 @@ client.on("interactionCreate", async (interaction) => {
       try {
         const category = interaction.options.getString("category") || "general";
         const joke = await ai.generateJoke(category);
-        messages.success(interaction, joke);
+        messages.send(interaction, joke);
       } catch (error) {
         console.error("Error in joke command:", error);
-        messages.error(interaction, "An error occurred while generating the joke.");
+        messages.send(interaction, "An error occurred while generating the joke.");
       }
       break;
     }
@@ -210,7 +210,7 @@ client.on("interactionCreate", async (interaction) => {
         messages.image(interaction, imagePath, prompt);
       } catch (error) {
         console.error("Error in generate command:", error);
-        messages.error(interaction, "An error occurred while generating the image.");
+        messages.send(interaction, "An error occurred while generating the image.");
       }
       break;
     }
@@ -218,13 +218,13 @@ client.on("interactionCreate", async (interaction) => {
     case "reset": {
       // Check if this is an AI channel
       if (!aiTextChannels.has(interaction.channelId)) {
-        messages.error(interaction, "This command can only be used in AI-enabled channels.");
+        messages.send(interaction, "This command can only be used in AI-enabled channels.");
         return;
       }
 
       // Clear conversation history
       ai.clearConversationHistory(interaction.channelId);
-      messages.success(interaction, `Conversation history has been reset. The AI will start fresh.`);
+      messages.send(interaction, `Conversation history has been reset. The AI will start fresh.`);
       break;
     }
   }

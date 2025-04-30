@@ -19,12 +19,8 @@ function sendResponse(target, content) {
 }
 
 module.exports = {
-  success: (target, message) => {
-    return sendResponse(target, `${emojis.success} | ${message}`);
-  },
-
-  error: (target, message) => {
-    return sendResponse(target, `${emojis.error} | ${message}`);
+  send: (target, content) => {
+    sendResponse(target, content);
   },
 
   image: (target, imagePath, prompt) => {
