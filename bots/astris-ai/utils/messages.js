@@ -2,6 +2,7 @@ const { EmbedBuilder, AttachmentBuilder } = require("discord.js");
 const emojis = require("../emojis.js");
 const config = require("../config.js");
 const path = require("path");
+const ai = require("./aiHelper.js");
 
 // Helper function to handle both message and interaction responses
 async function sendResponse(target, content) {
@@ -20,7 +21,10 @@ async function sendResponse(target, content) {
 
 module.exports = {
   send: async function (target, content) {
-    await sendResponse(target, content);
+    const chunks = ai.chunkMessage(content);
+    for (const chunk of chunks) {
+      await sendResponse(target, chunk);
+    }
   },
 
   image: async function (target, imagePath, prompt) {
