@@ -3,7 +3,6 @@ const config = require("./config.js");
 const emojis = require("./emojis.js");
 const messages = require("./utils/messages.js");
 const ai = require("./utils/aiHelper.js");
-const fs = require("fs");
 const express = require("express");
 
 const app = express();

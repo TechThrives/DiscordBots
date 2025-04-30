@@ -133,7 +133,7 @@ module.exports = {
       }
       fs.writeFileSync(imagePath, response.data);
       setTimeout(() => {
-        fs.unlink(imagePath, (err) => {
+        fs.unlinkSync(imagePath, (err) => {
           if (err) console.error("Error deleting temp image:", err);
         });
       }, 60000); // Delete after 1 minute
