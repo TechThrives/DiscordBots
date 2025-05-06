@@ -8,3 +8,7 @@
 - Share common utilities and configurations
 - Optimized for speed and caching with Turborepo
 - Easy to develop, test, and deploy
+
+## Folders
+
+- `bots`: Contains the source code for each Discord bot
