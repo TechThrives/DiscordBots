@@ -15,4 +15,4 @@ A feature-rich Discord music bot built with Discord.js, Riffy, and Lavalink. Thi
 
 ## Credits
 
-- [Friday](https://github.com/friday2su)
+- [GlaceYT](https://github.com/GlaceYT)
