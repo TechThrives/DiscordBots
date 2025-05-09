@@ -1,6 +1,6 @@
-const { EmbedBuilder } = require('discord.js');
+const { EmbedBuilder } = require("discord.js");
 const config = require("../config.js");
-const musicIcons = require('../ui/icons/musicicons.js');
+const musicIcons = require("../ui/icons/musicicons.js");
 
 module.exports = {
   name: "ping",
@@ -10,7 +10,7 @@ module.exports = {
   run: async (client, interaction, lang) => {
     try {
       const start = Date.now();
-      await interaction.reply(lang.ping.response);
+      await interaction.reply({ content: lang.ping.response });
 
       const end = Date.now();
       const latency = end - start;
@@ -21,7 +21,6 @@ module.exports = {
         .setAuthor({
           name: lang.ping.embed.title,
           iconURL: musicIcons.pingIcon,
-          url: "https://discord.gg/xQF9f9yUEM"
         })
         .setDescription(
           `${lang.ping.embed.responseTime.replace("{latency}", latency)}
@@ -31,7 +30,7 @@ module.exports = {
         .setFooter({ text: lang.ping.embed.footer, iconURL: musicIcons.heartIcon })
         .setTimestamp();
 
-      return interaction.editReply({ content: null, embeds: [embed] }).catch(e => {
+      return interaction.editReply({ content: null, embeds: [embed] }).catch((e) => {
         console.error(e);
       });
     } catch (e) {
