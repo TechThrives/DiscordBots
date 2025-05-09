@@ -30,9 +30,8 @@ module.exports = {
         .setFooter({ text: lang.ping.embed.footer, iconURL: musicIcons.heartIcon })
         .setTimestamp();
 
-      return interaction.editReply({ content: null, embeds: [embed] }).catch((e) => {
-        console.error(e);
-      });
+      await interaction.editReply({ content: null, embeds: [embed] });
+      
     } catch (e) {
       console.error(e);
     }
