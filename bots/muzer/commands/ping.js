@@ -10,7 +10,7 @@ module.exports = {
   run: async (client, interaction, lang) => {
     try {
       const start = Date.now();
-      await interaction.reply({ content: lang.ping.response });
+      await interaction.reply({ content: lang.ping.response, ephemeral: true });
 
       const end = Date.now();
       const latency = end - start;
@@ -30,7 +30,7 @@ module.exports = {
         .setFooter({ text: lang.ping.embed.footer, iconURL: musicIcons.heartIcon })
         .setTimestamp();
 
-      await interaction.editReply({ content: null, embeds: [embed] });
+      await interaction.editReply({ embeds: [embed]});
       
     } catch (e) {
       console.error(e);
