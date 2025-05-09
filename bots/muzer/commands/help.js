@@ -1,8 +1,8 @@
-const { EmbedBuilder, MessageFlags } = require('discord.js');
-const fs = require('fs');
-const path = require('path');
+const { EmbedBuilder, MessageFlags } = require("discord.js");
+const fs = require("fs");
+const path = require("path");
 const config = require("../config.js");
-const musicIcons = require('../ui/icons/musicicons.js');
+const musicIcons = require("../ui/icons/musicicons.js");
 
 module.exports = {
   name: "help",
@@ -14,11 +14,16 @@ module.exports = {
       const botName = client.user.username;
 
       const commandsPath = path.join(__dirname, "../commands");
-      const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
+      const commandFiles = fs
+        .readdirSync(commandsPath)
+        .filter((file) => file.endsWith(".js"));
       const totalCommands = commandFiles.length;
 
       const totalServers = client.guilds.cache.size;
-      const totalUsers = client.guilds.cache.reduce((acc, guild) => acc + guild.memberCount, 0);
+      const totalUsers = client.guilds.cache.reduce(
+        (acc, guild) => acc + guild.memberCount,
+        0,
+      );
 
       const uptime = process.uptime();
       const days = Math.floor(uptime / (3600 * 24));
@@ -37,23 +42,25 @@ module.exports = {
           iconURL: musicIcons.alertIcon,
         })
         .setThumbnail(client.user.displayAvatarURL({ dynamic: true }))
-        .setDescription(lang.help.embed.description
-          .replace("{botName}", botName)
-          .replace("{totalCommands}", totalCommands)
-          .replace("{totalServers}", totalServers)
-          .replace("{totalUsers}", totalUsers)
-          .replace("{uptimeString}", uptimeString)
-          .replace("{ping}", ping)
+        .setDescription(
+          lang.help.embed.description
+            .replace("{botName}", botName)
+            .replace("{totalCommands}", totalCommands)
+            .replace("{totalServers}", totalServers)
+            .replace("{totalUsers}", totalUsers)
+            .replace("{uptimeString}", uptimeString)
+            .replace("{ping}", ping),
         )
-        .addFields(
-          {
-            name: lang.help.embed.availableCommands,
-            value: commandFiles.map(file => {
-              const command = require(path.join(commandsPath, file));
-              return `\`/${command.name}\` - ${command.description || lang.help.embed.noDescription}`;
-            }).join('\n') || lang.help.embed.noCommands
-          }
-        )
+        .addFields({
+          name: lang.help.embed.availableCommands,
+          value:
+            commandFiles
+              .map((file) => {
+                const command = require(path.join(commandsPath, file));
+                return `\`/${command.name}\` - ${command.description || lang.help.embed.noDescription}`;
+              })
+              .join("\n") || lang.help.embed.noCommands,
+        })
         .setFooter({ text: lang.footer, iconURL: musicIcons.heartIcon })
         .setTimestamp();
 

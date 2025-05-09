@@ -2,53 +2,54 @@ const config = require("../config.js");
 const { ActivityType } = require("discord.js");
 
 module.exports = async (client) => {
-    const { REST } = require("@discordjs/rest");
-    const { Routes } = require("discord-api-types/v10");
-    const rest = new REST({ version: "10" }).setToken(config.TOKEN);
+  const { REST } = require("@discordjs/rest");
+  const { Routes } = require("discord-api-types/v10");
+  const rest = new REST({ version: "10" }).setToken(config.TOKEN);
 
-    (async () => {
-        try {
-            await rest.put(Routes.applicationCommands(client.user.id), {
-                body: await client.commands,
-            });
-            console.log("✅ Commands Loaded Successfully");
-        } catch (err) {
-            console.error("❌ Failed to load commands:", err.message);
-        }
-    })();
+  (async () => {
+    try {
+      await rest.put(Routes.applicationCommands(client.user.id), {
+        body: await client.commands,
+      });
+      console.log("✅ Commands Loaded Successfully");
+    } catch (err) {
+      console.error("❌ Failed to load commands:", err.message);
+    }
+  })();
 
-    const defaultActivity = {
-        name: config.activityName,
-        type: ActivityType[config.activityType.toUpperCase()]
-    };
+  const defaultActivity = {
+    name: config.activityName,
+    type: ActivityType[config.activityType.toUpperCase()],
+  };
 
-    async function updateStatus() {
- 
-        const activePlayers = Array.from(client.riffy.players.values()).filter(player => player.playing);
+  async function updateStatus() {
+    const activePlayers = Array.from(client.riffy.players.values()).filter(
+      (player) => player.playing,
+    );
 
-        if (!activePlayers.length) {
-            //console.log("⏹️ No song is currently playing. Setting default status.");
-            client.user.setActivity(defaultActivity);
-            return;
-        }
-
-        const player = activePlayers[0];
-
-        if (!player.current || !player.current.info || !player.current.info.title) {
-            //console.log("⚠️ Current track info is missing. Keeping default status.");
-            return;
-        }
-
-        const trackName = player.current.info.title;
-        //console.log(`🎵 Now Playing: ${trackName}`);
-
-        client.user.setActivity({
-            name: `🎸 ${trackName}`,
-            type: ActivityType.Playing
-        });
+    if (!activePlayers.length) {
+      //console.log("⏹️ No song is currently playing. Setting default status.");
+      client.user.setActivity(defaultActivity);
+      return;
     }
 
-    setInterval(updateStatus, 5000);
+    const player = activePlayers[0];
 
-    client.errorLog = config.errorLog;
+    if (!player.current || !player.current.info || !player.current.info.title) {
+      //console.log("⚠️ Current track info is missing. Keeping default status.");
+      return;
+    }
+
+    const trackName = player.current.info.title;
+    //console.log(`🎵 Now Playing: ${trackName}`);
+
+    client.user.setActivity({
+      name: `🎸 ${trackName}`,
+      type: ActivityType.Playing,
+    });
+  }
+
+  setInterval(updateStatus, 5000);
+
+  client.errorLog = config.errorLog;
 };

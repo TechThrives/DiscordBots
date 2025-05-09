@@ -16,9 +16,11 @@ module.exports = {
       playlistNotFound: "재생 목록을 찾을 수 없음",
       playlistNotFoundDescription: "- 재생 목록을 찾을 수 없습니다.",
       accessDenied: "접근 거부됨",
-      accessDeniedDescription: "- 이 재생 목록에 노래를 추가할 권한이 없습니다.",
+      accessDeniedDescription:
+        "- 이 재생 목록에 노래를 추가할 권한이 없습니다.",
       songAdded: "노래 추가됨",
-      songAddedDescription: "- 노래 **{songInput}**이(가) 재생 목록 **{playlistName}**에 추가되었습니다.",
+      songAddedDescription:
+        "- 노래 **{songInput}**이(가) 재생 목록 **{playlistName}**에 추가되었습니다.",
       error: "오류",
       errorDescription: "- 노래를 추가하는 중 오류가 발생했습니다.",
     },
@@ -30,7 +32,8 @@ module.exports = {
       createdBy: "제작자: {userId}",
       serverName: "서버: {serverName}",
       songs: "노래: **{songCount}**",
-      publicPlaylistsTitle: "공개 재생 목록 ({currentPage}/{totalPages} 페이지)",
+      publicPlaylistsTitle:
+        "공개 재생 목록 ({currentPage}/{totalPages} 페이지)",
       error: "오류",
       errorDescription: "- 재생 목록을 가져오는 중 오류가 발생했습니다.",
     },
@@ -68,7 +71,8 @@ module.exports = {
       accessDenied: "접근 거부됨",
       accessDeniedDescription: "- 이 재생 목록을 삭제할 권한이 없습니다.",
       playlistDeleted: "재생 목록 삭제됨",
-      playlistDeletedDescription: "- 재생 목록 **{playlistName}**이(가) 삭제되었습니다.",
+      playlistDeletedDescription:
+        "- 재생 목록 **{playlistName}**이(가) 삭제되었습니다.",
       error: "오류",
       errorDescription: "- 재생 목록을 삭제하는 중 오류가 발생했습니다.",
     },
@@ -79,7 +83,8 @@ module.exports = {
       playlistNotFound: "재생 목록을 찾을 수 없음",
       playlistNotFoundDescription: "- 재생 목록을 찾을 수 없습니다.",
       songDeleted: "노래 삭제됨",
-      songDeletedDescription: "- 노래 **{songName}**이(가) 재생 목록 **{playlistName}**에서 삭제되었습니다.",
+      songDeletedDescription:
+        "- 노래 **{songName}**이(가) 재생 목록 **{playlistName}**에서 삭제되었습니다.",
       error: "오류",
       errorDescription: "- 노래를 삭제하는 중 오류가 발생했습니다.",
     },
@@ -89,8 +94,10 @@ module.exports = {
   filters: {
     embed: {
       error: "오류",
-      noPlayer: "- 활성화된 플레이어를 찾을 수 없습니다. 먼저 노래를 재생해 주세요.",
-      wrongChannel: "- 이 명령어를 사용하려면 봇과 같은 음성 채널에 있어야 합니다.",
+      noPlayer:
+        "- 활성화된 플레이어를 찾을 수 없습니다. 먼저 노래를 재생해 주세요.",
+      wrongChannel:
+        "- 이 명령어를 사용하려면 봇과 같은 음성 채널에 있어야 합니다.",
       filtersCleared: "모든 필터가 제거되었습니다.",
       invalidFilter: "잘못된 필터가 선택되었습니다.",
       filterApplied: "필터 **{filter}**이(가) 적용되었습니다.",
@@ -159,7 +166,8 @@ module.exports = {
       noLavalinkNodes: "- 요청을 처리할 수 있는 Lavalink 노드가 없습니다.",
       noResults: "- 결과를 찾을 수 없습니다.",
       requestUpdated: "요청이 업데이트되었습니다!",
-      successProcessed: "- 요청이 성공적으로 처리되었습니다.\n- 재생을 제어하려면 버튼을 사용하세요",
+      successProcessed:
+        "- 요청이 성공적으로 처리되었습니다.\n- 재생을 제어하려면 버튼을 사용하세요",
       errorProcessing: "- 요청을 처리하는 중 오류가 발생했습니다.",
     },
     commandDescription: "노래 이름/링크 또는 재생 목록 입력",
@@ -173,7 +181,8 @@ module.exports = {
       noPermission: "- 이 비공개 재생 목록을 재생할 권한이 없습니다.",
       emptyPlaylist: "- 재생 목록이 비어 있습니다.",
       playingPlaylist: "재생 목록 재생 중!",
-      playlistPlaying: "- 재생 목록 **{playlistName}**이(가) 재생 중입니다.\n- 재생을 제어하려면 버튼을 사용하세요",
+      playlistPlaying:
+        "- 재생 목록 **{playlistName}**이(가) 재생 중입니다.\n- 재생을 제어하려면 버튼을 사용하세요",
       errorResolvingSong: "- 노래를 확인하는 중 오류가 발생했습니다.",
       errorPlayingPlaylist: "- 재생 목록을 재생하는 중 오류가 발생했습니다.",
     },
@@ -182,7 +191,8 @@ module.exports = {
   queue: {
     embed: {
       queueEmpty: "대기열이 비어 있음",
-      queueEmptyDescription: "- 현재 대기열이 비어 있습니다. `/play` 명령어로 노래를 추가하세요.",
+      queueEmptyDescription:
+        "- 현재 대기열이 비어 있습니다. `/play` 명령어로 노래를 추가하세요.",
       currentQueue: "현재 대기열",
       noMoreSongs: "- 대기열에 더 이상 노래가 없습니다.",
       error: "오류",
@@ -192,11 +202,14 @@ module.exports = {
   remove: {
     embed: {
       queueEmpty: "대기열이 비어 있음",
-      queueEmptyDescription: "- 현재 대기열이 비어 있습니다. `/play` 명령어로 노래를 추가하세요.",
+      queueEmptyDescription:
+        "- 현재 대기열이 비어 있습니다. `/play` 명령어로 노래를 추가하세요.",
       invalidPosition: "오류",
-      invalidPositionDescription: "- 잘못된 위치입니다. 1에서 {queueLength} 사이의 숫자를 입력하세요.",
+      invalidPositionDescription:
+        "- 잘못된 위치입니다. 1에서 {queueLength} 사이의 숫자를 입력하세요.",
       songRemoved: "노래 제거됨",
-      songRemovedDescription: "- 대기열에서 노래가 제거되었습니다: **{songTitle}**",
+      songRemovedDescription:
+        "- 대기열에서 노래가 제거되었습니다: **{songTitle}**",
       error: "오류",
       errorDescription: "- 대기열에서 노래를 제거하는 중 오류가 발생했습니다.",
     },
@@ -219,14 +232,16 @@ module.exports = {
       noPermission: "- 이 비공개 재생 목록을 볼 권한이 없습니다.",
       noSongs: "- 이 재생 목록에 노래가 없습니다.",
       songsInPlaylist: "{playlistName}의 노래",
-      songsInPlaylistPage: "{playlistName}의 노래 ({currentPage}/{totalPages} 페이지)",
+      songsInPlaylistPage:
+        "{playlistName}의 노래 ({currentPage}/{totalPages} 페이지)",
       errorDescription: "- 노래 목록을 표시하는 중 오류가 발생했습니다.",
     },
   },
   shuffle: {
     embed: {
       queueEmpty: "대기열이 비어 있음",
-      queueEmptyDescription: "- 현재 대기열이 비어 있습니다. `/play` 명령어로 노래를 추가하세요.",
+      queueEmptyDescription:
+        "- 현재 대기열이 비어 있습니다. `/play` 명령어로 노래를 추가하세요.",
       queueShuffled: "대기열이 섞임",
       queueShuffledDescription: "- 대기열이 성공적으로 섞였습니다.",
       error: "오류",
@@ -248,7 +263,8 @@ module.exports = {
       noActivePlayer: "오류",
       noActivePlayerDescription: "- 활성화된 플레이어를 찾을 수 없습니다.",
       musicHalted: "음악 중지됨!",
-      musicHaltedDescription: "**- 재생이 중지되고 플레이어가 종료되었습니다!**",
+      musicHaltedDescription:
+        "**- 재생이 중지되고 플레이어가 종료되었습니다!**",
       error: "오류",
       errorDescription: "- 요청을 처리하는 중 오류가 발생했습니다.",
     },

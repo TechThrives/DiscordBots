@@ -1,57 +1,62 @@
-const { EmbedBuilder, MessageFlags } = require('discord.js');
+const { EmbedBuilder, MessageFlags } = require("discord.js");
 const config = require("../config.js");
-const musicIcons = require('../ui/icons/musicicons.js');
+const musicIcons = require("../ui/icons/musicicons.js");
 
 async function pause(client, interaction, lang) {
-    try {
-        const player = client.riffy.players.get(interaction.guildId);
+  try {
+    const player = client.riffy.players.get(interaction.guildId);
 
-        if (!player) {
-            const errorEmbed = new EmbedBuilder()
-                .setColor('#ff0000')
-                .setAuthor({ 
-                    name: lang.pause.embed.error, 
-                    iconURL: musicIcons.alertIcon,
-                })
-                .setFooter({ text: lang.footer, iconURL: musicIcons.heartIcon })
-                .setDescription(lang.pause.embed.noActivePlayer);
+    if (!player) {
+      const errorEmbed = new EmbedBuilder()
+        .setColor("#ff0000")
+        .setAuthor({
+          name: lang.pause.embed.error,
+          iconURL: musicIcons.alertIcon,
+        })
+        .setFooter({ text: lang.footer, iconURL: musicIcons.heartIcon })
+        .setDescription(lang.pause.embed.noActivePlayer);
 
-            await interaction.reply({ embeds: [errorEmbed], flags: MessageFlags.Ephemeral });
-            return;
-        }
-
-        player.pause(true);
-
-        const embed = new EmbedBuilder()
-            .setColor(config.embedColor)
-            .setAuthor({ 
-                name: lang.pause.embed.paused, 
-                iconURL: musicIcons.pauseResumeIcon,
-            })
-            .setFooter({ text: lang.footer, iconURL: musicIcons.heartIcon })
-            .setDescription(lang.pause.embed.pausedDescription);
-
-        await interaction.reply({ embeds: [embed] });
-
-    } catch (error) {
-        console.error('Error processing pause command:', error);
-        const errorEmbed = new EmbedBuilder()
-            .setColor('#ff0000')
-            .setAuthor({ 
-                name: lang.pause.embed.error, 
-                iconURL: musicIcons.alertIcon,
-            })
-            .setFooter({ text: lang.footer, iconURL: musicIcons.heartIcon })
-            .setDescription(lang.pause.embed.errorDescription);
-
-        await interaction.reply({ embeds: [errorEmbed], flags: MessageFlags.Ephemeral });
+      await interaction.reply({
+        embeds: [errorEmbed],
+        flags: MessageFlags.Ephemeral,
+      });
+      return;
     }
+
+    player.pause(true);
+
+    const embed = new EmbedBuilder()
+      .setColor(config.embedColor)
+      .setAuthor({
+        name: lang.pause.embed.paused,
+        iconURL: musicIcons.pauseResumeIcon,
+      })
+      .setFooter({ text: lang.footer, iconURL: musicIcons.heartIcon })
+      .setDescription(lang.pause.embed.pausedDescription);
+
+    await interaction.reply({ embeds: [embed] });
+  } catch (error) {
+    console.error("Error processing pause command:", error);
+    const errorEmbed = new EmbedBuilder()
+      .setColor("#ff0000")
+      .setAuthor({
+        name: lang.pause.embed.error,
+        iconURL: musicIcons.alertIcon,
+      })
+      .setFooter({ text: lang.footer, iconURL: musicIcons.heartIcon })
+      .setDescription(lang.pause.embed.errorDescription);
+
+    await interaction.reply({
+      embeds: [errorEmbed],
+      flags: MessageFlags.Ephemeral,
+    });
+  }
 }
 
 module.exports = {
-    name: "pause",
-    description: "Pause the current song",
-    permissions: "0x0000000000000800",
-    options: [],
-    run: pause
+  name: "pause",
+  description: "Pause the current song",
+  permissions: "0x0000000000000800",
+  options: [],
+  run: pause,
 };
