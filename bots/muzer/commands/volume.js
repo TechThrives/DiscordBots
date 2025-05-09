@@ -1,4 +1,4 @@
-const { ApplicationCommandOptionType, EmbedBuilder } = require('discord.js');
+const { ApplicationCommandOptionType, EmbedBuilder, MessageFlags } = require('discord.js');
 const config = require("../config.js");
 const musicIcons = require('../ui/icons/musicicons.js');
 
@@ -17,12 +17,12 @@ async function volume(client, interaction, lang) {
                 .setFooter({ text: lang.footer, iconURL: musicIcons.heartIcon })
                 .setDescription(lang.volume.embed.noActivePlayerDescription);
 
-            await interaction.reply({ embeds: [errorEmbed], ephemeral: true });
+            await interaction.reply({ embeds: [errorEmbed], flags: MessageFlags.Ephemeral });
             return;
         }
 
         if (volume < 0 || volume > 100) {
-            return interaction.reply({ content: lang.volume.volumeRangeError, ephemeral: true });
+            return interaction.reply({ content: lang.volume.volumeRangeError, flags: MessageFlags.Ephemeral });
         }
 
         player.setVolume(volume);
@@ -48,7 +48,7 @@ async function volume(client, interaction, lang) {
             .setFooter({ text: lang.footer, iconURL: musicIcons.heartIcon })
             .setDescription(lang.volume.embed.errorDescription);
 
-        await interaction.reply({ embeds: [errorEmbed], ephemeral: true });
+        await interaction.reply({ embeds: [errorEmbed], flags: MessageFlags.Ephemeral });
     }
 }
 

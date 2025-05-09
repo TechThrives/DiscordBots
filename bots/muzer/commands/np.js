@@ -1,4 +1,4 @@
-const { EmbedBuilder } = require('discord.js');
+const { EmbedBuilder, MessageFlags } = require('discord.js');
 const config = require('../config.js');
 const musicIcons = require('../ui/icons/musicicons.js');
 
@@ -28,7 +28,7 @@ async function nowPlaying(client, interaction, lang) {
                 .setFooter({ text: lang.footer, iconURL: musicIcons.heartIcon })
                 .setDescription(lang.nowPlaying.embed.noSong);
 
-            await interaction.reply({ embeds: [errorEmbed], ephemeral: true });
+            await interaction.reply({ embeds: [errorEmbed], flags: MessageFlags.Ephemeral });
             return;
         }
 
@@ -57,7 +57,7 @@ async function nowPlaying(client, interaction, lang) {
             .setFooter({ text: lang.footer, iconURL: musicIcons.heartIcon })
             .setDescription(lang.nowPlaying.embed.errorDescription);
 
-        await interaction.reply({ embeds: [errorEmbed], ephemeral: true });
+        await interaction.reply({ embeds: [errorEmbed], flags: MessageFlags.Ephemeral });
     }
 }
 

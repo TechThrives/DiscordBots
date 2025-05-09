@@ -1,4 +1,4 @@
-const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
+const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, MessageFlags } = require('discord.js');
 const config = require("../config.js");
 const musicIcons = require('../ui/icons/musicicons.js');
 
@@ -15,7 +15,7 @@ async function queue(client, interaction, lang) {
                 .setDescription(lang.queue.embed.queueEmptyDescription)
                 .setFooter({ text: lang.footer, iconURL: musicIcons.heartIcon });
 
-            await interaction.reply({ embeds: [embed], ephemeral: true });
+            await interaction.reply({ embeds: [embed], flags: MessageFlags.Ephemeral });
             return;
         }
 
@@ -109,7 +109,7 @@ async function queue(client, interaction, lang) {
             .setFooter({ text: lang.footer, iconURL: musicIcons.heartIcon })
             .setDescription(lang.queue.embed.errorDescription);
 
-        await interaction.reply({ embeds: [errorEmbed], ephemeral: true });
+        await interaction.reply({ embeds: [errorEmbed], flags: MessageFlags.Ephemeral });
     }
 }
 

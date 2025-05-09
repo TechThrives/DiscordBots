@@ -1,4 +1,4 @@
-const { ApplicationCommandOptionType, EmbedBuilder } = require('discord.js');
+const { ApplicationCommandOptionType, EmbedBuilder, MessageFlags } = require('discord.js');
 const { playlistCollection } = require('../mongodb.js');
 const musicIcons = require('../ui/icons/musicicons.js');
 
@@ -19,7 +19,7 @@ async function addSong(client, interaction, lang) {
                 .setDescription(lang.addsong.embed.playlistNotFoundDescription)
                 .setFooter({ text: lang.footer, iconURL: musicIcons.heartIcon })
                 .setTimestamp();
-            await interaction.reply({ embeds: [embed], ephemeral: true });
+            await interaction.reply({ embeds: [embed], flags: MessageFlags.Ephemeral });
             return;
         }
 
@@ -33,7 +33,7 @@ async function addSong(client, interaction, lang) {
                 .setDescription(lang.addsong.embed.accessDeniedDescription)
                 .setFooter({ text: lang.footer, iconURL: musicIcons.heartIcon })
                 .setTimestamp();
-            await interaction.reply({ embeds: [embed], ephemeral: true });
+            await interaction.reply({ embeds: [embed], flags: MessageFlags.Ephemeral });
             return;
         }
 
@@ -74,7 +74,7 @@ async function addSong(client, interaction, lang) {
             .setFooter({ text: lang.footer, iconURL: musicIcons.heartIcon })
             .setTimestamp();
 
-        await interaction.reply({ embeds: [errorEmbed], ephemeral: true });
+        await interaction.reply({ embeds: [errorEmbed], flags: MessageFlags.Ephemeral });
     }
 }
 

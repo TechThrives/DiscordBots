@@ -1,4 +1,4 @@
-const { EmbedBuilder } = require("discord.js");
+const { EmbedBuilder, MessageFlags } = require("discord.js");
 const config = require("../config.js");
 const musicIcons = require("../ui/icons/musicicons.js");
 
@@ -10,7 +10,7 @@ module.exports = {
   run: async (client, interaction, lang) => {
     try {
       const start = Date.now();
-      await interaction.reply({ content: lang.ping.response, ephemeral: true });
+      await interaction.reply({ content: lang.ping.response, flags: MessageFlags.Ephemeral });
 
       const end = Date.now();
       const latency = end - start;
@@ -30,8 +30,7 @@ module.exports = {
         .setFooter({ text: lang.ping.embed.footer, iconURL: musicIcons.heartIcon })
         .setTimestamp();
 
-      await interaction.editReply({ embeds: [embed]});
-      
+      await interaction.editReply({ content: null, embeds: [embed] });
     } catch (e) {
       console.error(e);
     }

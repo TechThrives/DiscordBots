@@ -1,4 +1,4 @@
-const { EmbedBuilder } = require('discord.js');
+const { EmbedBuilder, MessageFlags } = require('discord.js');
 const { playlistCollection } = require('../mongodb.js');
 const musicIcons = require('../ui/icons/musicicons.js');
 
@@ -63,7 +63,7 @@ async function allPlaylists(client, interaction, lang) {
             .setTimestamp()
             .setDescription(lang.allplaylists.embed.errorDescription);
 
-        await interaction.reply({ embeds: [errorEmbed], ephemeral: true });
+        await interaction.reply({ embeds: [errorEmbed], flags: MessageFlags.Ephemeral });
     }
 }
 

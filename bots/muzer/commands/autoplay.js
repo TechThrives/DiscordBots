@@ -1,4 +1,4 @@
-const { ApplicationCommandOptionType, EmbedBuilder } = require('discord.js');
+const { ApplicationCommandOptionType, EmbedBuilder, MessageFlags } = require('discord.js');
 const { autoplayCollection } = require('../mongodb.js');
 const musicIcons = require('../ui/icons/musicicons.js');
 
@@ -36,7 +36,7 @@ async function toggleAutoplay(client, interaction, lang) {
             .setTimestamp()
             .setDescription(lang.autoplay.embed.errorDescription);
 
-        await interaction.reply({ embeds: [errorEmbed], ephemeral: true });
+        await interaction.reply({ embeds: [errorEmbed], flags: MessageFlags.Ephemeral });
     }
 }
 

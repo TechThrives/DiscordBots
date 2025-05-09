@@ -1,4 +1,4 @@
-const { ApplicationCommandOptionType, EmbedBuilder } = require('discord.js');
+const { ApplicationCommandOptionType, EmbedBuilder, MessageFlags } = require('discord.js');
 const { playlistCollection } = require('../mongodb.js');
 const musicIcons = require('../ui/icons/musicicons.js');
 
@@ -27,7 +27,7 @@ async function createPlaylist(client, interaction, lang) {
                 .setTimestamp()
                 .setDescription(lang.createplaylist.embed.playlistExistsDescription);
 
-            await interaction.reply({ embeds: [embed], ephemeral: true });
+            await interaction.reply({ embeds: [embed], flags: MessageFlags.Ephemeral });
             return;
         }
 
@@ -63,7 +63,7 @@ async function createPlaylist(client, interaction, lang) {
             .setTimestamp()
             .setDescription(lang.createplaylist.embed.errorDescription);
 
-        await interaction.reply({ embeds: [errorEmbed], ephemeral: true });
+        await interaction.reply({ embeds: [errorEmbed], flags: MessageFlags.Ephemeral });
     }
 }
 

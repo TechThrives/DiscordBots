@@ -1,4 +1,4 @@
-const { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder, ApplicationCommandOptionType } = require('discord.js');
+const { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder, ApplicationCommandOptionType, MessageFlags } = require('discord.js');
 const config = require("../config.js");
 const musicIcons = require('../ui/icons/musicicons.js');
 
@@ -16,7 +16,7 @@ async function filters(client, interaction, lang) {
                 .setFooter({ text: lang.footer, iconURL: musicIcons.heartIcon })
                 .setDescription(lang.filters.embed.noPlayer);
 
-            await interaction.reply({ embeds: [embed], ephemeral: true });
+            await interaction.reply({ embeds: [embed], flags: MessageFlags.Ephemeral });
             return;
         }
 
@@ -30,7 +30,7 @@ async function filters(client, interaction, lang) {
                 .setFooter({ text: lang.footer, iconURL: musicIcons.heartIcon })
                 .setDescription(lang.filters.embed.wrongChannel);
 
-            await interaction.reply({ embeds: [embed], ephemeral: true });
+            await interaction.reply({ embeds: [embed], flags: MessageFlags.Ephemeral });
             return;
         }
 
@@ -38,7 +38,7 @@ async function filters(client, interaction, lang) {
 
         if (selectedFilter === 'clear') {
             player.filters.clearFilters();
-            await interaction.reply({ content: lang.filters.embed.filtersCleared, ephemeral: true });
+            await interaction.reply({ content: lang.filters.embed.filtersCleared, flags: MessageFlags.Ephemeral });
             return;
         }
 
@@ -71,11 +71,11 @@ async function filters(client, interaction, lang) {
                 player.filters.setBassboost(true, { value: 3 });
                 break;
             default:
-                await interaction.reply({ content: lang.filters.embed.invalidFilter, ephemeral: true });
+                await interaction.reply({ content: lang.filters.embed.invalidFilter, flags: MessageFlags.Ephemeral });
                 return;
         }
 
-        await interaction.reply({ content: lang.filters.embed.filterApplied.replace("{filter}", selectedFilter), ephemeral: true });
+        await interaction.reply({ content: lang.filters.embed.filterApplied.replace("{filter}", selectedFilter), flags: MessageFlags.Ephemeral });
 
     } catch (error) {
         console.error('Error processing filters command:', error);
@@ -92,7 +92,7 @@ async function filters(client, interaction, lang) {
         if (interaction.replied || interaction.deferred) {
             await interaction.editReply({ embeds: [errorEmbed] });
         } else {
-            await interaction.reply({ embeds: [errorEmbed], ephemeral: true });
+            await interaction.reply({ embeds: [errorEmbed], flags: MessageFlags.Ephemeral });
         }
     }
 }

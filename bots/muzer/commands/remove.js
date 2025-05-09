@@ -1,4 +1,4 @@
-const { ApplicationCommandOptionType, EmbedBuilder } = require('discord.js');
+const { ApplicationCommandOptionType, EmbedBuilder, MessageFlags } = require('discord.js');
 const config = require("../config.js");
 const musicIcons = require('../ui/icons/musicicons.js');
 
@@ -17,7 +17,7 @@ async function remove(client, interaction, lang) {
                 .setDescription(lang.remove.embed.queueEmptyDescription)
                 .setFooter({ text: lang.footer, iconURL: musicIcons.heartIcon });
 
-            await interaction.reply({ embeds: [emptyQueueEmbed], ephemeral: true });
+            await interaction.reply({ embeds: [emptyQueueEmbed], flags: MessageFlags.Ephemeral });
             return;
         }
 
@@ -31,7 +31,7 @@ async function remove(client, interaction, lang) {
                 .setDescription(lang.remove.embed.invalidPositionDescription.replace("{queueLength}", player.queue.length))
                 .setFooter({ text: lang.footer, iconURL: musicIcons.heartIcon });
 
-            await interaction.reply({ embeds: [invalidPositionEmbed], ephemeral: true });
+            await interaction.reply({ embeds: [invalidPositionEmbed], flags: MessageFlags.Ephemeral });
             return;
         }
 
@@ -58,7 +58,7 @@ async function remove(client, interaction, lang) {
             .setFooter({ text: lang.footer, iconURL: musicIcons.heartIcon })
             .setDescription(lang.remove.embed.errorDescription);
 
-        await interaction.reply({ embeds: [errorEmbed], ephemeral: true });
+        await interaction.reply({ embeds: [errorEmbed], flags: MessageFlags.Ephemeral });
     }
 }
 

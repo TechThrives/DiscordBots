@@ -1,4 +1,4 @@
-const { EmbedBuilder } = require('discord.js');
+const { EmbedBuilder, MessageFlags } = require('discord.js');
 const fs = require('fs');
 const path = require('path');
 const config = require("../config.js");
@@ -62,7 +62,7 @@ module.exports = {
       console.error(e);
       return interaction.reply({
         content: lang.help.embed.error,
-        ephemeral: true,
+        flags: MessageFlags.Ephemeral,
       });
     }
   },
