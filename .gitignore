@@ -33,3 +33,6 @@ yarn-error.log*
 # packages
 dist
 tsconfig.tsbuildinfo
+
+# prettier ignore
+.prettierignore
