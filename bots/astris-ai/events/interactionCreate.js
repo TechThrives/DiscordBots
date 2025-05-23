@@ -1,4 +1,4 @@
-const { log } = require('../index.js');
+const { log } = require('../utils');
 
 module.exports = {
     name: 'interactionCreate',

@@ -1,8 +1,5 @@
 const fs = require('fs');
-
-function loadConfig() {
-    return JSON.parse(fs.readFileSync('./data/config.json', 'utf8'));
-}
+const config = require('./config');
 
 function loadJSON(file) {
     if (fs.existsSync(file)) {
@@ -35,4 +32,31 @@ function saveJSON(file, data) {
     fs.writeFileSync(file, JSON.stringify(data, null, 4));  
 }
 
-module.exports = { loadConfig, loadJSON, saveJSON, getTimestamp, writeLogToFile, formatOptions };
+const log = (type, message, data = null) => {
+    const types = {
+        INFO: '\x1b[34mINFO\x1b[0m', // Blue
+        SUCCESS: '\x1b[32mSUCCESS\x1b[0m', // Green
+        ERROR: '\x1b[31mERROR\x1b[0m', // Red
+        DEBUG: '\x1b[35mDEBUG\x1b[0m', // Purple
+    };
+
+    const timestamp = getTimestamp();
+    let logMessage = `${timestamp} ${types[type]}: ${message}`;
+
+    if (data) {
+        if (typeof data === "object") {
+            logMessage += `\n📌 Data: ${formatOptions(data)}`;
+        } else {
+            logMessage += ` | 📌 ${data}`;
+        }
+    }
+
+    if (config.debug) {
+        console.log(logMessage);
+        writeLogToFile(logMessage);
+    } else if (type !== "DEBUG") {
+        console.log(logMessage);
+    }
+};
+
+module.exports = { loadJSON, saveJSON, getTimestamp, writeLogToFile, formatOptions, log };
