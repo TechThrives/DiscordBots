@@ -1,0 +1,8 @@
+{
+    "token": "BOT_TOKEN", 
+    "clientId": "APPLICATION_ID",
+    "guildId": "GUILD_ID_(OPTIONAL)",
+    "debug": false,
+    "moderator": "",
+    "geminiKey": ""
+}
