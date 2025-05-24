@@ -1,0 +1,48 @@
+[24/5/2025 8:56:22 pm] [24/5/2025 8:56:21 pm] [34mINFO[0m: Loading commands...
+[24/5/2025 8:56:22 pm] [24/5/2025 8:56:22 pm] [34mINFO[0m: Loading commands from folder: help
+[24/5/2025 8:56:22 pm] [24/5/2025 8:56:22 pm] [32mSUCCESS[0m: Command loaded: help
+[24/5/2025 8:56:22 pm] [24/5/2025 8:56:22 pm] [32mSUCCESS[0m: Command loaded: invite
+[24/5/2025 8:56:22 pm] [24/5/2025 8:56:22 pm] [32mSUCCESS[0m: Command loaded: setup-info
+[24/5/2025 8:56:22 pm] [24/5/2025 8:56:22 pm] [34mINFO[0m: Loading commands from folder: image
+[24/5/2025 8:56:22 pm] [24/5/2025 8:56:22 pm] [32mSUCCESS[0m: Command loaded: flux
+[24/5/2025 8:56:22 pm] [24/5/2025 8:56:22 pm] [32mSUCCESS[0m: Command loaded: img
+[24/5/2025 8:56:22 pm] [24/5/2025 8:56:22 pm] [32mSUCCESS[0m: Command loaded: reimg
+[24/5/2025 8:56:22 pm] [24/5/2025 8:56:22 pm] [34mINFO[0m: Loading commands from folder: msg
+[24/5/2025 8:56:22 pm] [24/5/2025 8:56:22 pm] [32mSUCCESS[0m: Command loaded: clear
+[24/5/2025 8:56:22 pm] [24/5/2025 8:56:22 pm] [34mINFO[0m: Loading commands from folder: utils
+[24/5/2025 8:56:22 pm] [24/5/2025 8:56:22 pm] [32mSUCCESS[0m: Command loaded: avatar
+[24/5/2025 8:56:22 pm] [24/5/2025 8:56:22 pm] [32mSUCCESS[0m: Command loaded: ping
+[24/5/2025 8:56:22 pm] [24/5/2025 8:56:22 pm] [32mSUCCESS[0m: Command loaded: serverinfo
+[24/5/2025 8:56:22 pm] [24/5/2025 8:56:22 pm] [32mSUCCESS[0m: Command loaded: userinfo
+[24/5/2025 8:56:22 pm] [24/5/2025 8:56:22 pm] [34mINFO[0m: Loading events...
+[24/5/2025 8:56:22 pm] [24/5/2025 8:56:22 pm] [32mSUCCESS[0m: Event loaded: interactionCreate
+[24/5/2025 8:56:22 pm] [24/5/2025 8:56:22 pm] [32mSUCCESS[0m: Event loaded: messageCreate
+[24/5/2025 8:56:22 pm] [24/5/2025 8:56:22 pm] [32mSUCCESS[0m: Event loaded: ready
+[24/5/2025 8:56:22 pm] [24/5/2025 8:56:22 pm] [32mSUCCESS[0m: Server started on port 8080
+[24/5/2025 8:56:23 pm] [24/5/2025 8:56:23 pm] [34mINFO[0m: Initialize deployment of slash commands...
+[24/5/2025 8:56:24 pm] [24/5/2025 8:56:24 pm] [32mSUCCESS[0m: Successfully deployed application (/) commands.
+[24/5/2025 8:56:24 pm] [24/5/2025 8:56:24 pm] [32mSUCCESS[0m: Bot successfully logged in as AstrisAI#1317
+[24/5/2025 8:56:55 pm] [24/5/2025 8:56:55 pm] [34mINFO[0m: Loading commands...
+[24/5/2025 8:56:55 pm] [24/5/2025 8:56:55 pm] [34mINFO[0m: Loading commands from folder: help
+[24/5/2025 8:56:55 pm] [24/5/2025 8:56:55 pm] [32mSUCCESS[0m: Command loaded: help
+[24/5/2025 8:56:55 pm] [24/5/2025 8:56:55 pm] [32mSUCCESS[0m: Command loaded: invite
+[24/5/2025 8:56:55 pm] [24/5/2025 8:56:55 pm] [32mSUCCESS[0m: Command loaded: setup-info
+[24/5/2025 8:56:55 pm] [24/5/2025 8:56:55 pm] [34mINFO[0m: Loading commands from folder: image
+[24/5/2025 8:56:55 pm] [24/5/2025 8:56:55 pm] [32mSUCCESS[0m: Command loaded: flux
+[24/5/2025 8:56:55 pm] [24/5/2025 8:56:55 pm] [32mSUCCESS[0m: Command loaded: img
+[24/5/2025 8:56:55 pm] [24/5/2025 8:56:55 pm] [32mSUCCESS[0m: Command loaded: reimg
+[24/5/2025 8:56:55 pm] [24/5/2025 8:56:55 pm] [34mINFO[0m: Loading commands from folder: msg
+[24/5/2025 8:56:55 pm] [24/5/2025 8:56:55 pm] [32mSUCCESS[0m: Command loaded: clear
+[24/5/2025 8:56:55 pm] [24/5/2025 8:56:55 pm] [34mINFO[0m: Loading commands from folder: utils
+[24/5/2025 8:56:55 pm] [24/5/2025 8:56:55 pm] [32mSUCCESS[0m: Command loaded: avatar
+[24/5/2025 8:56:55 pm] [24/5/2025 8:56:55 pm] [32mSUCCESS[0m: Command loaded: ping
+[24/5/2025 8:56:55 pm] [24/5/2025 8:56:55 pm] [32mSUCCESS[0m: Command loaded: serverinfo
+[24/5/2025 8:56:55 pm] [24/5/2025 8:56:55 pm] [32mSUCCESS[0m: Command loaded: userinfo
+[24/5/2025 8:56:55 pm] [24/5/2025 8:56:55 pm] [34mINFO[0m: Loading events...
+[24/5/2025 8:56:55 pm] [24/5/2025 8:56:55 pm] [32mSUCCESS[0m: Event loaded: interactionCreate
+[24/5/2025 8:56:55 pm] [24/5/2025 8:56:55 pm] [32mSUCCESS[0m: Event loaded: messageCreate
+[24/5/2025 8:56:55 pm] [24/5/2025 8:56:55 pm] [32mSUCCESS[0m: Event loaded: ready
+[24/5/2025 8:56:55 pm] [24/5/2025 8:56:55 pm] [32mSUCCESS[0m: Server started on port 8080
+[24/5/2025 8:56:57 pm] [24/5/2025 8:56:57 pm] [34mINFO[0m: Initialize deployment of slash commands...
+[24/5/2025 8:56:57 pm] [24/5/2025 8:56:57 pm] [32mSUCCESS[0m: Successfully deployed application (/) commands.
+[24/5/2025 8:56:57 pm] [24/5/2025 8:56:57 pm] [32mSUCCESS[0m: Bot successfully logged in as AstrisAI#1317

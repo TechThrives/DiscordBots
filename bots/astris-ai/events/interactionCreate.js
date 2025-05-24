@@ -12,18 +12,29 @@ module.exports = {
 
     log(
       "DEBUG",
-      `Command executed: "${interaction.commandName}" by "${interaction.user.tag}" in "${interaction.channel?.name || "DM"}"`,
-      options || "No options provided."
+      `Command executed: "${interaction.commandName}" by "${interaction.user.tag}" in "${interaction.channel?.name || "DM"}" - ${options || "No options provided."}`
     );
 
     try {
+      if (interaction.client.setBotStatus) {
+        interaction.client.setBotStatus(interaction.client, `Executing command /${interaction.commandName}`);
+      }
       await command.execute(interaction);
     } catch (error) {
       log(
         "ERROR",
         `Error executing command: "${interaction.commandName}" by "${interaction.user.tag}" - ${error.message}`
       );
-      await interaction.editReply({ content: "There was an error while executing this command!", flags: MessageFlags.Ephemeral });
+      if (interaction.deferred) {
+        return interaction.editReply({
+          content: "There was an error while executing this command!",
+        });
+      } else {
+        await interaction.reply({
+          content: "There was an error while executing this command!",
+          flags: MessageFlags.Ephemeral,
+        });
+      }
     }
   },
 };

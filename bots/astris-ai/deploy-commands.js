@@ -4,7 +4,6 @@ const { log } = require("./utils");
 const config = require("./config");
 
 const deployCommands = async () => {
-  console.log("-----------------------------------------------------");
   log("INFO", "Initialize deployment of slash commands...");
 
   const commands = [];
@@ -21,12 +20,10 @@ const deployCommands = async () => {
   const rest = new REST({ version: "10" }).setToken(config.token);
 
   try {
-    log("INFO", "Started refreshing application (/) commands.");
     await rest.put(Routes.applicationCommands(config.clientId), { body: commands });
-    log("SUCCESS", "Successfully reloaded application (/) commands.");
-    console.log("-----------------------------------------------------");
+    log("SUCCESS", "Successfully deployed application (/) commands.");
   } catch (error) {
-    log("ERROR", error);
+    log("ERROR", `Failed to deploy slash commands: ${error.message}`);
   }
 };
 

@@ -5,14 +5,6 @@ const { log } = require("./utils");
 const config = require("./config");
 const express = require("express");
 
-deployCommands()
-  .then(() => {
-    log("SUCCESS", "Slash commands deployed successfully.");
-  })
-  .catch((err) => {
-    log("ERROR", `Failed to deploy slash commands: ${err.message}`);
-  });
-
 const client = new Client({
   intents: [GatewayIntentBits.Guilds,
     GatewayIntentBits.GuildMessages,
@@ -33,7 +25,6 @@ console.log(`
     ╚═════╝  ╚═════╝    ╚═╝       ╚═════╝ ╚═╝  ╚═╝╚══════╝╚══════╝
 `);
 console.log("\x1b[0m");
-console.log("                   ---------------------------");
 
 log("INFO", "Loading commands...");
 const commandFolders = fs.readdirSync("./commands");
@@ -50,8 +41,6 @@ for (const folder of commandFolders) {
   }
 }
 
-console.log("-----------------------------------------------------");
-
 log("INFO", "Loading events...");
 const eventFiles = fs.readdirSync("./events").filter((file) => file.endsWith(".js"));
 
@@ -63,7 +52,8 @@ for (const file of eventFiles) {
 
 client
   .login(config.token)
-  .then(() => {
+  .then(async() => {
+    await deployCommands();
     log("SUCCESS", `Bot successfully logged in as ${client.user.tag}`);
   })
   .catch((err) => {

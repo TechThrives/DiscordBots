@@ -1,16 +1,53 @@
+const { ActivityType } = require("discord.js");
+const { log } = require("../utils");
+
+function setBotStatus(client, status) {
+  try {
+    client.user.setPresence({
+      activities: [
+        {
+          name: status,
+          type: ActivityType.Custom,
+        },
+      ],
+      status: "dnd",
+    });
+
+    setTimeout(() => {
+      client.user.setPresence({
+        activities: [
+          {
+            name: "Your Ai Buddy",
+            type: ActivityType.Custom,
+          },
+        ],
+        status: "online",
+      });
+    }, 8000);
+  } catch (error) {
+    log("ERROR", `Failed to set command status: ${error.message}`);
+  }
+}
+
 module.exports = {
-    name: 'ready',
-    once: true,
-    execute(client) {  
-        setTimeout(() => {
-            try {
-                client.user.setPresence({
-                    activities: [{ name: 'STATUS BOT', type: 3 }], // 3 'WATCHING' / 0 'Playing' / 1 'Streaming'/ 2 'Listening" / 5 'Competing'
-                    status: 'online' // 'dnd' do not deride / 'online'
-                });
-            } catch (error) {
-                console.error('Error setting presence:', error);
-            }
-        }, 5000);
-    },
+  name: "ready",
+  once: true,
+  execute(client) {
+    try {
+      client.user.setPresence({
+        activities: [
+          {
+            name: "Your Ai Buddy",
+            type: ActivityType.Custom,
+          },
+        ],
+        status: "online",
+      });
+
+      client.setBotStatus = setBotStatus;
+
+    } catch (error) {
+      console.error("Error setting presence:", error);
+    }
+  },
 };
