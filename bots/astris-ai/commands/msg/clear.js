@@ -12,14 +12,6 @@ module.exports = {
     .setDefaultMemberPermissions(PermissionFlagsBits.ManageMessages),
 
   async execute(interaction) {
-    if (!interaction.member.permissions.has(PermissionFlagsBits.ManageMessages)) {
-      await interaction.reply({
-        content: "You are not authorized to use this command.",
-        flags: MessageFlags.Ephemeral,
-      });
-      return;
-    }
-
     const amount = interaction.options.getInteger("amount");
     const targetUser = interaction.options.getUser("user");
 
@@ -55,7 +47,6 @@ module.exports = {
       await interaction.editReply({
         content: `Successfully deleted ${deletedCount} message${deletedCount !== 1 ? "s" : ""} from ${targetUser.tag}.`,
       });
-
     } else {
       const deletedMessages = await interaction.channel.bulkDelete(amount, true);
       deletedCount = deletedMessages.size;
@@ -69,4 +60,5 @@ module.exports = {
       `${interaction.user.tag} deleted ${deletedCount} messages in #${interaction.channel.name}${targetUser ? ` from ${targetUser.tag}` : ""}`
     );
   },
+  permissions: PermissionFlagsBits.ManageMessages,
 };

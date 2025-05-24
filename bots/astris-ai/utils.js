@@ -29,6 +29,7 @@ const log = (type, message) => {
     INFO: "\x1b[34mINFO\x1b[0m", // Blue
     SUCCESS: "\x1b[32mSUCCESS\x1b[0m", // Green
     ERROR: "\x1b[31mERROR\x1b[0m", // Red
+    WARN: "\x1b[33mWARNING\x1b[0m", // Yellow
     DEBUG: "\x1b[35mDEBUG\x1b[0m", // Purple
   };
 
