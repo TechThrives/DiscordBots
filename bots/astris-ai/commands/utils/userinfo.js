@@ -11,7 +11,7 @@ module.exports = {
     const member = interaction.guild.members.cache.get(user.id);
 
     const embed = new EmbedBuilder()
-      .setTitle(`News from ${user.tag}`)
+      .setTitle(`User info : ${user.tag}`)
       .setThumbnail(user.displayAvatarURL({ dynamic: true }))
       .addFields(
         { name: 'ID', value: user.id, inline: true },

@@ -18,9 +18,9 @@ const formatOptions = (interaction) => {
 };
 
 const getTimestamp = () => {
-    const now = new Date();
-    const timestamp = now.toLocaleString('fr-FR', { timeZone: 'Europe/Paris' }).replace(',', '');
-    return `[${timestamp}]`;
+  const now = new Date();
+  const timestamp = now.toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }).replace(/,/g, '');
+  return `[${timestamp}]`;
 };
 
 const writeLogToFile = (message) => {
