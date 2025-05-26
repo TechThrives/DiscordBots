@@ -1,7 +1,7 @@
 const { Client, GatewayIntentBits, Collection } = require("discord.js");
 const fs = require("fs");
 const { deployCommands } = require("./deploy-commands");
-const { log } = require("./utils");
+const { log } = require("./utils/common");
 const config = require("./config");
 const express = require("express");
 

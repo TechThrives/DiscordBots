@@ -1,5 +1,5 @@
 const { ActivityType } = require("discord.js");
-const { log } = require("../utils");
+const { log } = require("../utils/common");
 
 function setBotStatus(client, status) {
   try {
@@ -10,7 +10,7 @@ function setBotStatus(client, status) {
           type: ActivityType.Custom,
         },
       ],
-      status: "dnd",
+      status: "idle",
     });
 
     setTimeout(() => {

@@ -1,5 +1,5 @@
 const { MessageFlags } = require("discord.js");
-const { log } = require("../utils");
+const { log } = require("../utils/common");
 
 module.exports = {
   name: "interactionCreate",
@@ -41,7 +41,7 @@ module.exports = {
         }
 
         // Check if user has required permissions
-        if (interaction.member.permissions.has(command.permissions)) {
+        if (!interaction.member.permissions.has(command.permissions)) {
           const permissionNames = Array.isArray(command.permissions)
             ? command.permissions.join(", ")
             : command.permissions.toString();
@@ -69,7 +69,7 @@ module.exports = {
         `Command execution failed: "${interaction.commandName}" by "${interaction.user.tag}" - ${error.message}`
       );
 
-      const errorMessage = "There was an error while executing this command!";
+      const errorMessage = error.message || "There was an error while executing this command!";
 
       try {
         if (interaction.replied) {
@@ -78,6 +78,11 @@ module.exports = {
         } else if (interaction.deferred) {
           // Command was deferred, edit the reply
           await interaction.editReply({ content: errorMessage });
+
+          setTimeout(async () => {
+            await interaction.deleteReply();
+          }, 5000);
+          
         } else {
           // Command hasn't replied yet, send ephemeral reply
           await interaction.reply({

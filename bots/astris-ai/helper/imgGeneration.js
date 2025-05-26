@@ -1,6 +1,6 @@
 const axios = require("axios");
 const config = require("../config");
-const { log } = require("../utils");
+const { log } = require("../utils/common");
 
 const generateGoogleFx = async (prompt, imageCount = 1, aspectRatio = "IMAGE_ASPECT_RATIO_SQUARE") => {
   const data = {
@@ -42,8 +42,8 @@ const generateGoogleFx = async (prompt, imageCount = 1, aspectRatio = "IMAGE_ASP
 
     return base64Images;
   } catch (error) {
-    log("ERROR", `GoogleFx Error: ${error?.response?.data || error.message}`);
-    return [];
+    log("ERROR", `ImageFX Error: ${error.response.data?.error?.message || error?.response?.data || error.message}`);
+    throw new Error("Failed to generate images. Please try again.");
   }
 };
 
@@ -73,7 +73,7 @@ const generateFlux = async (prompt, aspectRatio = "1024:1024") => {
     return base64Images;
   } catch (error) {
     log("ERROR", `Flux Error: ${error?.response?.data || error.message}`);
-    return [];
+    throw new Error("Failed to generate images. Please try again.");
   }
 };
 
@@ -93,7 +93,7 @@ const reGenerate = async (prompt, imageUrl) => {
     });
 
     if (!response?.data) {
-      throw new Error("Invalid response from Flux");
+      throw new Error("Invalid response from GPT");
     }
 
     const base64Images = [];
@@ -103,7 +103,7 @@ const reGenerate = async (prompt, imageUrl) => {
     return base64Images;
   } catch (error) {
     log("ERROR", `GPT Error: ${error?.response?.data || error.message}`);
-    return [];
+    throw new Error("Failed to generate images. Please try again.");
   }
 };
 

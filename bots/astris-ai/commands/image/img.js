@@ -43,17 +43,6 @@ module.exports = {
       return new AttachmentBuilder(buffer).setName(`image${i + 1}.jpg`);
     });
 
-    if (attachments.length === 0) {
-      await interaction.editReply({
-        content: "Failed to generate images. Please try again.",
-      });
-
-      setTimeout(async () => {
-        await interaction.deleteReply();
-      }, 5000);
-      return;
-    }
-
     await interaction.editReply({
       content: `**Prompt**\n*${prompt}*\n**Requester**\n*@${userTag}*`,
       files: attachments,
