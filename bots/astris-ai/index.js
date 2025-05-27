@@ -63,6 +63,8 @@ client
 const app = express();
 const port = config.port;
 
+app.use(express.json());
+
 app.get("/", (req, res) => {
   res.json({ message: "AstrisAI is running!" });
 });

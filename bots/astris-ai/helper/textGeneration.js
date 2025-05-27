@@ -76,8 +76,6 @@ const summarizeText = async (text) => {
       }
     );
 
-    console.log(response.data.candidates);
-
     if (response.data && response.data.candidates && response.data.candidates[0]) {
       const summary = response.data.candidates[0].content.parts[0].text;
       log(`Text summarized successfully. Original length: ${text.length}, Summary length: ${summary.length}`);

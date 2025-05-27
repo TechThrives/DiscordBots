@@ -6,7 +6,10 @@ module.exports = {
     .setName("clear")
     .setDescription("Clears messages in the current channel.")
     .addIntegerOption((option) =>
-      option.setName("amount").setDescription("Number of messages to delete (max 100)").setRequired(true)
+      option.setName("amount").setDescription("Number of messages to delete (max 50)")
+    .setMinValue(1)
+    .setMaxValue(50)
+    .setRequired(true)
     )
     .addUserOption((option) => option.setName("user").setDescription("User to delete messages from").setRequired(false))
     .setDefaultMemberPermissions(PermissionFlagsBits.ManageMessages),
@@ -14,11 +17,6 @@ module.exports = {
   async execute(interaction) {
     const amount = interaction.options.getInteger("amount");
     const targetUser = interaction.options.getUser("user");
-
-    if (amount > 100 || amount < 1) {
-      await interaction.reply({ content: "Amount must be between 1 and 100.", flags: MessageFlags.Ephemeral });
-      return;
-    }
 
     await interaction.deferReply({ flags: MessageFlags.Ephemeral });
 
