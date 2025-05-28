@@ -1,7 +1,7 @@
 {
-  "name": "cloudcraft",
+  "name": "cloud-buddy",
   "version": "1.0.0",
-  "description": "CloudCraft - A Discord bot for posting assets",
+  "description": "CloudBuddy - A Discord bot for posting assets",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
