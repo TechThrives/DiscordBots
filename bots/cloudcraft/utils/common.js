@@ -2,10 +2,24 @@ const fs = require("fs");
 const config = require("../config");
 
 function loadJSON(file) {
-  if (fs.existsSync(file)) {
-    return JSON.parse(fs.readFileSync(file, "utf8"));
-  } else {
-    return {};
+  try {
+    if (fs.existsSync(file)) {
+      return JSON.parse(fs.readFileSync(file, "utf8"));
+    }
+  } catch (err) {
+    console.error(`Failed to read JSON file: ${file}`, err);
+  }
+  return {};
+}
+
+function updateJSON(key, value, file) {
+  let data = loadJSON(file);
+  data[key] = value;
+
+  try {
+    fs.writeFileSync(file, JSON.stringify(data, null, 2), "utf8");
+  } catch (err) {
+    console.error(`Failed to write to JSON file: ${file}`, err);
   }
 }
 
@@ -44,4 +58,4 @@ const log = (type, message) => {
   }
 };
 
-module.exports = { loadJSON, saveJSON, getTimestamp, writeLogToFile, log };
+module.exports = { updateJSON, loadJSON, saveJSON, getTimestamp, writeLogToFile, log };

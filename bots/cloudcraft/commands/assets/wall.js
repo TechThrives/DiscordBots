@@ -5,26 +5,36 @@ const {
   ButtonBuilder,
   ButtonStyle,
   MessageFlags,
+  PermissionFlagsBits,
 } = require("discord.js");
-const config = require("../../config");
-const { scrapeWallpaper } = require("../../helper/wallpaperHelper");
+const path = require("path");
+const { loadJSON } = require("../../utils/common");
+const { scrapeWallpaper } = require("../../helper/assetsHelper");
 const emojis = require("../../emojis");
 
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("wall")
-    .setDescription("Send wallpaper to channel")
+    .setDescription("Send wallpaper to the configured channel")
     .addStringOption((option) => option.setName("url").setDescription("URL of the wallpaper").setRequired(true))
-    .addChannelOption((option) =>
-      option.setName("channel").setDescription("Channel to send the wallpaper to").setRequired(false)
-    ),
+    .setDefaultMemberPermissions(PermissionFlagsBits.ManageGuild),
 
   async execute(interaction) {
     await interaction.deferReply({ flags: MessageFlags.Ephemeral });
 
     const wallpaperUrl = interaction.options.getString("url");
-    const channel =
-      interaction.options.getChannel("channel") || (await interaction.client.channels.fetch(config.channels.wallpaper));
+    const configFile = path.join(__dirname, "../../channelsConfig.json");
+    const config = loadJSON(configFile);
+    const channelId = config.wallpaperChannel;
+
+    if (!channelId) {
+      await interaction.editReply({
+        content: "Wallpaper channel is not configured. Use `/setwallchannel` to set it first.",
+      });
+      return;
+    }
+
+    const channel = await interaction.client.channels.fetch(channelId);
 
     const { title, category, resolution, size, tags, downloadUrl } = await scrapeWallpaper(wallpaperUrl);
 
@@ -38,7 +48,7 @@ module.exports = {
           `**Size:** ${size}`,
           "",
           `**Tags**`,
-          `${tags.map((tag) => "`" + `${tag}` + "`").join(" ")}`,
+          `${tags.map((tag) => "`" + tag + "`").join(" ")}`,
           "",
           `**React with ⭐ if you love it!**`,
           `**Drop a 🔥 if you’re using this!**`,
@@ -61,7 +71,7 @@ module.exports = {
     await message.react("🔥");
 
     await interaction.editReply({
-      content: `Wallpaper sent to ${channel}!`,
+      content: `Wallpaper sent to <#${channelId}>!`,
     });
   },
 };

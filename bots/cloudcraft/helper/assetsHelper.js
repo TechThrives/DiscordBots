@@ -1,9 +1,9 @@
 const axios = require("axios");
 const cheerio = require("cheerio");
+const config = require("../config");
 
 const scrapeWallpaper = async (url) => {
   try {
-
     const parsedUrl = new URL(url);
     if (!parsedUrl.hostname.endsWith("hdqwalls.com")) {
       throw new Error("Please provide a valid URL from hdqwalls.com only");
@@ -53,4 +53,32 @@ const scrapeWallpaper = async (url) => {
   }
 };
 
-module.exports = { scrapeWallpaper };
+const getMediaData = async (imdbID) => {
+  const apiKey = config.omdbApiKey;
+  const url = `https://www.omdbapi.com/?i=${imdbID}&apiKey=${apiKey}`;
+
+  try {
+    const response = await axios.get(url);
+    const data = response.data;
+
+    if (data.Response === "False") throw new Error("Media not found");
+
+    return {
+      title: data.Title,
+      year: data.Year,
+      released: data.Released,
+      genre: data.Genre,
+      poster: data.Poster,
+      imdbRating: data.imdbRating,
+      imdbVotes: data.imdbVotes,
+      type: data.Type.split(" ")
+        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(" "),
+    };
+  } catch (error) {
+    console.error("Error fetching media data:", error.message);
+    throw error;
+  }
+};
+
+module.exports = { scrapeWallpaper, getMediaData };
