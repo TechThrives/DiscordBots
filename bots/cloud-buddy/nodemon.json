@@ -1,0 +1,11 @@
+{
+  "watch": ["."],
+  "ext": "js,mjs,cjs,json",
+  "ignore": [
+    "channelsConfig.json",
+    "data/",
+    "node_modules/"
+  ],
+  "exec": "node index.js",
+  "delay": "500"
+}
