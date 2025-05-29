@@ -13,7 +13,7 @@ const emojis = require("../../emojis");
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName("wall")
+    .setName("wallpaper")
     .setDescription("Send wallpaper to the configured channel")
     .addStringOption((option) => option.setName("url").setDescription("URL of the wallpaper").setRequired(true))
     .setDefaultMemberPermissions(PermissionFlagsBits.ManageGuild),
@@ -28,7 +28,7 @@ module.exports = {
 
     if (!channelId) {
       await interaction.editReply({
-        content: "Wallpaper channel is not configured. Use `/setwallchannel` to set it first.",
+        content: "Wallpaper channel is not configured. Use `/setwallpaperchannel` to set it first.",
       });
       return;
     }
@@ -61,13 +61,13 @@ module.exports = {
           `**Category:** ${category}`,
           `**Original Resolution:** ${resolution}`,
           `**Size:** ${size}`,
-          "",
+          ``,
           `**Tags**`,
           `${tags.map((tag) => "`" + tag + "`").join(" ")}`,
-          "",
+          ``,
           `**Download the file above and rename it to remove .bin extension**`,
           `**${fileName} to ${fileName.replace(".bin", "")}**`,
-          "",
+          ``,
           `**React with ⭐ if you love it!**`,
           `**Drop a 🔥 if you’re using this!**`,
         ].join("\n")
@@ -88,4 +88,5 @@ module.exports = {
       content: `Wallpaper sent to <#${channelId}>!`,
     });
   },
+  permissions: PermissionFlagsBits.ManageGuild,
 };

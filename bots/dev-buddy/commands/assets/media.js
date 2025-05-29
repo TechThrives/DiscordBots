@@ -16,7 +16,9 @@ module.exports = {
   data: new SlashCommandBuilder()
     .setName("media")
     .setDescription("Send media to the configured channel")
-    .addStringOption((option) => option.setName("url").setDescription("URL of the downloadable media").setRequired(true))
+    .addStringOption((option) =>
+      option.setName("url").setDescription("URL of the downloadable media").setRequired(true)
+    )
     .addStringOption((option) => option.setName("imdb-id").setDescription("IMDB ID").setRequired(true))
     .setDefaultMemberPermissions(PermissionFlagsBits.ManageGuild),
 
@@ -74,4 +76,5 @@ module.exports = {
       content: `Media sent to <#${channelId}>!`,
     });
   },
+  permissions: PermissionFlagsBits.ManageGuild,
 };

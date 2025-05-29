@@ -81,4 +81,51 @@ const getMediaData = async (imdbID) => {
   }
 };
 
-module.exports = { scrapeWallpaper, getMediaData };
+const scrapeTemplate = async (url) => {
+  try {
+    const parsedUrl = new URL(url);
+    if (!parsedUrl.hostname.endsWith("free-psd-templates.com")) {
+      throw new Error("Please provide a valid URL from free-psd-templates.com only");
+    }
+
+    const { data: html } = await axios.get(url);
+    const $ = cheerio.load(html);
+
+    // Extract title
+    const title = $("h1.entry-title").text().trim();
+
+    // Extract fonts
+    const fonts = [];
+    $('p a[href*="fonts.google.com"]').each((i, el) => {
+      const fontName = $(el).text().trim();
+      const fontLink = $(el).attr("href");
+      fonts.push({ name: fontName, url: fontLink });
+    });
+
+    // Extract tags
+    const tags = [];
+    $('.entry-tags a[rel="tag"]').each((i, el) => {
+      tags.push($(el).text().trim());
+    });
+
+    // Extract download link
+    const downloadPageUrl = $('a.btn[href*="/get/"]').attr("href");
+
+    const { data: downloadPageHtml } = await axios.get(downloadPageUrl);
+    const $download = cheerio.load(downloadPageHtml);
+
+    const downloadUrl = $download('#link a.btn').attr('href');
+    
+    return {
+      title,
+      fonts,
+      tags,
+      downloadUrl,
+    };
+  } catch (error) {
+    console.error("Error scraping template:", error.message);
+    throw error;
+  }
+};
+
+module.exports = { scrapeWallpaper, getMediaData, scrapeTemplate };

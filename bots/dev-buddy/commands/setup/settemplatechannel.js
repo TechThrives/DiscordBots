@@ -4,10 +4,10 @@ const { updateJSON } = require("../../utils/common");
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName("setwallchannel")
-    .setDescription("Set the channel to send wallpapers")
+    .setName("settemplatechannel")
+    .setDescription("Set the channel to send templates")
     .addChannelOption((option) =>
-      option.setName("channel").setDescription("The new wallpaper channel").setRequired(true)
+      option.setName("channel").setDescription("The new template channel").setRequired(true)
     )
     .setDefaultMemberPermissions(PermissionFlagsBits.ManageGuild),
 
@@ -16,10 +16,10 @@ module.exports = {
 
     const configFile = path.join(__dirname, "../../channelsConfig.json");
 
-    updateJSON("wallpaperChannel", channel.id, configFile);
+    updateJSON("templateChannel", channel.id, configFile);
 
     await interaction.reply({
-      content: `Wallpaper channel has been set to <#${channel.id}>.`,
+      content: `Template channel has been set to <#${channel.id}>.`,
       flags: MessageFlags.Ephemeral,
     });
   },

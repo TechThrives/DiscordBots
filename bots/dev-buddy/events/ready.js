@@ -17,7 +17,7 @@ function setBotStatus(client, status) {
       client.user.setPresence({
         activities: [
           {
-            name: "Your Assets Manager",
+            name: "Powered by creativity & code",
             type: ActivityType.Custom,
           },
         ],
@@ -37,7 +37,7 @@ module.exports = {
       client.user.setPresence({
         activities: [
           {
-            name: "Your Assets Manager",
+            name: "Powered by creativity & code",
             type: ActivityType.Custom,
           },
         ],
