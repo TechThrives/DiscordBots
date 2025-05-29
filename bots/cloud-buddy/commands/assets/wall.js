@@ -1,12 +1,11 @@
 const {
   SlashCommandBuilder,
   EmbedBuilder,
-  ActionRowBuilder,
-  ButtonBuilder,
-  ButtonStyle,
   MessageFlags,
+  AttachmentBuilder,
   PermissionFlagsBits,
 } = require("discord.js");
+const axios = require("axios");
 const path = require("path");
 const { loadJSON } = require("../../utils/common");
 const { scrapeWallpaper } = require("../../helper/assetsHelper");
@@ -38,6 +37,22 @@ module.exports = {
 
     const { title, category, resolution, size, tags, downloadUrl } = await scrapeWallpaper(wallpaperUrl);
 
+    const response = await axios.get(downloadUrl, { responseType: "arraybuffer" });
+    const buffer = Buffer.from(response.data);
+
+    const originalExtension = downloadUrl.split(".").pop().split("?")[0] || "jpg";
+    const fileName = `${title.replace(/[^a-zA-Z0-9]/g, "_")}_${resolution}.${originalExtension}.bin`;
+
+    const file = new AttachmentBuilder(buffer, {
+      name: fileName,
+      description: `${title} - ${resolution} wallpaper (rename to .${originalExtension} after download)`,
+    });
+
+    const thumbnailFile = new AttachmentBuilder(buffer, {
+      name: `thumbnail.${originalExtension}`,
+      description: "Wallpaper thumbnail",
+    });
+
     const embed = new EmbedBuilder()
       .setTitle("**NEW WALLPAPER DROP**")
       .setDescription(
@@ -50,22 +65,21 @@ module.exports = {
           `**Tags**`,
           `${tags.map((tag) => "`" + tag + "`").join(" ")}`,
           "",
+          `**Download the file above and rename it to remove .bin extension**`,
+          `**${fileName} to ${fileName.replace(".bin", "")}**`,
+          "",
           `**React with ⭐ if you love it!**`,
           `**Drop a 🔥 if you’re using this!**`,
         ].join("\n")
       )
-      .setImage(downloadUrl)
+      .setThumbnail(`attachment://thumbnail.${originalExtension}`)
       .setFooter({
         text: `By ${interaction.client.user.username}`,
         iconURL: emojis.footerIcon,
       })
       .setTimestamp();
 
-    const button = new ActionRowBuilder().addComponents(
-      new ButtonBuilder().setLabel("Download").setStyle(ButtonStyle.Link).setURL(downloadUrl)
-    );
-
-    const message = await channel.send({ embeds: [embed], components: [button] });
+    const message = await channel.send({ embeds: [embed], files: [file, thumbnailFile] });
 
     await message.react("⭐");
     await message.react("🔥");
