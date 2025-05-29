@@ -1,6 +1,6 @@
 # Discord Bot
 
-A Discord bot for posting assets
+A Discord bot for your server
 
 ## Features
 
