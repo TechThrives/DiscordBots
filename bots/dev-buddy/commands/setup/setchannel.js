@@ -4,12 +4,6 @@ const { getCollection } = require("../../mongodb");
 const { log } = require("../../utils/common");
 
 const CHANNEL_TYPES = {
-  media: {
-    webhookName: "MediaNotifier",
-    webhookAvatar: "https://i.postimg.cc/Y0gHbnTT/M.png",
-    dbField: "mediaChannel",
-    replyMsg: "Media channel set",
-  },
   template: {
     webhookName: "TemplateDrop",
     webhookAvatar: "https://i.postimg.cc/vBCy7F2W/T.png",
@@ -29,18 +23,6 @@ module.exports = {
     .setName("setchannel")
     .setDescription("Set a specific channel to send messages via webhook")
     .setDefaultMemberPermissions(PermissionFlagsBits.ManageGuild)
-    .addSubcommand((sub) =>
-      sub
-        .setName("media")
-        .setDescription("Set the media channel")
-        .addChannelOption((option) =>
-          option
-            .setName("channel")
-            .setDescription("The text channel to send media")
-            .setRequired(true)
-            .addChannelTypes(ChannelType.GuildText)
-        )
-    )
     .addSubcommand((sub) =>
       sub
         .setName("template")

@@ -53,7 +53,7 @@ const scrapeWallpaper = async (url) => {
   }
 };
 
-const getMediaData = async (imdbID) => {
+const getImdbData = async (imdbID) => {
   const apiKey = config.omdbApiKey;
   const url = `https://www.omdbapi.com/?i=${imdbID}&apiKey=${apiKey}`;
 
@@ -128,4 +128,4 @@ const scrapeTemplate = async (url) => {
   }
 };
 
-module.exports = { scrapeWallpaper, getMediaData, scrapeTemplate };
+module.exports = { scrapeWallpaper, getImdbData, scrapeTemplate };
