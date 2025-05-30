@@ -78,15 +78,14 @@ module.exports = {
         [
           `**${title}**`,
           ``,
-          `${fonts.length > 0 && "**Fonts Used in Template**"}`,
-          fonts.length > 0 && templateFonts,
-          ``,
+          ...(fonts.length > 0 ? ["**Fonts Used in Template**", templateFonts, ``] : []),
           `**Tags:**`,
           `${tags.map((tag) => `\`${tag}\``).join(" ")}`,
           ``,
           `**Give a ⭐ for awesome designs!**`,
           `**React with 🔥 if you're using this!**`,
-        ].join("\n")
+        ]
+          .join("\n")
       )
       .setThumbnail(`attachment://thumbnail.${originalExtension}`)
       .setFooter({
