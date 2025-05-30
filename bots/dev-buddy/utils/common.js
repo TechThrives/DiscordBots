@@ -50,11 +50,10 @@ const log = (type, message) => {
   const timestamp = getTimestamp();
   const logMessage = `${timestamp} ${types[type]}: ${message}`;
 
-  if (config.debug) {
-    console.log(logMessage);
+  console.log(logMessage);
+  
+  if (config.logging) {
     writeLogToFile(logMessage);
-  } else if (type !== "DEBUG") {
-    console.log(logMessage);
   }
 };
 

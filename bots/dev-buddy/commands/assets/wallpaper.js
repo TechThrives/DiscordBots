@@ -81,9 +81,13 @@ module.exports = {
       })
       .setTimestamp();
 
-    const message = await webhook.send({ 
-      embeds: [embed], 
-      files: [file, thumbnailFile] 
+    await webhook.send({
+      files: [file],
+    });
+
+    const message = await webhook.send({
+      embeds: [embed],
+      files: [thumbnailFile],
     });
 
     await message.react("⭐");
