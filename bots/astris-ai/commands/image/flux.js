@@ -6,7 +6,7 @@ module.exports = {
     .setName("flux")
     .setDescription("Image Generation using Flux")
     .addStringOption((option) =>
-      option.setName("prompt").setDescription("Prompt for image generation").setRequired(true)
+      option.setName("prompt").setDescription("Prompt for image generation").setRequired(true),
     )
     .addStringOption((option) =>
       option
@@ -16,8 +16,8 @@ module.exports = {
         .addChoices(
           { name: "Square", value: "1024:1024" },
           { name: "Portrait (9:16)", value: "768:1366" },
-          { name: "Landscape (16:9)", value: "1366:768" }
-        )
+          { name: "Landscape (16:9)", value: "1366:768" },
+        ),
     ),
 
   async execute(interaction) {

@@ -1,8 +1,4 @@
-const {
-  ApplicationCommandOptionType,
-  EmbedBuilder,
-  MessageFlags,
-} = require("discord.js");
+const { ApplicationCommandOptionType, EmbedBuilder, MessageFlags } = require("discord.js");
 const { playlistCollection } = require("../mongodb.js");
 const musicIcons = require("../ui/icons/musicicons.js");
 
@@ -76,12 +72,7 @@ async function deletePlaylist(client, interaction, lang) {
         name: lang.deleteplaylist.embed.playlistDeleted,
         iconURL: musicIcons.correctIcon,
       })
-      .setDescription(
-        lang.deleteplaylist.embed.playlistDeletedDescription.replace(
-          "{playlistName}",
-          playlistName,
-        ),
-      )
+      .setDescription(lang.deleteplaylist.embed.playlistDeletedDescription.replace("{playlistName}", playlistName))
       .setFooter({ text: lang.footer, iconURL: musicIcons.heartIcon })
       .setTimestamp();
 

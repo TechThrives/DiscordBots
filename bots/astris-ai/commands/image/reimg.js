@@ -6,7 +6,7 @@ module.exports = {
     .setName("reimg")
     .setDescription("Regenerate image using GPT Image")
     .addStringOption((option) =>
-      option.setName("prompt").setDescription("Prompt for image generation").setRequired(true)
+      option.setName("prompt").setDescription("Prompt for image generation").setRequired(true),
     )
     .addAttachmentOption((option) => option.setName("image").setDescription("Image to regenerate").setRequired(true)),
 

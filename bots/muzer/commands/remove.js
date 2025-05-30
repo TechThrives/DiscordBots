@@ -1,8 +1,4 @@
-const {
-  ApplicationCommandOptionType,
-  EmbedBuilder,
-  MessageFlags,
-} = require("discord.js");
+const { ApplicationCommandOptionType, EmbedBuilder, MessageFlags } = require("discord.js");
 const config = require("../config.js");
 const musicIcons = require("../ui/icons/musicicons.js");
 
@@ -35,12 +31,7 @@ async function remove(client, interaction, lang) {
           name: lang.remove.embed.invalidPosition,
           iconURL: musicIcons.alertIcon,
         })
-        .setDescription(
-          lang.remove.embed.invalidPositionDescription.replace(
-            "{queueLength}",
-            player.queue.length,
-          ),
-        )
+        .setDescription(lang.remove.embed.invalidPositionDescription.replace("{queueLength}", player.queue.length))
         .setFooter({ text: lang.footer, iconURL: musicIcons.heartIcon });
 
       await interaction.reply({
@@ -58,12 +49,7 @@ async function remove(client, interaction, lang) {
         name: lang.remove.embed.songRemoved,
         iconURL: musicIcons.correctIcon,
       })
-      .setDescription(
-        lang.remove.embed.songRemovedDescription.replace(
-          "{songTitle}",
-          removedTrack.info.title,
-        ),
-      )
+      .setDescription(lang.remove.embed.songRemovedDescription.replace("{songTitle}", removedTrack.info.title))
       .setFooter({ text: lang.footer, iconURL: musicIcons.heartIcon });
 
     await interaction.reply({ embeds: [embed] });

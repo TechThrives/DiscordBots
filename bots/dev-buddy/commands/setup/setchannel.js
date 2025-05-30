@@ -32,8 +32,8 @@ module.exports = {
             .setName("channel")
             .setDescription("The text channel to send templates")
             .setRequired(true)
-            .addChannelTypes(ChannelType.GuildText)
-        )
+            .addChannelTypes(ChannelType.GuildText),
+        ),
     )
     .addSubcommand((sub) =>
       sub
@@ -44,8 +44,8 @@ module.exports = {
             .setName("channel")
             .setDescription("The text channel to send wallpapers")
             .setRequired(true)
-            .addChannelTypes(ChannelType.GuildText)
-        )
+            .addChannelTypes(ChannelType.GuildText),
+        ),
     ),
 
   async execute(interaction) {
@@ -106,7 +106,7 @@ module.exports = {
             },
           },
         },
-        { upsert: true }
+        { upsert: true },
       );
 
       log("INFO", `${config.replyMsg} for guild ${guildId} -> #${channel.name}`);

@@ -6,10 +6,7 @@ const config = require("./config");
 const express = require("express");
 
 const client = new Client({
-  intents: [GatewayIntentBits.Guilds,
-    GatewayIntentBits.GuildMessages,
-    GatewayIntentBits.MessageContent,
-  ],
+  intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent],
 });
 client.commands = new Collection();
 
@@ -52,7 +49,7 @@ for (const file of eventFiles) {
 
 client
   .login(config.token)
-  .then(async() => {
+  .then(async () => {
     await deployCommands();
     log("SUCCESS", `Bot successfully logged in as ${client.user.tag}`);
   })

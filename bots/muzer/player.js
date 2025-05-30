@@ -18,13 +18,7 @@ const axios = require("axios");
 const { autoplayCollection } = require("./mongodb.js");
 const guildTrackMessages = new Map();
 
-async function sendMessageWithPermissionsCheck(
-  channel,
-  embed,
-  attachment,
-  actionRow1,
-  actionRow2,
-) {
+async function sendMessageWithPermissionsCheck(channel, embed, attachment, actionRow1, actionRow2) {
   try {
     const permissions = channel.permissionsFor(channel.guild.members.me);
     if (
@@ -33,9 +27,7 @@ async function sendMessageWithPermissionsCheck(
       !permissions.has(PermissionsBitField.Flags.AttachFiles) ||
       !permissions.has(PermissionsBitField.Flags.UseExternalEmojis)
     ) {
-      console.error(
-        "Bot lacks necessary permissions to send messages in this channel.",
-      );
+      console.error("Bot lacks necessary permissions to send messages in this channel.");
       return;
     }
 
@@ -99,9 +91,7 @@ function initializePlayer(client) {
 
     try {
       const musicard = await Dynamic({
-        thumbnailImage:
-          track.info.thumbnail ||
-          fs.readFileSync(path.join(__dirname, "assets", "thumbnail.jpg")),
+        thumbnailImage: track.info.thumbnail || fs.readFileSync(path.join(__dirname, "assets", "thumbnail.jpg")),
         backgroundColor: "#070707",
         progress: 10,
         progressColor: "#FF7A00",
@@ -141,13 +131,7 @@ function initializePlayer(client) {
       const actionRow1 = createActionRow1(false);
       const actionRow2 = createActionRow2(false);
 
-      const message = await sendMessageWithPermissionsCheck(
-        channel,
-        embed,
-        attachment,
-        actionRow1,
-        actionRow2,
-      );
+      const message = await sendMessageWithPermissionsCheck(channel, embed, attachment, actionRow1, actionRow2);
 
       if (message) {
         // Store the track message for this guild
@@ -166,9 +150,7 @@ function initializePlayer(client) {
       console.error("Error creating or sending music card:", error.message);
       const errorEmbed = new EmbedBuilder()
         .setColor("#FF0000")
-        .setDescription(
-          "⚠️ **Unable to load track card. Continuing playback...**",
-        );
+        .setDescription("⚠️ **Unable to load track card. Continuing playback...**");
       await channel.send({ embeds: [errorEmbed] });
     }
   });
@@ -194,9 +176,7 @@ function initializePlayer(client) {
         if (!nextTrack) {
           await cleanupTrackMessages(client, player);
           player.destroy();
-          await channel.send(
-            "⚠️ **No more tracks to autoplay. Disconnecting...**",
-          );
+          await channel.send("⚠️ **No more tracks to autoplay. Disconnecting...**");
         }
       } else {
         await cleanupTrackMessages(client, player);
@@ -218,13 +198,9 @@ async function cleanupPreviousTrackMessages(channel, guildId) {
 
   for (const messageInfo of messages) {
     try {
-      const fetchChannel = channel.client.channels.cache.get(
-        messageInfo.channelId,
-      );
+      const fetchChannel = channel.client.channels.cache.get(messageInfo.channelId);
       if (fetchChannel) {
-        const message = await fetchChannel.messages
-          .fetch(messageInfo.messageId)
-          .catch(() => null);
+        const message = await fetchChannel.messages.fetch(messageInfo.messageId).catch(() => null);
         if (message) {
           await message.delete().catch(() => {});
         }
@@ -247,9 +223,7 @@ async function cleanupTrackMessages(client, player) {
     try {
       const channel = client.channels.cache.get(messageInfo.channelId);
       if (channel) {
-        const message = await channel.messages
-          .fetch(messageInfo.messageId)
-          .catch(() => null);
+        const message = await channel.messages.fetch(messageInfo.messageId).catch(() => null);
         if (message) {
           await message.delete().catch(() => {});
         }
@@ -267,13 +241,7 @@ function formatDuration(ms) {
   const minutes = Math.floor((ms / (1000 * 60)) % 60);
   const hours = Math.floor((ms / (1000 * 60 * 60)) % 24);
 
-  return [
-    hours > 0 ? `${hours}h` : null,
-    minutes > 0 ? `${minutes}m` : null,
-    `${seconds}s`,
-  ]
-    .filter(Boolean)
-    .join(" ");
+  return [hours > 0 ? `${hours}h` : null, minutes > 0 ? `${minutes}m` : null, `${seconds}s`].filter(Boolean).join(" ");
 }
 function setupCollector(client, player, channel, message) {
   const filter = (i) =>
@@ -305,14 +273,9 @@ function setupCollector(client, player, channel, message) {
     if (!voiceChannel || voiceChannel.id !== playerChannel) {
       const vcEmbed = new EmbedBuilder()
         .setColor(config.embedColor)
-        .setDescription(
-          "🔒 **You need to be in the same voice channel to use the controls!**",
-        );
+        .setDescription("🔒 **You need to be in the same voice channel to use the controls!**");
       const sentMessage = await channel.send({ embeds: [vcEmbed] });
-      setTimeout(
-        () => sentMessage.delete().catch(console.error),
-        config.embedTimeout * 1000,
-      );
+      setTimeout(() => sentMessage.delete().catch(console.error), config.embedTimeout * 1000);
       return;
     }
 
@@ -348,10 +311,7 @@ async function handleInteraction(i, player, channel) {
     case "stopTrack":
       player.stop();
       player.destroy();
-      await sendEmbed(
-        channel,
-        "⏹️ **Playback has been stopped and player destroyed!**",
-      );
+      await sendEmbed(channel, "⏹️ **Playback has been stopped and player destroyed!**");
       break;
     case "pauseTrack":
       if (player.paused) {
@@ -379,25 +339,15 @@ async function handleInteraction(i, player, channel) {
 }
 
 async function sendEmbed(channel, message) {
-  const embed = new EmbedBuilder()
-    .setColor(config.embedColor)
-    .setDescription(message);
+  const embed = new EmbedBuilder().setColor(config.embedColor).setDescription(message);
   const sentMessage = await channel.send({ embeds: [embed] });
-  setTimeout(
-    () => sentMessage.delete().catch(console.error),
-    config.embedTimeout * 1000,
-  );
+  setTimeout(() => sentMessage.delete().catch(console.error), config.embedTimeout * 1000);
 }
 
 function adjustVolume(player, channel, amount) {
   const newVolume = Math.min(100, Math.max(10, player.volume + amount));
   if (newVolume === player.volume) {
-    sendEmbed(
-      channel,
-      amount > 0
-        ? "🔊 **Volume is already at maximum!**"
-        : "🔉 **Volume is already at minimum!**",
-    );
+    sendEmbed(channel, amount > 0 ? "🔊 **Volume is already at maximum!**" : "🔉 **Volume is already at minimum!**");
   } else {
     player.setVolume(newVolume);
     sendEmbed(channel, `🔊 **Volume changed to ${newVolume}%!**`);
@@ -406,12 +356,7 @@ function adjustVolume(player, channel, amount) {
 
 function toggleLoop(player, channel) {
   player.setLoop(player.loop === "track" ? "queue" : "track");
-  sendEmbed(
-    channel,
-    player.loop === "track"
-      ? "🔁 **Track loop is activated!**"
-      : "🔁 **Queue loop is activated!**",
-  );
+  sendEmbed(channel, player.loop === "track" ? "🔁 **Track loop is activated!**" : "🔁 **Queue loop is activated!**");
 }
 
 function disableLoop(player, channel) {
@@ -433,10 +378,7 @@ async function getLyrics(trackName, artistName, duration) {
       .trim();
 
     artistName = artistName
-      .replace(
-        /\b(Topic|VEVO|Records|Label|Productions|Entertainment|Ltd|Inc|Band|DJ|Composer|Performer)\b/gi,
-        "",
-      )
+      .replace(/\b(Topic|VEVO|Records|Label|Productions|Entertainment|Ltd|Inc|Band|DJ|Composer|Performer)\b/gi, "")
       .replace(/ x /gi, " & ")
       .replace(/\s+/g, " ")
       .trim();
@@ -457,10 +399,7 @@ async function getLyrics(trackName, artistName, duration) {
 
     return response.data.syncedLyrics || response.data.plainLyrics;
   } catch (error) {
-    console.error(
-      "❌ Lyrics fetch error:",
-      error.response?.data?.message || error.message,
-    );
+    console.error("❌ Lyrics fetch error:", error.response?.data?.message || error.message);
     return null;
   }
 }
@@ -472,11 +411,7 @@ async function showLyrics(channel, player) {
   }
 
   const track = player.current.info;
-  const lyrics = await getLyrics(
-    track.title,
-    track.author,
-    Math.floor(track.length / 1000),
-  );
+  const lyrics = await getLyrics(track.title, track.author, Math.floor(track.length / 1000));
 
   if (!lyrics) {
     sendEmbed(channel, "❌ **Lyrics not found!**");
@@ -494,10 +429,7 @@ async function showLyrics(channel, player) {
     .setDescription("🔄 Syncing lyrics...")
     .setColor(config.embedColor);
 
-  const stopButton = new ButtonBuilder()
-    .setCustomId("stopLyrics")
-    .setLabel("Stop Lyrics")
-    .setStyle(ButtonStyle.Danger);
+  const stopButton = new ButtonBuilder().setCustomId("stopLyrics").setLabel("Stop Lyrics").setStyle(ButtonStyle.Danger);
 
   const fullButton = new ButtonBuilder()
     .setCustomId("fullLyrics")
@@ -570,61 +502,21 @@ async function showLyrics(channel, player) {
 
 function createActionRow1(disabled) {
   return new ActionRowBuilder().addComponents(
-    new ButtonBuilder()
-      .setCustomId("loopToggle")
-      .setEmoji("🔁")
-      .setStyle(ButtonStyle.Secondary)
-      .setDisabled(disabled),
-    new ButtonBuilder()
-      .setCustomId("disableLoop")
-      .setEmoji("❌")
-      .setStyle(ButtonStyle.Secondary)
-      .setDisabled(disabled),
-    new ButtonBuilder()
-      .setCustomId("skipTrack")
-      .setEmoji("⏭️")
-      .setStyle(ButtonStyle.Secondary)
-      .setDisabled(disabled),
-    new ButtonBuilder()
-      .setCustomId("showLyrics")
-      .setEmoji("🎤")
-      .setStyle(ButtonStyle.Secondary)
-      .setDisabled(disabled),
-    new ButtonBuilder()
-      .setCustomId("clearQueue")
-      .setEmoji("🗑️")
-      .setStyle(ButtonStyle.Secondary)
-      .setDisabled(disabled),
+    new ButtonBuilder().setCustomId("loopToggle").setEmoji("🔁").setStyle(ButtonStyle.Secondary).setDisabled(disabled),
+    new ButtonBuilder().setCustomId("disableLoop").setEmoji("❌").setStyle(ButtonStyle.Secondary).setDisabled(disabled),
+    new ButtonBuilder().setCustomId("skipTrack").setEmoji("⏭️").setStyle(ButtonStyle.Secondary).setDisabled(disabled),
+    new ButtonBuilder().setCustomId("showLyrics").setEmoji("🎤").setStyle(ButtonStyle.Secondary).setDisabled(disabled),
+    new ButtonBuilder().setCustomId("clearQueue").setEmoji("🗑️").setStyle(ButtonStyle.Secondary).setDisabled(disabled),
   );
 }
 
 function createActionRow2(disabled) {
   return new ActionRowBuilder().addComponents(
-    new ButtonBuilder()
-      .setCustomId("stopTrack")
-      .setEmoji("⏹️")
-      .setStyle(ButtonStyle.Danger)
-      .setDisabled(disabled),
-    new ButtonBuilder()
-      .setCustomId("pauseTrack")
-      .setEmoji("⏸️")
-      .setStyle(ButtonStyle.Secondary)
-      .setDisabled(disabled),
-    new ButtonBuilder()
-      .setCustomId("resumeTrack")
-      .setEmoji("▶️")
-      .setStyle(ButtonStyle.Secondary)
-      .setDisabled(disabled),
-    new ButtonBuilder()
-      .setCustomId("volumeUp")
-      .setEmoji("🔊")
-      .setStyle(ButtonStyle.Secondary)
-      .setDisabled(disabled),
-    new ButtonBuilder()
-      .setCustomId("volumeDown")
-      .setEmoji("🔉")
-      .setStyle(ButtonStyle.Secondary)
-      .setDisabled(disabled),
+    new ButtonBuilder().setCustomId("stopTrack").setEmoji("⏹️").setStyle(ButtonStyle.Danger).setDisabled(disabled),
+    new ButtonBuilder().setCustomId("pauseTrack").setEmoji("⏸️").setStyle(ButtonStyle.Secondary).setDisabled(disabled),
+    new ButtonBuilder().setCustomId("resumeTrack").setEmoji("▶️").setStyle(ButtonStyle.Secondary).setDisabled(disabled),
+    new ButtonBuilder().setCustomId("volumeUp").setEmoji("🔊").setStyle(ButtonStyle.Secondary).setDisabled(disabled),
+    new ButtonBuilder().setCustomId("volumeDown").setEmoji("🔉").setStyle(ButtonStyle.Secondary).setDisabled(disabled),
   );
 }
 

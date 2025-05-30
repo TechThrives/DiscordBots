@@ -6,9 +6,7 @@ async function myPlaylists(client, interaction, lang) {
   try {
     const userId = interaction.user.id;
 
-    const playlists = await playlistCollection
-      .find({ userId: userId })
-      .toArray();
+    const playlists = await playlistCollection.find({ userId: userId }).toArray();
 
     if (!playlists.length) {
       const noPlaylistsEmbed = new EmbedBuilder()

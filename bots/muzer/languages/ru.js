@@ -16,11 +16,9 @@ module.exports = {
       playlistNotFound: "Плейлист не найден",
       playlistNotFoundDescription: "- Плейлист не найден.",
       accessDenied: "Доступ запрещён",
-      accessDeniedDescription:
-        "- У вас нет прав для добавления песен в этот плейлист.",
+      accessDeniedDescription: "- У вас нет прав для добавления песен в этот плейлист.",
       songAdded: "Песня добавлена",
-      songAddedDescription:
-        "- Песня **{songInput}** добавлена в плейлист **{playlistName}**.",
+      songAddedDescription: "- Песня **{songInput}** добавлена в плейлист **{playlistName}**.",
       error: "Ошибка",
       errorDescription: "- Произошла ошибка при добавлении песни.",
     },
@@ -28,13 +26,11 @@ module.exports = {
   allplaylists: {
     embed: {
       noPlaylistsFound: "Плейлисты не найдены",
-      noPlaylistsFoundDescription:
-        "- В данный момент нет доступных публичных плейлистов.",
+      noPlaylistsFoundDescription: "- В данный момент нет доступных публичных плейлистов.",
       createdBy: "Создано: {userId}",
       serverName: "Сервер: {serverName}",
       songs: "Песен: **{songCount}**",
-      publicPlaylistsTitle:
-        "Публичные плейлисты (Страница {currentPage}/{totalPages})",
+      publicPlaylistsTitle: "Публичные плейлисты (Страница {currentPage}/{totalPages})",
       error: "Ошибка",
       errorDescription: "- Произошла ошибка при получении плейлистов.",
     },
@@ -42,13 +38,11 @@ module.exports = {
   autoplay: {
     embed: {
       autoplayUpdated: "Автовоспроизведение обновлено",
-      autoplayStatus:
-        "- Автовоспроизведение было **{status}** для этого сервера.",
+      autoplayStatus: "- Автовоспроизведение было **{status}** для этого сервера.",
       enabled: "включено",
       disabled: "отключено",
       error: "Ошибка",
-      errorDescription:
-        "- Произошла ошибка при обновлении автовоспроизведения.",
+      errorDescription: "- Произошла ошибка при обновлении автовоспроизведения.",
     },
     commandDescription: "Включить или отключить автовоспроизведение",
   },
@@ -57,16 +51,14 @@ module.exports = {
       playlistExists: "Плейлист существует",
       playlistExistsDescription: "- Плейлист с таким именем уже существует.",
       playlistCreated: "Плейлист создан",
-      playlistCreatedDescription:
-        "- Плейлист **{playlistName}** создан.\n- Видимость: **{visibility}**.",
+      playlistCreatedDescription: "- Плейлист **{playlistName}** создан.\n- Видимость: **{visibility}**.",
       private: "Приватный",
       public: "Публичный",
       error: "Ошибка",
       errorDescription: "- Произошла ошибка при создании плейлиста.",
     },
     commandDescriptionName: "Введите название плейлиста",
-    commandDescriptionPrivate:
-      "Сделать плейлист приватным (видимым только для вас)",
+    commandDescriptionPrivate: "Сделать плейлист приватным (видимым только для вас)",
   },
   deleteplaylist: {
     embed: {
@@ -86,8 +78,7 @@ module.exports = {
       playlistNotFound: "Плейлист не найден",
       playlistNotFoundDescription: "- Плейлист не найден.",
       songDeleted: "Песня удалена",
-      songDeletedDescription:
-        "- Песня **{songName}** удалена из плейлиста **{playlistName}**.",
+      songDeletedDescription: "- Песня **{songName}** удалена из плейлиста **{playlistName}**.",
       error: "Ошибка",
       errorDescription: "- Произошла ошибка при удалении песни.",
     },
@@ -98,8 +89,7 @@ module.exports = {
     embed: {
       error: "Ошибка",
       noPlayer: "- Активный проигрыватель не найден. Сначала включите песню.",
-      wrongChannel:
-        "- Вы должны находиться в том же голосовом канале, что и бот, чтобы использовать эту команду.",
+      wrongChannel: "- Вы должны находиться в том же голосовом канале, что и бот, чтобы использовать эту команду.",
       filtersCleared: "Все фильтры очищены.",
       invalidFilter: "Выбран недействительный фильтр.",
       filterApplied: "Фильтр **{filter}** применён.",
@@ -134,8 +124,7 @@ module.exports = {
     embed: {
       noPlaylistsFound: "Плейлисты не найдены",
       noPlaylistsFoundDescription: "- У вас пока нет созданных плейлистов.",
-      yourPlaylistsTitle:
-        "Ваши плейлисты (Страница {currentPage}/{totalPages})",
+      yourPlaylistsTitle: "Ваши плейлисты (Страница {currentPage}/{totalPages})",
       visibility: "Видимость",
       private: "Приватный",
       public: "Публичный",
@@ -165,13 +154,11 @@ module.exports = {
   play: {
     embed: {
       error: "Ошибка",
-      noVoiceChannel:
-        "- Вы должны находиться в голосовом канале для использования этой команды.",
+      noVoiceChannel: "- Вы должны находиться в голосовом канале для использования этой команды.",
       noLavalinkNodes: "- Нет доступных узлов Lavalink для обработки запроса.",
       noResults: "- Результаты не найдены.",
       requestUpdated: "Запрос обновлён!",
-      successProcessed:
-        "- Ваш запрос успешно обработан.\n- Используйте кнопки для управления воспроизведением",
+      successProcessed: "- Ваш запрос успешно обработан.\n- Используйте кнопки для управления воспроизведением",
       errorProcessing: "- Произошла ошибка при обработке вашего запроса.",
     },
     commandDescription: "Введите название песни / ссылку или плейлист",
@@ -179,12 +166,10 @@ module.exports = {
   playCustomPlaylist: {
     embed: {
       error: "Ошибка",
-      noVoiceChannel:
-        "- Вы должны находиться в голосовом канале для использования этой команды.",
+      noVoiceChannel: "- Вы должны находиться в голосовом канале для использования этой команды.",
       playlistNotFound: "- Плейлист не найден.",
       accessDenied: "Доступ запрещён",
-      noPermission:
-        "- У вас нет прав для воспроизведения этого приватного плейлиста.",
+      noPermission: "- У вас нет прав для воспроизведения этого приватного плейлиста.",
       emptyPlaylist: "- Плейлист пуст.",
       playingPlaylist: "Воспроизведение плейлиста!",
       playlistPlaying:
@@ -197,8 +182,7 @@ module.exports = {
   queue: {
     embed: {
       queueEmpty: "Очередь пуста",
-      queueEmptyDescription:
-        "- Очередь пуста. Добавьте песни с помощью команды `/play`.",
+      queueEmptyDescription: "- Очередь пуста. Добавьте песни с помощью команды `/play`.",
       currentQueue: "Текущая очередь",
       noMoreSongs: "- В очереди больше нет песен.",
       error: "Ошибка",
@@ -208,11 +192,9 @@ module.exports = {
   remove: {
     embed: {
       queueEmpty: "Очередь пуста",
-      queueEmptyDescription:
-        "- Очередь пуста. Добавьте песни с помощью команды `/play`.",
+      queueEmptyDescription: "- Очередь пуста. Добавьте песни с помощью команды `/play`.",
       invalidPosition: "Ошибка",
-      invalidPositionDescription:
-        "- Неверная позиция. Введите число от 1 до {queueLength}.",
+      invalidPositionDescription: "- Неверная позиция. Введите число от 1 до {queueLength}.",
       songRemoved: "Песня удалена",
       songRemovedDescription: "- Песня удалена из очереди: **{songTitle}**",
       error: "Ошибка",
@@ -234,20 +216,17 @@ module.exports = {
       error: "Ошибка",
       playlistNotFound: "- Плейлист не найден.",
       accessDenied: "Доступ запрещён",
-      noPermission:
-        "- У вас нет прав для просмотра этого приватного плейлиста.",
+      noPermission: "- У вас нет прав для просмотра этого приватного плейлиста.",
       noSongs: "- В этом плейлисте нет песен.",
       songsInPlaylist: "Песни в плейлисте {playlistName}",
-      songsInPlaylistPage:
-        "Песни в плейлисте {playlistName} (Страница {currentPage}/{totalPages})",
+      songsInPlaylistPage: "Песни в плейлисте {playlistName} (Страница {currentPage}/{totalPages})",
       errorDescription: "- Произошла ошибка при отображении песен.",
     },
   },
   shuffle: {
     embed: {
       queueEmpty: "Очередь пуста",
-      queueEmptyDescription:
-        "- Очередь пуста. Добавьте песни с помощью команды `/play`.",
+      queueEmptyDescription: "- Очередь пуста. Добавьте песни с помощью команды `/play`.",
       queueShuffled: "Очередь перемешана",
       queueShuffledDescription: "- Очередь успешно перемешана.",
       error: "Ошибка",
@@ -269,8 +248,7 @@ module.exports = {
       noActivePlayer: "Ошибка",
       noActivePlayerDescription: "- Активный проигрыватель не найден.",
       musicHalted: "Музыка остановлена!",
-      musicHaltedDescription:
-        "**- Воспроизведение остановлено и проигрыватель закрыт!**",
+      musicHaltedDescription: "**- Воспроизведение остановлено и проигрыватель закрыт!**",
       error: "Ошибка",
       errorDescription: "- Произошла ошибка при обработке вашего запроса.",
     },

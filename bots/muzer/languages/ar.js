@@ -16,11 +16,9 @@ module.exports = {
       playlistNotFound: "قائمة التشغيل غير موجودة",
       playlistNotFoundDescription: "- قائمة التشغيل غير موجودة.",
       accessDenied: "تم رفض الوصول",
-      accessDeniedDescription:
-        "- ليس لديك صلاحية لإضافة أغاني إلى قائمة التشغيل هذه.",
+      accessDeniedDescription: "- ليس لديك صلاحية لإضافة أغاني إلى قائمة التشغيل هذه.",
       songAdded: "تمت إضافة الأغنية",
-      songAddedDescription:
-        "- تمت إضافة الأغنية **{songInput}** إلى قائمة التشغيل **{playlistName}**.",
+      songAddedDescription: "- تمت إضافة الأغنية **{songInput}** إلى قائمة التشغيل **{playlistName}**.",
       error: "خطأ",
       errorDescription: "- حدث خطأ أثناء إضافة الأغنية.",
     },
@@ -32,8 +30,7 @@ module.exports = {
       createdBy: "تم الإنشاء بواسطة: {userId}",
       serverName: "السيرفر: {serverName}",
       songs: "الأغاني: **{songCount}**",
-      publicPlaylistsTitle:
-        "قوائم التشغيل العامة (صفحة {currentPage}/{totalPages})",
+      publicPlaylistsTitle: "قوائم التشغيل العامة (صفحة {currentPage}/{totalPages})",
       error: "خطأ",
       errorDescription: "- حدث خطأ أثناء جلب قوائم التشغيل.",
     },
@@ -54,8 +51,7 @@ module.exports = {
       playlistExists: "قائمة التشغيل موجودة",
       playlistExistsDescription: "- قائمة تشغيل بهذا الاسم موجودة بالفعل.",
       playlistCreated: "تم إنشاء قائمة التشغيل",
-      playlistCreatedDescription:
-        "- تم إنشاء قائمة التشغيل **{playlistName}**.\n- الخصوصية: **{visibility}**.",
+      playlistCreatedDescription: "- تم إنشاء قائمة التشغيل **{playlistName}**.\n- الخصوصية: **{visibility}**.",
       private: "خاص",
       public: "عام",
       error: "خطأ",
@@ -82,8 +78,7 @@ module.exports = {
       playlistNotFound: "قائمة التشغيل غير موجودة",
       playlistNotFoundDescription: "- قائمة التشغيل غير موجودة.",
       songDeleted: "تم حذف الأغنية",
-      songDeletedDescription:
-        "- تم حذف الأغنية **{songName}** من قائمة التشغيل **{playlistName}**.",
+      songDeletedDescription: "- تم حذف الأغنية **{songName}** من قائمة التشغيل **{playlistName}**.",
       error: "خطأ",
       errorDescription: "- حدث خطأ أثناء حذف الأغنية.",
     },
@@ -94,8 +89,7 @@ module.exports = {
     embed: {
       error: "خطأ",
       noPlayer: "- لم يتم العثور على مشغل نشط. يرجى تشغيل أغنية أولاً.",
-      wrongChannel:
-        "- يجب أن تكون في نفس القناة الصوتية مع البوت لاستخدام هذا الأمر.",
+      wrongChannel: "- يجب أن تكون في نفس القناة الصوتية مع البوت لاستخدام هذا الأمر.",
       filtersCleared: "تم مسح جميع الفلاتر.",
       invalidFilter: "تم اختيار فلتر غير صالح.",
       filterApplied: "تم تطبيق الفلتر **{filter}**.",
@@ -130,8 +124,7 @@ module.exports = {
     embed: {
       noPlaylistsFound: "لم يتم العثور على قوائم تشغيل",
       noPlaylistsFoundDescription: "- لم تقم بإنشاء أي قوائم تشغيل بعد.",
-      yourPlaylistsTitle:
-        "قوائم التشغيل الخاصة بك (صفحة {currentPage}/{totalPages})",
+      yourPlaylistsTitle: "قوائم التشغيل الخاصة بك (صفحة {currentPage}/{totalPages})",
       visibility: "الخصوصية",
       private: "خاص",
       public: "عام",
@@ -165,8 +158,7 @@ module.exports = {
       noLavalinkNodes: "- لا توجد عقد Lavalink متاحة لمعالجة الطلب.",
       noResults: "- لم يتم العثور على نتائج.",
       requestUpdated: "تم تحديث الطلب!",
-      successProcessed:
-        "- تمت معالجة طلبك بنجاح.\n- يرجى استخدام الأزرار للتحكم في التشغيل",
+      successProcessed: "- تمت معالجة طلبك بنجاح.\n- يرجى استخدام الأزرار للتحكم في التشغيل",
       errorProcessing: "- حدث خطأ أثناء معالجة طلبك.",
     },
     commandDescription: "أدخل اسم الأغنية / الرابط أو قائمة التشغيل",
@@ -180,8 +172,7 @@ module.exports = {
       noPermission: "- ليس لديك صلاحية لتشغيل قائمة التشغيل الخاصة هذه.",
       emptyPlaylist: "- قائمة التشغيل فارغة.",
       playingPlaylist: "جاري تشغيل قائمة التشغيل!",
-      playlistPlaying:
-        "- قائمة التشغيل **{playlistName}** قيد التشغيل.\n- يرجى استخدام الأزرار للتحكم في التشغيل",
+      playlistPlaying: "- قائمة التشغيل **{playlistName}** قيد التشغيل.\n- يرجى استخدام الأزرار للتحكم في التشغيل",
       errorResolvingSong: "- خطأ في معالجة الأغنية.",
       errorPlayingPlaylist: "- حدث خطأ أثناء تشغيل قائمة التشغيل.",
     },
@@ -190,8 +181,7 @@ module.exports = {
   queue: {
     embed: {
       queueEmpty: "قائمة الانتظار فارغة",
-      queueEmptyDescription:
-        "- قائمة الانتظار فارغة حالياً. أضف أغاني باستخدام الأمر `/play`.",
+      queueEmptyDescription: "- قائمة الانتظار فارغة حالياً. أضف أغاني باستخدام الأمر `/play`.",
       currentQueue: "قائمة الانتظار الحالية",
       noMoreSongs: "- لا توجد المزيد من الأغاني في قائمة الانتظار.",
       error: "خطأ",
@@ -201,14 +191,11 @@ module.exports = {
   remove: {
     embed: {
       queueEmpty: "قائمة الانتظار فارغة",
-      queueEmptyDescription:
-        "- قائمة الانتظار فارغة حالياً. أضف أغاني باستخدام الأمر `/play`.",
+      queueEmptyDescription: "- قائمة الانتظار فارغة حالياً. أضف أغاني باستخدام الأمر `/play`.",
       invalidPosition: "خطأ",
-      invalidPositionDescription:
-        "- موقع غير صالح. أدخل رقماً بين 1 و {queueLength}.",
+      invalidPositionDescription: "- موقع غير صالح. أدخل رقماً بين 1 و {queueLength}.",
       songRemoved: "تم إزالة الأغنية",
-      songRemovedDescription:
-        "- تم إزالة الأغنية من قائمة الانتظار: **{songTitle}**",
+      songRemovedDescription: "- تم إزالة الأغنية من قائمة الانتظار: **{songTitle}**",
       error: "خطأ",
       errorDescription: "- حدث خطأ أثناء إزالة الأغنية من قائمة الانتظار.",
     },
@@ -231,16 +218,14 @@ module.exports = {
       noPermission: "- ليس لديك صلاحية لعرض قائمة التشغيل الخاصة هذه.",
       noSongs: "- لا توجد أغاني في قائمة التشغيل هذه.",
       songsInPlaylist: "الأغاني في {playlistName}",
-      songsInPlaylistPage:
-        "الأغاني في {playlistName} (صفحة {currentPage}/{totalPages})",
+      songsInPlaylistPage: "الأغاني في {playlistName} (صفحة {currentPage}/{totalPages})",
       errorDescription: "- حدث خطأ أثناء عرض الأغاني.",
     },
   },
   shuffle: {
     embed: {
       queueEmpty: "قائمة الانتظار فارغة",
-      queueEmptyDescription:
-        "- قائمة الانتظار فارغة حالياً. أضف أغاني باستخدام الأمر `/play`.",
+      queueEmptyDescription: "- قائمة الانتظار فارغة حالياً. أضف أغاني باستخدام الأمر `/play`.",
       queueShuffled: "تم خلط قائمة الانتظار",
       queueShuffledDescription: "- تم خلط قائمة الانتظار بنجاح.",
       error: "خطأ",

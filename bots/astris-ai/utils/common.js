@@ -51,7 +51,7 @@ const log = (type, message) => {
   const logMessage = `${timestamp} ${types[type]}: ${message}`;
 
   console.log(logMessage);
-  
+
   if (config.logging) {
     writeLogToFile(logMessage);
   }

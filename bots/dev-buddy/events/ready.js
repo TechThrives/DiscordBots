@@ -45,7 +45,6 @@ module.exports = {
       });
 
       client.setBotStatus = setBotStatus;
-
     } catch (error) {
       console.error("Error setting presence:", error);
     }

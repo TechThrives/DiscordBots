@@ -1,8 +1,4 @@
-const {
-  ApplicationCommandOptionType,
-  EmbedBuilder,
-  MessageFlags,
-} = require("discord.js");
+const { ApplicationCommandOptionType, EmbedBuilder, MessageFlags } = require("discord.js");
 const config = require("../config.js");
 const musicIcons = require("../ui/icons/musicicons.js");
 const SpotifyWebApi = require("spotify-web-api-node");
@@ -122,11 +118,7 @@ async function play(client, interaction, lang) {
         requester: interaction.user.username,
       });
 
-      if (
-        !resolve ||
-        typeof resolve !== "object" ||
-        !Array.isArray(resolve.tracks)
-      ) {
+      if (!resolve || typeof resolve !== "object" || !Array.isArray(resolve.tracks)) {
         throw new TypeError("Invalid response from Riffy");
       }
 
@@ -137,10 +129,7 @@ async function play(client, interaction, lang) {
           player.queue.add(track);
           requesters.set(track.info.uri, interaction.user.username);
         }
-      } else if (
-        resolve.loadType === "search" ||
-        resolve.loadType === "track"
-      ) {
+      } else if (resolve.loadType === "search" || resolve.loadType === "track") {
         const track = resolve.tracks.shift();
         track.info.requester = interaction.user.username;
         player.queue.add(track);

@@ -1,8 +1,4 @@
-const {
-  ApplicationCommandOptionType,
-  EmbedBuilder,
-  MessageFlags,
-} = require("discord.js");
+const { ApplicationCommandOptionType, EmbedBuilder, MessageFlags } = require("discord.js");
 const { playlistCollection } = require("../mongodb.js");
 const config = require("../config.js");
 const musicIcons = require("../ui/icons/musicicons.js");
@@ -57,10 +53,7 @@ async function showSongs(client, interaction, lang) {
       const embed = new EmbedBuilder()
         .setColor("#00ff00")
         .setAuthor({
-          name: lang.showsongs.embed.songsInPlaylist.replace(
-            "{playlistName}",
-            playlistName,
-          ),
+          name: lang.showsongs.embed.songsInPlaylist.replace("{playlistName}", playlistName),
           iconURL: musicIcons.playlistIcon,
         })
         .setFooter({ text: lang.footer, iconURL: musicIcons.heartIcon })
@@ -71,11 +64,7 @@ async function showSongs(client, interaction, lang) {
     }
 
     for (const [index, chunk] of songChunks.entries()) {
-      const description = chunk
-        .map(
-          (song, i) => `${index * chunkSize + i + 1}. ${song.name || song.url}`,
-        )
-        .join("\n");
+      const description = chunk.map((song, i) => `${index * chunkSize + i + 1}. ${song.name || song.url}`).join("\n");
 
       const embed = new EmbedBuilder()
         .setColor("#00ff00")

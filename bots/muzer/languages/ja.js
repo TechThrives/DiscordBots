@@ -16,11 +16,9 @@ module.exports = {
       playlistNotFound: "プレイリストが見つかりません",
       playlistNotFoundDescription: "- プレイリストが見つかりません。",
       accessDenied: "アクセス拒否",
-      accessDeniedDescription:
-        "- このプレイリストに曲を追加する権限がありません。",
+      accessDeniedDescription: "- このプレイリストに曲を追加する権限がありません。",
       songAdded: "曲を追加しました",
-      songAddedDescription:
-        "- 曲 **{songInput}** をプレイリスト **{playlistName}** に追加しました。",
+      songAddedDescription: "- 曲 **{songInput}** をプレイリスト **{playlistName}** に追加しました。",
       error: "エラー",
       errorDescription: "- 曲の追加中にエラーが発生しました。",
     },
@@ -32,8 +30,7 @@ module.exports = {
       createdBy: "作成者：{userId}",
       serverName: "サーバー：{serverName}",
       songs: "曲数：**{songCount}**",
-      publicPlaylistsTitle:
-        "公開プレイリスト（{currentPage}/{totalPages}ページ）",
+      publicPlaylistsTitle: "公開プレイリスト（{currentPage}/{totalPages}ページ）",
       error: "エラー",
       errorDescription: "- プレイリストの取得中にエラーが発生しました。",
     },
@@ -54,16 +51,14 @@ module.exports = {
       playlistExists: "プレイリストが既に存在します",
       playlistExistsDescription: "- この名前のプレイリストは既に存在します。",
       playlistCreated: "プレイリストを作成しました",
-      playlistCreatedDescription:
-        "- プレイリスト **{playlistName}** を作成しました。\n- 公開設定：**{visibility}**。",
+      playlistCreatedDescription: "- プレイリスト **{playlistName}** を作成しました。\n- 公開設定：**{visibility}**。",
       private: "非公開",
       public: "公開",
       error: "エラー",
       errorDescription: "- プレイリストの作成中にエラーが発生しました。",
     },
     commandDescriptionName: "プレイリスト名を入力",
-    commandDescriptionPrivate:
-      "プレイリストを非公開に設定（あなたのみ閲覧可能）",
+    commandDescriptionPrivate: "プレイリストを非公開に設定（あなたのみ閲覧可能）",
   },
   deleteplaylist: {
     embed: {
@@ -72,8 +67,7 @@ module.exports = {
       accessDenied: "アクセス拒否",
       accessDeniedDescription: "- このプレイリストを削除する権限がありません。",
       playlistDeleted: "プレイリストを削除しました",
-      playlistDeletedDescription:
-        "- プレイリスト **{playlistName}** を削除しました。",
+      playlistDeletedDescription: "- プレイリスト **{playlistName}** を削除しました。",
       error: "エラー",
       errorDescription: "- プレイリストの削除中にエラーが発生しました。",
     },
@@ -84,8 +78,7 @@ module.exports = {
       playlistNotFound: "プレイリストが見つかりません",
       playlistNotFoundDescription: "- プレイリストが見つかりません。",
       songDeleted: "曲を削除しました",
-      songDeletedDescription:
-        "- プレイリスト **{playlistName}** から曲 **{songName}** を削除しました。",
+      songDeletedDescription: "- プレイリスト **{playlistName}** から曲 **{songName}** を削除しました。",
       error: "エラー",
       errorDescription: "- 曲の削除中にエラーが発生しました。",
     },
@@ -95,10 +88,8 @@ module.exports = {
   filters: {
     embed: {
       error: "エラー",
-      noPlayer:
-        "- アクティブなプレイヤーが見つかりません。先に曲を再生してください。",
-      wrongChannel:
-        "- このコマンドを使用するにはボットと同じボイスチャンネルにいる必要があります。",
+      noPlayer: "- アクティブなプレイヤーが見つかりません。先に曲を再生してください。",
+      wrongChannel: "- このコマンドを使用するにはボットと同じボイスチャンネルにいる必要があります。",
       filtersCleared: "全てのフィルターをクリアしました。",
       invalidFilter: "無効なフィルターが選択されました。",
       filterApplied: "フィルター **{filter}** を適用しました。",
@@ -133,8 +124,7 @@ module.exports = {
     embed: {
       noPlaylistsFound: "プレイリストが見つかりません",
       noPlaylistsFoundDescription: "- まだプレイリストを作成していません。",
-      yourPlaylistsTitle:
-        "あなたのプレイリスト（{currentPage}/{totalPages}ページ）",
+      yourPlaylistsTitle: "あなたのプレイリスト（{currentPage}/{totalPages}ページ）",
       visibility: "公開設定",
       private: "非公開",
       public: "公開",
@@ -164,13 +154,11 @@ module.exports = {
   play: {
     embed: {
       error: "エラー",
-      noVoiceChannel:
-        "- このコマンドを使用するにはボイスチャンネルに参加する必要があります。",
+      noVoiceChannel: "- このコマンドを使用するにはボイスチャンネルに参加する必要があります。",
       noLavalinkNodes: "- リクエストを処理できるLavalinkノードがありません。",
       noResults: "- 結果が見つかりません。",
       requestUpdated: "リクエストを更新しました！",
-      successProcessed:
-        "- リクエストを正常に処理しました。\n- ボタンを使用して再生を制御してください。",
+      successProcessed: "- リクエストを正常に処理しました。\n- ボタンを使用して再生を制御してください。",
       errorProcessing: "- リクエストの処理中にエラーが発生しました。",
     },
     commandDescription: "曲名/リンクまたはプレイリストを入力",
@@ -178,15 +166,13 @@ module.exports = {
   playCustomPlaylist: {
     embed: {
       error: "エラー",
-      noVoiceChannel:
-        "- このコマンドを使用するにはボイスチャンネルに参加する必要があります。",
+      noVoiceChannel: "- このコマンドを使用するにはボイスチャンネルに参加する必要があります。",
       playlistNotFound: "- プレイリストが見つかりません。",
       accessDenied: "アクセス拒否",
       noPermission: "- この非公開プレイリストを再生する権限がありません。",
       emptyPlaylist: "- プレイリストが空です。",
       playingPlaylist: "プレイリストを再生中！",
-      playlistPlaying:
-        "- プレイリスト **{playlistName}** を再生中です。\n- ボタンを使用して再生を制御してください。",
+      playlistPlaying: "- プレイリスト **{playlistName}** を再生中です。\n- ボタンを使用して再生を制御してください。",
       errorResolvingSong: "- 曲の解決中にエラーが発生しました。",
       errorPlayingPlaylist: "- プレイリストの再生中にエラーが発生しました。",
     },
@@ -195,8 +181,7 @@ module.exports = {
   queue: {
     embed: {
       queueEmpty: "キューが空です",
-      queueEmptyDescription:
-        "- 現在キューは空です。`/play`コマンドで曲を追加してください。",
+      queueEmptyDescription: "- 現在キューは空です。`/play`コマンドで曲を追加してください。",
       currentQueue: "現在のキュー",
       noMoreSongs: "- キューに曲がありません。",
       error: "エラー",
@@ -206,11 +191,9 @@ module.exports = {
   remove: {
     embed: {
       queueEmpty: "キューが空です",
-      queueEmptyDescription:
-        "- 現在キューは空です。`/play`コマンドで曲を追加してください。",
+      queueEmptyDescription: "- 現在キューは空です。`/play`コマンドで曲を追加してください。",
       invalidPosition: "エラー",
-      invalidPositionDescription:
-        "- 無効な位置です。1から{queueLength}の間の数字を入力してください。",
+      invalidPositionDescription: "- 無効な位置です。1から{queueLength}の間の数字を入力してください。",
       songRemoved: "曲を削除しました",
       songRemovedDescription: "- キューから曲を削除しました：**{songTitle}**",
       error: "エラー",
@@ -235,16 +218,14 @@ module.exports = {
       noPermission: "- この非公開プレイリストを閲覧する権限がありません。",
       noSongs: "- このプレイリストに曲はありません。",
       songsInPlaylist: "{playlistName}の曲一覧",
-      songsInPlaylistPage:
-        "{playlistName}の曲一覧（{currentPage}/{totalPages}ページ）",
+      songsInPlaylistPage: "{playlistName}の曲一覧（{currentPage}/{totalPages}ページ）",
       errorDescription: "- 曲の表示中にエラーが発生しました。",
     },
   },
   shuffle: {
     embed: {
       queueEmpty: "キューが空です",
-      queueEmptyDescription:
-        "- 現在キューは空です。`/play`コマンドで曲を追加してください。",
+      queueEmptyDescription: "- 現在キューは空です。`/play`コマンドで曲を追加してください。",
       queueShuffled: "キューをシャッフルしました",
       queueShuffledDescription: "- キューを正常にシャッフルしました。",
       error: "エラー",

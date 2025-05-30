@@ -7,7 +7,7 @@ const sendLargeText = async (interaction, content, options = {}) => {
     maxLength = 2000,
     chunkSize = 1900,
     useCodeBlock = false,
-    splitBy = "\n"
+    splitBy = "\n",
   } = options;
 
   try {
@@ -26,7 +26,7 @@ const sendLargeText = async (interaction, content, options = {}) => {
 
     // Content is too long, need to split it
     const chunks = splitTextIntoChunks(formattedContent, chunkSize, splitBy);
-    
+
     // Send first chunk as reply/edit
     const firstChunk = prefix + chunks[0] + (chunks.length > 1 ? "" : suffix);
     if (interaction.deferred || interaction.replied) {
@@ -43,10 +43,9 @@ const sendLargeText = async (interaction, content, options = {}) => {
     }
 
     return { success: true, chunks: chunks.length };
-
   } catch (error) {
     log("ERROR", `Failed to send large text: ${error.message}`);
-    
+
     // Try to send error message
     const errorMsg = "Failed to send message due to length or other issues.";
     try {
@@ -58,7 +57,7 @@ const sendLargeText = async (interaction, content, options = {}) => {
     } catch (replyError) {
       log("ERROR", `Failed to send error message: ${replyError.message}`);
     }
-    
+
     throw error;
   }
 };
@@ -68,7 +67,7 @@ const sendLargeText = async (interaction, content, options = {}) => {
  */
 const splitTextIntoChunks = (text, maxChunkSize, splitBy = "\n") => {
   const chunks = [];
-  
+
   // If text is shorter than max size, return as single chunk
   if (text.length <= maxChunkSize) {
     return [text];
@@ -80,7 +79,7 @@ const splitTextIntoChunks = (text, maxChunkSize, splitBy = "\n") => {
 
   for (const part of parts) {
     const partWithDelimiter = part + splitBy;
-    
+
     // If adding this part would exceed chunk size
     if ((currentChunk + partWithDelimiter).length > maxChunkSize) {
       // If current chunk has content, save it
@@ -88,7 +87,7 @@ const splitTextIntoChunks = (text, maxChunkSize, splitBy = "\n") => {
         chunks.push(currentChunk.trim());
         currentChunk = "";
       }
-      
+
       // If single part is larger than chunk size, force split it
       if (partWithDelimiter.length > maxChunkSize) {
         const forceSplit = forceSplitLongText(partWithDelimiter, maxChunkSize);
@@ -115,18 +114,17 @@ const splitTextIntoChunks = (text, maxChunkSize, splitBy = "\n") => {
 const forceSplitLongText = (text, maxSize) => {
   const chunks = [];
   let start = 0;
-  
+
   while (start < text.length) {
     const end = start + maxSize;
     chunks.push(text.substring(start, end));
     start = end;
   }
-  
+
   return chunks;
 };
 
-
 module.exports = {
   sendLargeText,
-  splitTextIntoChunks
+  splitTextIntoChunks,
 };

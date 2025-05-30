@@ -18,8 +18,7 @@ module.exports = {
       accessDenied: "访问被拒绝",
       accessDeniedDescription: "- 您没有权限向此播放列表添加歌曲。",
       songAdded: "已添加歌曲",
-      songAddedDescription:
-        "- 歌曲 **{songInput}** 已添加到播放列表 **{playlistName}**。",
+      songAddedDescription: "- 歌曲 **{songInput}** 已添加到播放列表 **{playlistName}**。",
       error: "错误",
       errorDescription: "- 添加歌曲时发生错误。",
     },
@@ -52,8 +51,7 @@ module.exports = {
       playlistExists: "播放列表已存在",
       playlistExistsDescription: "- 已存在同名播放列表。",
       playlistCreated: "播放列表已创建",
-      playlistCreatedDescription:
-        "- 播放列表 **{playlistName}** 已创建。\n- 可见性：**{visibility}**。",
+      playlistCreatedDescription: "- 播放列表 **{playlistName}** 已创建。\n- 可见性：**{visibility}**。",
       private: "私密",
       public: "公开",
       error: "错误",
@@ -80,8 +78,7 @@ module.exports = {
       playlistNotFound: "未找到播放列表",
       playlistNotFoundDescription: "- 未找到播放列表。",
       songDeleted: "歌曲已删除",
-      songDeletedDescription:
-        "- 歌曲 **{songName}** 已从播放列表 **{playlistName}** 中删除。",
+      songDeletedDescription: "- 歌曲 **{songName}** 已从播放列表 **{playlistName}** 中删除。",
       error: "错误",
       errorDescription: "- 删除歌曲时发生错误。",
     },
@@ -175,8 +172,7 @@ module.exports = {
       noPermission: "- 您没有权限播放此私密播放列表。",
       emptyPlaylist: "- 播放列表为空。",
       playingPlaylist: "正在播放列表！",
-      playlistPlaying:
-        "- 播放列表 **{playlistName}** 正在播放。\n- 请使用按钮控制播放",
+      playlistPlaying: "- 播放列表 **{playlistName}** 正在播放。\n- 请使用按钮控制播放",
       errorResolvingSong: "- 解析歌曲时出错。",
       errorPlayingPlaylist: "- 播放列表时发生错误。",
     },
@@ -197,8 +193,7 @@ module.exports = {
       queueEmpty: "队列为空",
       queueEmptyDescription: "- 当前队列为空。使用 `/play` 命令添加歌曲。",
       invalidPosition: "错误",
-      invalidPositionDescription:
-        "- 无效的位置。请输入 1 到 {queueLength} 之间的数字。",
+      invalidPositionDescription: "- 无效的位置。请输入 1 到 {queueLength} 之间的数字。",
       songRemoved: "歌曲已移除",
       songRemovedDescription: "- 已从队列中移除歌曲：**{songTitle}**",
       error: "错误",
@@ -223,8 +218,7 @@ module.exports = {
       noPermission: "- 您没有权限查看此私密播放列表。",
       noSongs: "- 此播放列表中没有歌曲。",
       songsInPlaylist: "{playlistName} 中的歌曲",
-      songsInPlaylistPage:
-        "{playlistName} 中的歌曲（第 {currentPage}/{totalPages} 页）",
+      songsInPlaylistPage: "{playlistName} 中的歌曲（第 {currentPage}/{totalPages} 页）",
       errorDescription: "- 显示歌曲时发生错误。",
     },
   },

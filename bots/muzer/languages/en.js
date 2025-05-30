@@ -16,11 +16,9 @@ module.exports = {
       playlistNotFound: "Playlist Not Found",
       playlistNotFoundDescription: "- Playlist not found.",
       accessDenied: "Access Denied",
-      accessDeniedDescription:
-        "- You do not have permission to add songs to this playlist.",
+      accessDeniedDescription: "- You do not have permission to add songs to this playlist.",
       songAdded: "Song Added",
-      songAddedDescription:
-        "- Song **{songInput}** has been added to playlist **{playlistName}**.",
+      songAddedDescription: "- Song **{songInput}** has been added to playlist **{playlistName}**.",
       error: "Error",
       errorDescription: "- An error occurred while adding the song.",
     },
@@ -28,13 +26,11 @@ module.exports = {
   allplaylists: {
     embed: {
       noPlaylistsFound: "No Playlists Found",
-      noPlaylistsFoundDescription:
-        "- No public playlists are currently available.",
+      noPlaylistsFoundDescription: "- No public playlists are currently available.",
       createdBy: "Created by: {userId}",
       serverName: "Server: {serverName}",
       songs: "Songs: **{songCount}**",
-      publicPlaylistsTitle:
-        "Public Playlists (Page {currentPage}/{totalPages})",
+      publicPlaylistsTitle: "Public Playlists (Page {currentPage}/{totalPages})",
       error: "Error",
       errorDescription: "- An error occurred while fetching the playlists.",
     },
@@ -55,8 +51,7 @@ module.exports = {
       playlistExists: "Playlist Exists",
       playlistExistsDescription: "- A playlist with this name already exists.",
       playlistCreated: "Playlist Created",
-      playlistCreatedDescription:
-        "- Playlist **{playlistName}** has been created.\n- Visibility: **{visibility}**.",
+      playlistCreatedDescription: "- Playlist **{playlistName}** has been created.\n- Visibility: **{visibility}**.",
       private: "Private",
       public: "Public",
       error: "Error",
@@ -70,11 +65,9 @@ module.exports = {
       playlistNotFound: "Playlist Not Found",
       playlistNotFoundDescription: "- Playlist not found.",
       accessDenied: "Access Denied",
-      accessDeniedDescription:
-        "- You do not have permission to delete this playlist.",
+      accessDeniedDescription: "- You do not have permission to delete this playlist.",
       playlistDeleted: "Playlist Deleted",
-      playlistDeletedDescription:
-        "- Playlist **{playlistName}** has been deleted.",
+      playlistDeletedDescription: "- Playlist **{playlistName}** has been deleted.",
       error: "Error",
       errorDescription: "- An error occurred while deleting the playlist.",
     },
@@ -85,8 +78,7 @@ module.exports = {
       playlistNotFound: "Playlist Not Found",
       playlistNotFoundDescription: "- Playlist not found.",
       songDeleted: "Song Deleted",
-      songDeletedDescription:
-        "- Song **{songName}** has been deleted from playlist **{playlistName}**.",
+      songDeletedDescription: "- Song **{songName}** has been deleted from playlist **{playlistName}**.",
       error: "Error",
       errorDescription: "- An error occurred while deleting the song.",
     },
@@ -97,8 +89,7 @@ module.exports = {
     embed: {
       error: "Error",
       noPlayer: "- No active player found. Please play a song first.",
-      wrongChannel:
-        "- You need to be in the same voice channel as the bot to use this command.",
+      wrongChannel: "- You need to be in the same voice channel as the bot to use this command.",
       filtersCleared: "All filters have been cleared.",
       invalidFilter: "Invalid filter selected.",
       filterApplied: "Filter **{filter}** has been applied.",
@@ -163,13 +154,11 @@ module.exports = {
   play: {
     embed: {
       error: "Error",
-      noVoiceChannel:
-        "- You need to be in a voice channel to use this command.",
+      noVoiceChannel: "- You need to be in a voice channel to use this command.",
       noLavalinkNodes: "- No available Lavalink nodes to process the request.",
       noResults: "- No results found.",
       requestUpdated: "Request Updated!",
-      successProcessed:
-        "- Your request has been successfully processed.\n- Please use buttons to control playback",
+      successProcessed: "- Your request has been successfully processed.\n- Please use buttons to control playback",
       errorProcessing: "- An error occurred while processing your request.",
     },
     commandDescription: "Enter song name / link or playlist",
@@ -177,16 +166,13 @@ module.exports = {
   playCustomPlaylist: {
     embed: {
       error: "Error",
-      noVoiceChannel:
-        "- You need to be in a voice channel to use this command.",
+      noVoiceChannel: "- You need to be in a voice channel to use this command.",
       playlistNotFound: "- Playlist not found.",
       accessDenied: "Access Denied",
-      noPermission:
-        "- You do not have permission to play this private playlist.",
+      noPermission: "- You do not have permission to play this private playlist.",
       emptyPlaylist: "- The playlist is empty.",
       playingPlaylist: "Playing Playlist!",
-      playlistPlaying:
-        "- Playlist **{playlistName}** is now playing.\n- Please use buttons to control playback",
+      playlistPlaying: "- Playlist **{playlistName}** is now playing.\n- Please use buttons to control playback",
       errorResolvingSong: "- Error resolving song.",
       errorPlayingPlaylist: "- An error occurred while playing the playlist.",
     },
@@ -195,8 +181,7 @@ module.exports = {
   queue: {
     embed: {
       queueEmpty: "Queue is Empty",
-      queueEmptyDescription:
-        "- The queue is currently empty. Add songs using the `/play` command.",
+      queueEmptyDescription: "- The queue is currently empty. Add songs using the `/play` command.",
       currentQueue: "Current Queue",
       noMoreSongs: "- No more songs in the queue.",
       error: "Error",
@@ -206,16 +191,13 @@ module.exports = {
   remove: {
     embed: {
       queueEmpty: "Queue is Empty",
-      queueEmptyDescription:
-        "- The queue is currently empty. Add songs using the `/play` command.",
+      queueEmptyDescription: "- The queue is currently empty. Add songs using the `/play` command.",
       invalidPosition: "Error",
-      invalidPositionDescription:
-        "- Invalid position. Enter a number between 1 and {queueLength}.",
+      invalidPositionDescription: "- Invalid position. Enter a number between 1 and {queueLength}.",
       songRemoved: "Song Removed",
       songRemovedDescription: "- Removed song: **{songTitle}** from the queue.",
       error: "Error",
-      errorDescription:
-        "- An error occurred while removing the song from the queue.",
+      errorDescription: "- An error occurred while removing the song from the queue.",
     },
   },
   resume: {
@@ -233,20 +215,17 @@ module.exports = {
       error: "Error",
       playlistNotFound: "- Playlist not found.",
       accessDenied: "Access Denied",
-      noPermission:
-        "- You do not have permission to view this private playlist.",
+      noPermission: "- You do not have permission to view this private playlist.",
       noSongs: "- No songs in this playlist.",
       songsInPlaylist: "Songs in {playlistName}",
-      songsInPlaylistPage:
-        "Songs in {playlistName} (Page {currentPage}/{totalPages})",
+      songsInPlaylistPage: "Songs in {playlistName} (Page {currentPage}/{totalPages})",
       errorDescription: "- An error occurred while showing the songs.",
     },
   },
   shuffle: {
     embed: {
       queueEmpty: "Queue is Empty",
-      queueEmptyDescription:
-        "- The queue is currently empty. Add songs using the `/play` command.",
+      queueEmptyDescription: "- The queue is currently empty. Add songs using the `/play` command.",
       queueShuffled: "Queue Shuffled",
       queueShuffledDescription: "- The queue has been shuffled successfully.",
       error: "Error",
@@ -268,8 +247,7 @@ module.exports = {
       noActivePlayer: "Error",
       noActivePlayerDescription: "- No active player found.",
       musicHalted: "Music Halted!",
-      musicHaltedDescription:
-        "**- Playback has been stopped and player destroyed!**",
+      musicHaltedDescription: "**- Playback has been stopped and player destroyed!**",
       error: "Error",
       errorDescription: "- An error occurred while processing your request.",
     },

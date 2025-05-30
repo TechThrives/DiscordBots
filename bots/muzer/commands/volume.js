@@ -1,8 +1,4 @@
-const {
-  ApplicationCommandOptionType,
-  EmbedBuilder,
-  MessageFlags,
-} = require("discord.js");
+const { ApplicationCommandOptionType, EmbedBuilder, MessageFlags } = require("discord.js");
 const config = require("../config.js");
 const musicIcons = require("../ui/icons/musicicons.js");
 
@@ -44,9 +40,7 @@ async function volume(client, interaction, lang) {
         iconURL: musicIcons.volumeIcon,
       })
       .setFooter({ text: lang.footer, iconURL: musicIcons.heartIcon })
-      .setDescription(
-        lang.volume.embed.volumeUpdatedDescription.replace("{volume}", volume),
-      );
+      .setDescription(lang.volume.embed.volumeUpdatedDescription.replace("{volume}", volume));
 
     return interaction.reply({ embeds: [embed] });
   } catch (error) {

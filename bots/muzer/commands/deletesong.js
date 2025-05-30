@@ -1,8 +1,4 @@
-const {
-  ApplicationCommandOptionType,
-  EmbedBuilder,
-  MessageFlags,
-} = require("discord.js");
+const { ApplicationCommandOptionType, EmbedBuilder, MessageFlags } = require("discord.js");
 const { playlistCollection } = require("../mongodb.js");
 const musicIcons = require("../ui/icons/musicicons.js");
 
@@ -30,10 +26,7 @@ async function deleteSong(client, interaction, lang) {
       return;
     }
 
-    await playlistCollection.updateOne(
-      { name: playlistName },
-      { $pull: { songs: { name: songName } } },
-    );
+    await playlistCollection.updateOne({ name: playlistName }, { $pull: { songs: { name: songName } } });
     const embed = new EmbedBuilder()
       .setColor("#00ff00")
       .setAuthor({

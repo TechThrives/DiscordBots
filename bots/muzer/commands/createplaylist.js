@@ -1,8 +1,4 @@
-const {
-  ApplicationCommandOptionType,
-  EmbedBuilder,
-  MessageFlags,
-} = require("discord.js");
+const { ApplicationCommandOptionType, EmbedBuilder, MessageFlags } = require("discord.js");
 const { playlistCollection } = require("../mongodb.js");
 const musicIcons = require("../ui/icons/musicicons.js");
 
@@ -58,12 +54,7 @@ async function createPlaylist(client, interaction, lang) {
       .setDescription(
         lang.createplaylist.embed.playlistCreatedDescription
           .replace("{playlistName}", playlistName)
-          .replace(
-            "{visibility}",
-            isPrivate
-              ? lang.createplaylist.embed.private
-              : lang.createplaylist.embed.public,
-          ),
+          .replace("{visibility}", isPrivate ? lang.createplaylist.embed.private : lang.createplaylist.embed.public),
       );
 
     await interaction.reply({ embeds: [embed] });

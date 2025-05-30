@@ -35,10 +35,7 @@ async function nowPlaying(client, interaction, lang) {
       return;
     }
 
-    const progressBar = createProgressBar(
-      player.position / 1000,
-      player.current.info.length / 1000,
-    );
+    const progressBar = createProgressBar(player.position / 1000, player.current.info.length / 1000);
 
     const npEmbed = new EmbedBuilder()
       .setColor(config.embedColor)

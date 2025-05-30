@@ -14,7 +14,7 @@ module.exports = {
         { name: "Owner", value: `<@${guild.ownerId}>` },
         { name: "Members", value: `${guild.memberCount}` },
         { name: "ID", value: `${guild.id}` },
-        { name: "Created on", value: `<t:${Math.floor(guild.createdTimestamp / 1000)}:D>` }
+        { name: "Created on", value: `<t:${Math.floor(guild.createdTimestamp / 1000)}:D>` },
       );
 
     await interaction.editReply({ embeds: [embed] });

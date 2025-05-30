@@ -73,12 +73,12 @@ const summarizeText = async (text) => {
           "Content-Type": "application/json",
         },
         timeout: 30000,
-      }
+      },
     );
 
     if (response.data && response.data.candidates && response.data.candidates[0]) {
       const summary = response.data.candidates[0].content.parts[0].text;
-      log(`Text summarized successfully. Original length: ${text.length}, Summary length: ${summary.length}`);
+      log("INFO", `Text summarized successfully. Original length: ${text.length}, Summary length: ${summary.length}`);
       return summary.trim();
     }
 

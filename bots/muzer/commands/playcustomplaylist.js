@@ -1,8 +1,4 @@
-const {
-  ApplicationCommandOptionType,
-  EmbedBuilder,
-  MessageFlags,
-} = require("discord.js");
+const { ApplicationCommandOptionType, EmbedBuilder, MessageFlags } = require("discord.js");
 const { playlistCollection } = require("../mongodb.js");
 const config = require("../config.js");
 const musicIcons = require("../ui/icons/musicicons.js");
@@ -128,12 +124,7 @@ async function playCustomPlaylist(client, interaction, lang) {
         name: lang.playCustomPlaylist.embed.playingPlaylist,
         iconURL: musicIcons.beats2Icon,
       })
-      .setDescription(
-        lang.playCustomPlaylist.embed.playlistPlaying.replace(
-          "{playlistName}",
-          playlistName,
-        ),
-      )
+      .setDescription(lang.playCustomPlaylist.embed.playlistPlaying.replace("{playlistName}", playlistName))
       .setFooter({ text: lang.footer, iconURL: musicIcons.heartIcon });
 
     await interaction.followUp({ embeds: [embed] });

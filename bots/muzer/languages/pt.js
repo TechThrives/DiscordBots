@@ -16,11 +16,9 @@ module.exports = {
       playlistNotFound: "Playlist não encontrada",
       playlistNotFoundDescription: "- A playlist não foi encontrada.",
       accessDenied: "Acesso negado",
-      accessDeniedDescription:
-        "- Você não tem permissão para adicionar músicas a esta playlist.",
+      accessDeniedDescription: "- Você não tem permissão para adicionar músicas a esta playlist.",
       songAdded: "Música adicionada",
-      songAddedDescription:
-        "- A música **{songInput}** foi adicionada à playlist **{playlistName}**.",
+      songAddedDescription: "- A música **{songInput}** foi adicionada à playlist **{playlistName}**.",
       error: "Erro",
       errorDescription: "- Ocorreu um erro ao adicionar a música.",
     },
@@ -28,13 +26,11 @@ module.exports = {
   allplaylists: {
     embed: {
       noPlaylistsFound: "Nenhuma playlist encontrada",
-      noPlaylistsFoundDescription:
-        "- Não há playlists públicas disponíveis no momento.",
+      noPlaylistsFoundDescription: "- Não há playlists públicas disponíveis no momento.",
       createdBy: "Criado por: {userId}",
       serverName: "Servidor: {serverName}",
       songs: "Músicas: **{songCount}**",
-      publicPlaylistsTitle:
-        "Playlists Públicas (Página {currentPage}/{totalPages})",
+      publicPlaylistsTitle: "Playlists Públicas (Página {currentPage}/{totalPages})",
       error: "Erro",
       errorDescription: "- Ocorreu um erro ao buscar as playlists.",
     },
@@ -42,13 +38,11 @@ module.exports = {
   autoplay: {
     embed: {
       autoplayUpdated: "Reprodução automática atualizada",
-      autoplayStatus:
-        "- A reprodução automática foi **{status}** para este servidor.",
+      autoplayStatus: "- A reprodução automática foi **{status}** para este servidor.",
       enabled: "ativada",
       disabled: "desativada",
       error: "Erro",
-      errorDescription:
-        "- Ocorreu um erro ao atualizar a reprodução automática.",
+      errorDescription: "- Ocorreu um erro ao atualizar a reprodução automática.",
     },
     commandDescription: "Ativar ou desativar a reprodução automática",
   },
@@ -57,27 +51,23 @@ module.exports = {
       playlistExists: "Playlist já existe",
       playlistExistsDescription: "- Uma playlist com este nome já existe.",
       playlistCreated: "Playlist criada",
-      playlistCreatedDescription:
-        "- A playlist **{playlistName}** foi criada.\n- Visibilidade: **{visibility}**.",
+      playlistCreatedDescription: "- A playlist **{playlistName}** foi criada.\n- Visibilidade: **{visibility}**.",
       private: "Privada",
       public: "Pública",
       error: "Erro",
       errorDescription: "- Ocorreu um erro ao criar a playlist.",
     },
     commandDescriptionName: "Digite o nome da playlist",
-    commandDescriptionPrivate:
-      "Definir playlist como privada (visível apenas para você)",
+    commandDescriptionPrivate: "Definir playlist como privada (visível apenas para você)",
   },
   deleteplaylist: {
     embed: {
       playlistNotFound: "Playlist não encontrada",
       playlistNotFoundDescription: "- A playlist não foi encontrada.",
       accessDenied: "Acesso negado",
-      accessDeniedDescription:
-        "- Você não tem permissão para excluir esta playlist.",
+      accessDeniedDescription: "- Você não tem permissão para excluir esta playlist.",
       playlistDeleted: "Playlist excluída",
-      playlistDeletedDescription:
-        "- A playlist **{playlistName}** foi excluída.",
+      playlistDeletedDescription: "- A playlist **{playlistName}** foi excluída.",
       error: "Erro",
       errorDescription: "- Ocorreu um erro ao excluir a playlist.",
     },
@@ -88,8 +78,7 @@ module.exports = {
       playlistNotFound: "Playlist não encontrada",
       playlistNotFoundDescription: "- A playlist não foi encontrada.",
       songDeleted: "Música removida",
-      songDeletedDescription:
-        "- A música **{songName}** foi removida da playlist **{playlistName}**.",
+      songDeletedDescription: "- A música **{songName}** foi removida da playlist **{playlistName}**.",
       error: "Erro",
       errorDescription: "- Ocorreu um erro ao remover a música.",
     },
@@ -99,10 +88,8 @@ module.exports = {
   filters: {
     embed: {
       error: "Erro",
-      noPlayer:
-        "- Nenhum player ativo encontrado. Por favor, reproduza uma música primeiro.",
-      wrongChannel:
-        "- Você precisa estar no mesmo canal de voz que o bot para usar este comando.",
+      noPlayer: "- Nenhum player ativo encontrado. Por favor, reproduza uma música primeiro.",
+      wrongChannel: "- Você precisa estar no mesmo canal de voz que o bot para usar este comando.",
       filtersCleared: "Todos os filtros foram removidos.",
       invalidFilter: "Filtro inválido selecionado.",
       filterApplied: "Filtro **{filter}** aplicado.",
@@ -167,14 +154,11 @@ module.exports = {
   play: {
     embed: {
       error: "Erro",
-      noVoiceChannel:
-        "- Você precisa estar em um canal de voz para usar este comando.",
-      noLavalinkNodes:
-        "- Não há nós Lavalink disponíveis para processar a solicitação.",
+      noVoiceChannel: "- Você precisa estar em um canal de voz para usar este comando.",
+      noLavalinkNodes: "- Não há nós Lavalink disponíveis para processar a solicitação.",
       noResults: "- Nenhum resultado encontrado.",
       requestUpdated: "Solicitação atualizada!",
-      successProcessed:
-        "- Sua solicitação foi processada com sucesso.\n- Use os botões para controlar a reprodução",
+      successProcessed: "- Sua solicitação foi processada com sucesso.\n- Use os botões para controlar a reprodução",
       errorProcessing: "- Ocorreu um erro ao processar sua solicitação.",
     },
     commandDescription: "Digite o nome da música / link ou playlist",
@@ -182,12 +166,10 @@ module.exports = {
   playCustomPlaylist: {
     embed: {
       error: "Erro",
-      noVoiceChannel:
-        "- Você precisa estar em um canal de voz para usar este comando.",
+      noVoiceChannel: "- Você precisa estar em um canal de voz para usar este comando.",
       playlistNotFound: "- Playlist não encontrada.",
       accessDenied: "Acesso negado",
-      noPermission:
-        "- Você não tem permissão para reproduzir esta playlist privada.",
+      noPermission: "- Você não tem permissão para reproduzir esta playlist privada.",
       emptyPlaylist: "- A playlist está vazia.",
       playingPlaylist: "Reproduzindo playlist!",
       playlistPlaying:
@@ -200,8 +182,7 @@ module.exports = {
   queue: {
     embed: {
       queueEmpty: "Fila vazia",
-      queueEmptyDescription:
-        "- A fila está vazia. Adicione músicas usando o comando `/play`.",
+      queueEmptyDescription: "- A fila está vazia. Adicione músicas usando o comando `/play`.",
       currentQueue: "Fila atual",
       noMoreSongs: "- Não há mais músicas na fila.",
       error: "Erro",
@@ -211,11 +192,9 @@ module.exports = {
   remove: {
     embed: {
       queueEmpty: "Fila vazia",
-      queueEmptyDescription:
-        "- A fila está vazia. Adicione músicas usando o comando `/play`.",
+      queueEmptyDescription: "- A fila está vazia. Adicione músicas usando o comando `/play`.",
       invalidPosition: "Erro",
-      invalidPositionDescription:
-        "- Posição inválida. Digite um número entre 1 e {queueLength}.",
+      invalidPositionDescription: "- Posição inválida. Digite um número entre 1 e {queueLength}.",
       songRemoved: "Música removida",
       songRemovedDescription: "- Música removida da fila: **{songTitle}**",
       error: "Erro",
@@ -240,16 +219,14 @@ module.exports = {
       noPermission: "- Você não tem permissão para ver esta playlist privada.",
       noSongs: "- Não há músicas nesta playlist.",
       songsInPlaylist: "Músicas em {playlistName}",
-      songsInPlaylistPage:
-        "Músicas em {playlistName} (Página {currentPage}/{totalPages})",
+      songsInPlaylistPage: "Músicas em {playlistName} (Página {currentPage}/{totalPages})",
       errorDescription: "- Ocorreu um erro ao exibir as músicas.",
     },
   },
   shuffle: {
     embed: {
       queueEmpty: "Fila vazia",
-      queueEmptyDescription:
-        "- A fila está vazia. Adicione músicas usando o comando `/play`.",
+      queueEmptyDescription: "- A fila está vazia. Adicione músicas usando o comando `/play`.",
       queueShuffled: "Fila embaralhada",
       queueShuffledDescription: "- A fila foi embaralhada com sucesso.",
       error: "Erro",
@@ -271,8 +248,7 @@ module.exports = {
       noActivePlayer: "Erro",
       noActivePlayerDescription: "- Nenhum player ativo encontrado.",
       musicHalted: "Música parada!",
-      musicHaltedDescription:
-        "**- A reprodução foi interrompida e o player foi encerrado!**",
+      musicHaltedDescription: "**- A reprodução foi interrompida e o player foi encerrado!**",
       error: "Erro",
       errorDescription: "- Ocorreu um erro ao processar sua solicitação.",
     },

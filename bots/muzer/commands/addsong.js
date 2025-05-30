@@ -1,8 +1,4 @@
-const {
-  ApplicationCommandOptionType,
-  EmbedBuilder,
-  MessageFlags,
-} = require("discord.js");
+const { ApplicationCommandOptionType, EmbedBuilder, MessageFlags } = require("discord.js");
 const { playlistCollection } = require("../mongodb.js");
 const musicIcons = require("../ui/icons/musicicons.js");
 
@@ -56,10 +52,7 @@ async function addSong(client, interaction, lang) {
       song = { name: songInput };
     }
 
-    await playlistCollection.updateOne(
-      { name: playlistName },
-      { $push: { songs: song } },
-    );
+    await playlistCollection.updateOne({ name: playlistName }, { $push: { songs: song } });
 
     const embed = new EmbedBuilder()
       .setColor("#00ff00")

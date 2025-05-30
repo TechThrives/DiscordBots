@@ -84,8 +84,7 @@ module.exports = {
           ``,
           `**Give a ⭐ for awesome designs!**`,
           `**React with 🔥 if you're using this!**`,
-        ]
-          .join("\n")
+        ].join("\n"),
       )
       .setThumbnail(`attachment://thumbnail.${originalExtension}`)
       .setFooter({
@@ -95,7 +94,7 @@ module.exports = {
       .setTimestamp();
 
     const button = new ActionRowBuilder().addComponents(
-      new ButtonBuilder().setLabel("Download").setStyle(ButtonStyle.Link).setURL(downloadUrl)
+      new ButtonBuilder().setLabel("Download").setStyle(ButtonStyle.Link).setURL(downloadUrl),
     );
 
     const message = await webhook.send({

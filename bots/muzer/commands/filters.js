@@ -30,10 +30,7 @@ async function filters(client, interaction, lang) {
       return;
     }
 
-    if (
-      !interaction.member.voice.channelId ||
-      interaction.member.voice.channelId !== player.voiceChannel
-    ) {
+    if (!interaction.member.voice.channelId || interaction.member.voice.channelId !== player.voiceChannel) {
       const embed = new EmbedBuilder()
         .setColor("#ff0000")
         .setAuthor({
@@ -103,10 +100,7 @@ async function filters(client, interaction, lang) {
     }
 
     await interaction.reply({
-      content: lang.filters.embed.filterApplied.replace(
-        "{filter}",
-        selectedFilter,
-      ),
+      content: lang.filters.embed.filterApplied.replace("{filter}", selectedFilter),
       flags: MessageFlags.Ephemeral,
     });
   } catch (error) {

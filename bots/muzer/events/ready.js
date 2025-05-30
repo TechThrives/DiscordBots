@@ -21,9 +21,7 @@ module.exports = async (client) => {
   };
 
   async function updateStatus() {
-    const activePlayers = Array.from(client.riffy.players.values()).filter(
-      (player) => player.playing,
-    );
+    const activePlayers = Array.from(client.riffy.players.values()).filter((player) => player.playing);
 
     if (!activePlayers.length) {
       //console.log("⏹️ No song is currently playing. Setting default status.");

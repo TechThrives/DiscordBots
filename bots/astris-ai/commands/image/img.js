@@ -6,7 +6,7 @@ module.exports = {
     .setName("img")
     .setDescription("Image Generation using Google Image Fx")
     .addStringOption((option) =>
-      option.setName("prompt").setDescription("Prompt for image generation").setRequired(true)
+      option.setName("prompt").setDescription("Prompt for image generation").setRequired(true),
     )
     .addStringOption((option) =>
       option
@@ -16,8 +16,8 @@ module.exports = {
         .addChoices(
           { name: "Square", value: "IMAGE_ASPECT_RATIO_SQUARE" },
           { name: "Portrait (16:9)", value: "IMAGE_ASPECT_RATIO_PORTRAIT" },
-          { name: "Landscape (9:16)", value: "IMAGE_ASPECT_RATIO_LANDSCAPE" }
-        )
+          { name: "Landscape (9:16)", value: "IMAGE_ASPECT_RATIO_LANDSCAPE" },
+        ),
     )
     .addNumberOption((option) =>
       option
@@ -25,7 +25,7 @@ module.exports = {
         .setDescription("Number of images to generate")
         .setRequired(false)
         .setMinValue(1)
-        .setMaxValue(4)
+        .setMaxValue(4),
     ),
 
   async execute(interaction) {

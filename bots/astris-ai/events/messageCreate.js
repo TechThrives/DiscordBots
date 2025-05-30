@@ -1,7 +1,6 @@
-
 module.exports = {
-    name: 'messageCreate',
-    async execute(message) {
-        // console.log(message);
-    }
+  name: "messageCreate",
+  async execute(message) {
+    // console.log(message);
+  },
 };

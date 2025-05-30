@@ -12,7 +12,7 @@ module.exports = {
         .setDescription("Amount of messages to summarize")
         .setRequired(false)
         .setMinValue(4)
-        .setMaxValue(16)
+        .setMaxValue(16),
     ),
   async execute(interaction) {
     await interaction.deferReply();

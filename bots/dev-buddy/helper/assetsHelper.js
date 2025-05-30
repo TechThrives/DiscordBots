@@ -114,8 +114,8 @@ const scrapeTemplate = async (url) => {
     const { data: downloadPageHtml } = await axios.get(downloadPageUrl);
     const $download = cheerio.load(downloadPageHtml);
 
-    const downloadUrl = $download('#link a.btn').attr('href');
-    
+    const downloadUrl = $download("#link a.btn").attr("href");
+
     return {
       title,
       fonts,

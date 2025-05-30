@@ -16,11 +16,9 @@ module.exports = {
       playlistNotFound: "Không tìm thấy danh sách phát",
       playlistNotFoundDescription: "- Không tìm thấy danh sách phát.",
       accessDenied: "Từ chối truy cập",
-      accessDeniedDescription:
-        "- Bạn không có quyền thêm bài hát vào danh sách phát này.",
+      accessDeniedDescription: "- Bạn không có quyền thêm bài hát vào danh sách phát này.",
       songAdded: "Đã thêm bài hát",
-      songAddedDescription:
-        "- Bài hát **{songInput}** đã được thêm vào danh sách phát **{playlistName}**.",
+      songAddedDescription: "- Bài hát **{songInput}** đã được thêm vào danh sách phát **{playlistName}**.",
       error: "Lỗi",
       errorDescription: "- Đã xảy ra lỗi khi thêm bài hát.",
     },
@@ -28,13 +26,11 @@ module.exports = {
   allplaylists: {
     embed: {
       noPlaylistsFound: "Không tìm thấy danh sách phát",
-      noPlaylistsFoundDescription:
-        "- Hiện không có danh sách phát công khai nào.",
+      noPlaylistsFoundDescription: "- Hiện không có danh sách phát công khai nào.",
       createdBy: "Tạo bởi: {userId}",
       serverName: "Máy chủ: {serverName}",
       songs: "Bài hát: **{songCount}**",
-      publicPlaylistsTitle:
-        "Danh Sách Phát Công Khai (Trang {currentPage}/{totalPages})",
+      publicPlaylistsTitle: "Danh Sách Phát Công Khai (Trang {currentPage}/{totalPages})",
       error: "Lỗi",
       errorDescription: "- Đã xảy ra lỗi khi lấy danh sách phát.",
     },
@@ -63,8 +59,7 @@ module.exports = {
       errorDescription: "- Đã xảy ra lỗi khi tạo danh sách phát.",
     },
     commandDescriptionName: "Nhập tên danh sách phát",
-    commandDescriptionPrivate:
-      "Đặt danh sách phát ở chế độ riêng tư (chỉ bạn mới nhìn thấy)",
+    commandDescriptionPrivate: "Đặt danh sách phát ở chế độ riêng tư (chỉ bạn mới nhìn thấy)",
   },
   deleteplaylist: {
     embed: {
@@ -73,8 +68,7 @@ module.exports = {
       accessDenied: "Từ chối truy cập",
       accessDeniedDescription: "- Bạn không có quyền xóa danh sách phát này.",
       playlistDeleted: "Đã xóa danh sách phát",
-      playlistDeletedDescription:
-        "- Danh sách phát **{playlistName}** đã được xóa.",
+      playlistDeletedDescription: "- Danh sách phát **{playlistName}** đã được xóa.",
       error: "Lỗi",
       errorDescription: "- Đã xảy ra lỗi khi xóa danh sách phát.",
     },
@@ -85,8 +79,7 @@ module.exports = {
       playlistNotFound: "Không tìm thấy danh sách phát",
       playlistNotFoundDescription: "- Không tìm thấy danh sách phát.",
       songDeleted: "Đã xóa bài hát",
-      songDeletedDescription:
-        "- Bài hát **{songName}** đã được xóa khỏi danh sách phát **{playlistName}**.",
+      songDeletedDescription: "- Bài hát **{songName}** đã được xóa khỏi danh sách phát **{playlistName}**.",
       error: "Lỗi",
       errorDescription: "- Đã xảy ra lỗi khi xóa bài hát.",
     },
@@ -96,8 +89,7 @@ module.exports = {
   filters: {
     embed: {
       error: "Lỗi",
-      noPlayer:
-        "- Không tìm thấy trình phát đang hoạt động. Vui lòng phát một bài hát trước.",
+      noPlayer: "- Không tìm thấy trình phát đang hoạt động. Vui lòng phát một bài hát trước.",
       wrongChannel: "- Bạn cần ở cùng kênh thoại với bot để sử dụng lệnh này.",
       filtersCleared: "Đã xóa tất cả bộ lọc.",
       invalidFilter: "Đã chọn bộ lọc không hợp lệ.",
@@ -133,8 +125,7 @@ module.exports = {
     embed: {
       noPlaylistsFound: "Không tìm thấy danh sách phát",
       noPlaylistsFoundDescription: "- Bạn chưa tạo danh sách phát nào.",
-      yourPlaylistsTitle:
-        "Danh Sách Phát Của Bạn (Trang {currentPage}/{totalPages})",
+      yourPlaylistsTitle: "Danh Sách Phát Của Bạn (Trang {currentPage}/{totalPages})",
       visibility: "Chế độ hiển thị",
       private: "Riêng tư",
       public: "Công khai",
@@ -168,8 +159,7 @@ module.exports = {
       noLavalinkNodes: "- Không có node Lavalink khả dụng để xử lý yêu cầu.",
       noResults: "- Không tìm thấy kết quả.",
       requestUpdated: "Đã cập nhật yêu cầu!",
-      successProcessed:
-        "- Yêu cầu của bạn đã được xử lý thành công.\n- Sử dụng các nút để điều khiển phát nhạc",
+      successProcessed: "- Yêu cầu của bạn đã được xử lý thành công.\n- Sử dụng các nút để điều khiển phát nhạc",
       errorProcessing: "- Đã xảy ra lỗi khi xử lý yêu cầu của bạn.",
     },
     commandDescription: "Nhập tên bài hát / link hoặc danh sách phát",
@@ -183,8 +173,7 @@ module.exports = {
       noPermission: "- Bạn không có quyền phát danh sách phát riêng tư này.",
       emptyPlaylist: "- Danh sách phát trống.",
       playingPlaylist: "Đang phát danh sách phát!",
-      playlistPlaying:
-        "- Đang phát danh sách phát **{playlistName}**.\n- Sử dụng các nút để điều khiển phát nhạc",
+      playlistPlaying: "- Đang phát danh sách phát **{playlistName}**.\n- Sử dụng các nút để điều khiển phát nhạc",
       errorResolvingSong: "- Lỗi khi xử lý bài hát.",
       errorPlayingPlaylist: "- Đã xảy ra lỗi khi phát danh sách phát.",
     },
@@ -193,8 +182,7 @@ module.exports = {
   queue: {
     embed: {
       queueEmpty: "Hàng đợi trống",
-      queueEmptyDescription:
-        "- Hàng đợi hiện đang trống. Thêm bài hát bằng lệnh `/play`.",
+      queueEmptyDescription: "- Hàng đợi hiện đang trống. Thêm bài hát bằng lệnh `/play`.",
       currentQueue: "Hàng đợi hiện tại",
       noMoreSongs: "- Không còn bài hát nào trong hàng đợi.",
       error: "Lỗi",
@@ -204,11 +192,9 @@ module.exports = {
   remove: {
     embed: {
       queueEmpty: "Hàng đợi trống",
-      queueEmptyDescription:
-        "- Hàng đợi hiện đang trống. Thêm bài hát bằng lệnh `/play`.",
+      queueEmptyDescription: "- Hàng đợi hiện đang trống. Thêm bài hát bằng lệnh `/play`.",
       invalidPosition: "Lỗi",
-      invalidPositionDescription:
-        "- Vị trí không hợp lệ. Nhập số từ 1 đến {queueLength}.",
+      invalidPositionDescription: "- Vị trí không hợp lệ. Nhập số từ 1 đến {queueLength}.",
       songRemoved: "Đã xóa bài hát",
       songRemovedDescription: "- Đã xóa bài hát khỏi hàng đợi: **{songTitle}**",
       error: "Lỗi",
@@ -233,16 +219,14 @@ module.exports = {
       noPermission: "- Bạn không có quyền xem danh sách phát riêng tư này.",
       noSongs: "- Không có bài hát nào trong danh sách phát này.",
       songsInPlaylist: "Bài hát trong {playlistName}",
-      songsInPlaylistPage:
-        "Bài hát trong {playlistName} (Trang {currentPage}/{totalPages})",
+      songsInPlaylistPage: "Bài hát trong {playlistName} (Trang {currentPage}/{totalPages})",
       errorDescription: "- Đã xảy ra lỗi khi hiển thị bài hát.",
     },
   },
   shuffle: {
     embed: {
       queueEmpty: "Hàng đợi trống",
-      queueEmptyDescription:
-        "- Hàng đợi hiện đang trống. Thêm bài hát bằng lệnh `/play`.",
+      queueEmptyDescription: "- Hàng đợi hiện đang trống. Thêm bài hát bằng lệnh `/play`.",
       queueShuffled: "Đã xáo trộn hàng đợi",
       queueShuffledDescription: "- Đã xáo trộn hàng đợi thành công.",
       error: "Lỗi",
@@ -254,8 +238,7 @@ module.exports = {
       noActivePlayer: "Lỗi",
       noActivePlayerDescription: "- Không tìm thấy trình phát đang hoạt động.",
       songSkipped: "Đã bỏ qua bài hát!",
-      songSkippedDescription:
-        "**- Trình phát sẽ chuyển sang bài hát tiếp theo!**",
+      songSkippedDescription: "**- Trình phát sẽ chuyển sang bài hát tiếp theo!**",
       error: "Lỗi",
       errorDescription: "- Đã xảy ra lỗi khi xử lý yêu cầu của bạn.",
     },

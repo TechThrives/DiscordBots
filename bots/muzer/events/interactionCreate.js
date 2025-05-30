@@ -12,10 +12,7 @@ module.exports = async (client, interaction) => {
       });
     }
 
-    const languageFile = path.join(
-      __dirname,
-      `../languages/${config.language}.js`,
-    );
+    const languageFile = path.join(__dirname, `../languages/${config.language}.js`);
     const lang = require(languageFile);
 
     function cmd_loader() {
@@ -26,11 +23,7 @@ module.exports = async (client, interaction) => {
             let props = require(`.${config.commandsDir}/${f}`);
             if (interaction.commandName === props.name) {
               try {
-                if (
-                  interaction?.member?.permissions?.has(
-                    props?.permissions || "0x0000000000000800",
-                  )
-                ) {
+                if (interaction?.member?.permissions?.has(props?.permissions || "0x0000000000000800")) {
                   return props.run(client, interaction, lang);
                 } else {
                   return interaction?.reply({
@@ -40,10 +33,7 @@ module.exports = async (client, interaction) => {
                 }
               } catch (e) {
                 return interaction?.reply({
-                  content: lang.errors.generalError.replace(
-                    "{error}",
-                    e.message,
-                  ),
+                  content: lang.errors.generalError.replace("{error}", e.message),
                   flags: MessageFlags.Ephemeral,
                 });
               }

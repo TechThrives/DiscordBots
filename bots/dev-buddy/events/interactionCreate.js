@@ -20,7 +20,7 @@ module.exports = {
 
     log(
       "DEBUG",
-      `Command "${interaction.commandName}" executed by "${interaction.user.tag}" in "${interaction.channel?.name || "DM"}" [${options}]`
+      `Command "${interaction.commandName}" executed by "${interaction.user.tag}" in "${interaction.channel?.name || "DM"}" [${options}]`,
     );
 
     try {
@@ -48,7 +48,7 @@ module.exports = {
 
           log(
             "WARN",
-            `Permission denied: "${interaction.user.tag}" tried to use "${interaction.commandName}" without required permissions: ${permissionNames}`
+            `Permission denied: "${interaction.user.tag}" tried to use "${interaction.commandName}" without required permissions: ${permissionNames}`,
           );
 
           await interaction.reply({
@@ -66,7 +66,7 @@ module.exports = {
     } catch (error) {
       log(
         "ERROR",
-        `Command execution failed: "${interaction.commandName}" by "${interaction.user.tag}" - ${error.message}`
+        `Command execution failed: "${interaction.commandName}" by "${interaction.user.tag}" - ${error.message}`,
       );
 
       const errorMessage = error.message || "There was an error while executing this command!";
@@ -82,7 +82,6 @@ module.exports = {
           setTimeout(async () => {
             await interaction.deleteReply();
           }, 5000);
-          
         } else {
           // Command hasn't replied yet, send ephemeral reply
           await interaction.reply({

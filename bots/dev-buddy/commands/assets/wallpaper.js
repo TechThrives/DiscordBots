@@ -72,7 +72,7 @@ module.exports = {
           ``,
           `**React with ⭐ if you love it!**`,
           `**Drop a 🔥 if you're using this!**`,
-        ].join("\n")
+        ].join("\n"),
       )
       .setThumbnail(`attachment://thumbnail.${originalExtension}`)
       .setFooter({

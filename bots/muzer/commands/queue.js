@@ -1,10 +1,4 @@
-const {
-  EmbedBuilder,
-  ActionRowBuilder,
-  ButtonBuilder,
-  ButtonStyle,
-  MessageFlags,
-} = require("discord.js");
+const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, MessageFlags } = require("discord.js");
 const config = require("../config.js");
 const musicIcons = require("../ui/icons/musicicons.js");
 
@@ -31,9 +25,7 @@ async function queue(client, interaction, lang) {
     const currentTrack = player.queue.current;
     const queue = player.queue;
     const songsPerPage = 10;
-    const totalPages = Math.ceil(
-      (queue.length + (currentTrack ? 1 : 0)) / songsPerPage,
-    );
+    const totalPages = Math.ceil((queue.length + (currentTrack ? 1 : 0)) / songsPerPage);
     let currentPage = 1;
 
     function generateQueuePage(page) {
@@ -47,10 +39,7 @@ async function queue(client, interaction, lang) {
         );
       }
 
-      const paginatedQueue = queue.slice(
-        start - (currentTrack ? 1 : 0),
-        end - (currentTrack ? 1 : 0),
-      );
+      const paginatedQueue = queue.slice(start - (currentTrack ? 1 : 0), end - (currentTrack ? 1 : 0));
       paginatedQueue.forEach((track, index) => {
         queueItems.push(
           `**${start + index + 1}.** [${track.info.title}](${track.info.uri}) - Requested by: ${track.info.requester}`,

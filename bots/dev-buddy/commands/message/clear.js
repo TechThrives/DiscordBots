@@ -6,10 +6,12 @@ module.exports = {
     .setName("clear")
     .setDescription("Clears messages in the current channel.")
     .addIntegerOption((option) =>
-      option.setName("amount").setDescription("Number of messages to delete (max 50)")
-    .setMinValue(1)
-    .setMaxValue(50)
-    .setRequired(true)
+      option
+        .setName("amount")
+        .setDescription("Number of messages to delete (max 50)")
+        .setMinValue(1)
+        .setMaxValue(50)
+        .setRequired(true),
     )
     .addUserOption((option) => option.setName("user").setDescription("User to delete messages from").setRequired(false))
     .setDefaultMemberPermissions(PermissionFlagsBits.ManageMessages),
@@ -55,7 +57,7 @@ module.exports = {
     }
     log(
       "INFO",
-      `${interaction.user.tag} deleted ${deletedCount} messages in #${interaction.channel.name}${targetUser ? ` from ${targetUser.tag}` : ""}`
+      `${interaction.user.tag} deleted ${deletedCount} messages in #${interaction.channel.name}${targetUser ? ` from ${targetUser.tag}` : ""}`,
     );
   },
   permissions: PermissionFlagsBits.ManageMessages,

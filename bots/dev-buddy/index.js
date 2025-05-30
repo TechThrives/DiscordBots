@@ -60,7 +60,6 @@ async function main() {
     // Deploy slash commands
     await deployCommands();
     log("SUCCESS", `Bot ready as ${client.user.tag}`);
-    
   } catch (err) {
     log("ERROR", `Startup failed: ${err.message}`);
     console.error(err);

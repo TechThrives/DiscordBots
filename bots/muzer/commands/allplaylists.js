@@ -4,9 +4,7 @@ const musicIcons = require("../ui/icons/musicicons.js");
 
 async function allPlaylists(client, interaction, lang) {
   try {
-    const playlists = await playlistCollection
-      .find({ isPrivate: false })
-      .toArray();
+    const playlists = await playlistCollection.find({ isPrivate: false }).toArray();
 
     if (!playlists.length) {
       const noPlaylistsEmbed = new EmbedBuilder()

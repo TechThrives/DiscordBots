@@ -1,8 +1,4 @@
-const {
-  ApplicationCommandOptionType,
-  EmbedBuilder,
-  MessageFlags,
-} = require("discord.js");
+const { ApplicationCommandOptionType, EmbedBuilder, MessageFlags } = require("discord.js");
 const { autoplayCollection } = require("../mongodb.js");
 const musicIcons = require("../ui/icons/musicicons.js");
 
@@ -11,11 +7,7 @@ async function toggleAutoplay(client, interaction, lang) {
     const enable = interaction.options.getBoolean("enable");
     const guildId = interaction.guild.id;
 
-    await autoplayCollection.updateOne(
-      { guildId },
-      { $set: { autoplay: enable } },
-      { upsert: true },
-    );
+    await autoplayCollection.updateOne({ guildId }, { $set: { autoplay: enable } }, { upsert: true });
 
     const embed = new EmbedBuilder()
       .setColor(enable ? "#00ff00" : "#ff0000")
