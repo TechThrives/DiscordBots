@@ -9,7 +9,7 @@ module.exports = {
   commandsDir: "./commands",
   embedColor: "#1db954",
   activityName: "YouTube Music",
-  activityType: "LISTENING",
+  activityType: "Listening",
   embedTimeout: 5,
   errorLog: "",
   port: process.env.PORT || 8080,

@@ -39,10 +39,7 @@ async function sendMessageWithPermissionsCheck(channel, embed, attachment, actio
     return message;
   } catch (error) {
     console.error("Error sending message:", error.message);
-    const errorEmbed = new EmbedBuilder()
-      .setColor("#FF0000")
-      .setDescription("⚠️ **Unable to send message. Check bot permissions.**");
-    await channel.send({ embeds: [errorEmbed] });
+    sendEmbed(channel, "⚠️ **Unable to send message. Check bot permissions.**");
   }
 }
 
@@ -84,7 +81,7 @@ function initializePlayer(client) {
     const channel = client.channels.cache.get(player.textChannel);
     const guildId = player.guildId;
     const trackUri = track.info.uri;
-    const requester = requesters.get(trackUri);
+    const requester = requesters.get(trackUri) || "Autoplay";
 
     // Clean up previous track messages for this guild
     await cleanupPreviousTrackMessages(channel, guildId);
@@ -148,10 +145,7 @@ function initializePlayer(client) {
       }
     } catch (error) {
       console.error("Error creating or sending music card:", error.message);
-      const errorEmbed = new EmbedBuilder()
-        .setColor("#FF0000")
-        .setDescription("⚠️ **Unable to load track card. Continuing playback...**");
-      await channel.send({ embeds: [errorEmbed] });
+      sendEmbed(channel, "⚠️ **Unable to load track card. Continuing playback...**");
     }
   });
 
@@ -176,19 +170,19 @@ function initializePlayer(client) {
         if (!nextTrack) {
           await cleanupTrackMessages(client, player);
           player.destroy();
-          await channel.send("⚠️ **No more tracks to autoplay. Disconnecting...**");
+          sendEmbed(channel, "⚠️ **No more tracks to autoplay. Disconnecting...**");
         }
       } else {
         await cleanupTrackMessages(client, player);
         console.log(`Autoplay is disabled for guild: ${guildId}`);
         player.destroy();
-        await channel.send("🎶 **Queue has ended. Autoplay is disabled.**");
+        sendEmbed(channel, "🎶 **Queue has ended.  Autoplay is disabled.**");
       }
     } catch (error) {
       console.error("Error handling autoplay:", error);
       await cleanupTrackMessages(client, player);
       player.destroy();
-      await channel.send("👾**Queue Empty! Disconnecting...**");
+      sendEmbed(channel, "👾**Queue Empty! Disconnecting...**");
     }
   });
 }
@@ -271,11 +265,7 @@ function setupCollector(client, player, channel, message) {
     const playerChannel = player.voiceChannel;
 
     if (!voiceChannel || voiceChannel.id !== playerChannel) {
-      const vcEmbed = new EmbedBuilder()
-        .setColor(config.embedColor)
-        .setDescription("🔒 **You need to be in the same voice channel to use the controls!**");
-      const sentMessage = await channel.send({ embeds: [vcEmbed] });
-      setTimeout(() => sentMessage.delete().catch(console.error), config.embedTimeout * 1000);
+      sendEmbed(channel, "🔒 **You need to be in the same voice channel to use the controls!**");
       return;
     }
 
