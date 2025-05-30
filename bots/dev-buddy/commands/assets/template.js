@@ -9,8 +9,7 @@ const {
   ButtonStyle,
 } = require("discord.js");
 const axios = require("axios");
-const path = require("path");
-const { loadJSON } = require("../../utils/common");
+const { getCollection } = require("../../mongodb");
 const { scrapeTemplate } = require("../../helper/assetsHelper");
 const emojis = require("../../emojis");
 
@@ -27,18 +26,21 @@ module.exports = {
 
     const templateUrl = interaction.options.getString("url");
     const thumbnailUrl = interaction.options.getString("thumbnail");
-    const configFile = path.join(__dirname, "../../channelsConfig.json");
-    const config = loadJSON(configFile);
-    const channelId = config.templateChannel;
+    const guildId = interaction.guild.id;
 
-    if (!channelId) {
+    const guildConfigs = getCollection("GuildConfigs");
+    const config = await guildConfigs.findOne({ guildId });
+
+    if (!config || !config.templateChannel || !config.templateChannel.webhook) {
       await interaction.editReply({
-        content: "Template channel is not configured. Use `/settemplatechannel` to set it first.",
+        content: "Template channel is not configured. Use `/setchannel template` to set it first.",
       });
       return;
     }
 
-    const channel = await interaction.client.channels.fetch(channelId);
+    const { id: webhookId, token: webhookToken } = config.templateChannel.webhook;
+
+    const webhook = await interaction.client.fetchWebhook(webhookId, webhookToken);
 
     const parsedUrl = new URL(thumbnailUrl);
     const pathname = parsedUrl.pathname.toLowerCase();
@@ -83,12 +85,12 @@ module.exports = {
           `${tags.map((tag) => `\`${tag}\``).join(" ")}`,
           ``,
           `**Give a ⭐ for awesome designs!**`,
-          `**React with 🔥 if you’re using this!**`,
+          `**React with 🔥 if you're using this!**`,
         ].join("\n")
       )
       .setThumbnail(`attachment://thumbnail.${originalExtension}`)
       .setFooter({
-        text: `Shared by Free-PSD-Templates.com`,
+        text: `Posted by ${webhook.name}`,
         iconURL: emojis.footerIcon,
       })
       .setTimestamp();
@@ -97,7 +99,7 @@ module.exports = {
       new ButtonBuilder().setLabel("Download").setStyle(ButtonStyle.Link).setURL(downloadUrl)
     );
 
-    const message = await channel.send({
+    const message = await webhook.send({
       embeds: [embed],
       components: [button],
       files: [thumbnailFile],
@@ -107,7 +109,7 @@ module.exports = {
     await message.react("🔥");
 
     await interaction.editReply({
-      content: `Template sent to <#${channelId}>!`,
+      content: `Template sent to the <#${config.templateChannel.id}> channel!`,
     });
   },
   permissions: PermissionFlagsBits.ManageGuild,

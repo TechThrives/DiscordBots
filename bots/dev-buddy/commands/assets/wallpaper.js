@@ -6,8 +6,7 @@ const {
   PermissionFlagsBits,
 } = require("discord.js");
 const axios = require("axios");
-const path = require("path");
-const { loadJSON } = require("../../utils/common");
+const { getCollection } = require("../../mongodb");
 const { scrapeWallpaper } = require("../../helper/assetsHelper");
 const emojis = require("../../emojis");
 
@@ -22,18 +21,21 @@ module.exports = {
     await interaction.deferReply({ flags: MessageFlags.Ephemeral });
 
     const wallpaperUrl = interaction.options.getString("url");
-    const configFile = path.join(__dirname, "../../channelsConfig.json");
-    const config = loadJSON(configFile);
-    const channelId = config.wallpaperChannel;
+    const guildId = interaction.guild.id;
 
-    if (!channelId) {
+    const guildConfigs = getCollection("GuildConfigs");
+    const config = await guildConfigs.findOne({ guildId });
+
+    if (!config || !config.wallpaperChannel || !config.wallpaperChannel.webhook) {
       await interaction.editReply({
-        content: "Wallpaper channel is not configured. Use `/setwallpaperchannel` to set it first.",
+        content: "Wallpaper channel is not configured. Use `/setchannel wallpaper` to set it first.",
       });
       return;
     }
 
-    const channel = await interaction.client.channels.fetch(channelId);
+    const { id: webhookId, token: webhookToken } = config.wallpaperChannel.webhook;
+
+    const webhook = await interaction.client.fetchWebhook(webhookId, webhookToken);
 
     const { title, category, resolution, size, tags, downloadUrl } = await scrapeWallpaper(wallpaperUrl);
 
@@ -69,23 +71,26 @@ module.exports = {
           `**${fileName} to ${fileName.replace(".bin", "")}**`,
           ``,
           `**React with ⭐ if you love it!**`,
-          `**Drop a 🔥 if you’re using this!**`,
+          `**Drop a 🔥 if you're using this!**`,
         ].join("\n")
       )
       .setThumbnail(`attachment://thumbnail.${originalExtension}`)
       .setFooter({
-        text: `By ${interaction.client.user.username}`,
+        text: `Posted by ${webhook.name}`,
         iconURL: emojis.footerIcon,
       })
       .setTimestamp();
 
-    const message = await channel.send({ embeds: [embed], files: [file, thumbnailFile] });
+    const message = await webhook.send({ 
+      embeds: [embed], 
+      files: [file, thumbnailFile] 
+    });
 
     await message.react("⭐");
     await message.react("🔥");
 
     await interaction.editReply({
-      content: `Wallpaper sent to <#${channelId}>!`,
+      content: `Wallpaper sent to the <#${config.wallpaperChannel.id}> channel!`,
     });
   },
   permissions: PermissionFlagsBits.ManageGuild,

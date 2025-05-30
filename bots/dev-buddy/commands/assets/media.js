@@ -7,8 +7,7 @@ const {
   MessageFlags,
   PermissionFlagsBits,
 } = require("discord.js");
-const path = require("path");
-const { loadJSON } = require("../../utils/common");
+const { getCollection } = require("../../mongodb");
 const { getMediaData } = require("../../helper/assetsHelper");
 const emojis = require("../../emojis");
 
@@ -27,18 +26,21 @@ module.exports = {
 
     const url = interaction.options.getString("url");
     const imdbID = interaction.options.getString("imdb-id");
-    const configFile = path.join(__dirname, "../../channelsConfig.json");
-    const config = loadJSON(configFile);
-    const channelId = config.mediaChannel;
+    const guildId = interaction.guild.id;
 
-    if (!channelId) {
+    const guildConfigs = getCollection("GuildConfigs");
+    const config = await guildConfigs.findOne({ guildId });
+
+    if (!config || !config.mediaChannel || !config.mediaChannel.webhook) {
       await interaction.editReply({
-        content: "Media channel is not configured. Use `/setmediachannel` to set it first.",
+        content: "Media channel is not configured. Use `/setchannel media` to set it first.",
       });
       return;
     }
 
-    const channel = await interaction.client.channels.fetch(channelId);
+    const { id: webhookId, token: webhookToken } = config.mediaChannel.webhook;
+
+    const webhook = await interaction.client.fetchWebhook(webhookId, webhookToken);
 
     const { title, year, released, genre, poster, imdbRating, imdbVotes, type } = await getMediaData(imdbID);
 
@@ -51,14 +53,14 @@ module.exports = {
           `**IMDB Rating:** ${imdbRating}/10`,
           `**IMDB Votes:** ${imdbVotes}`,
           `**Type:** ${type}`,
-          "",
-          `**Drop a ⭐ if you already watched it?**`,
-          `**Hit 🔥 if Planning to watch?**`,
+          ``,
+          `**Drop a ⭐ if you already watched it!**`,
+          `**Hit 🔥 if Planning to watch!**`,
         ].join("\n")
       )
       .setImage(poster)
       .setFooter({
-        text: `Posted by ${interaction.client.user.username}`,
+        text: `Posted by ${webhook.name}`,
         iconURL: emojis.footerIcon,
       })
       .setTimestamp();
@@ -67,13 +69,16 @@ module.exports = {
       new ButtonBuilder().setLabel("Download").setStyle(ButtonStyle.Link).setURL(url)
     );
 
-    const message = await channel.send({ embeds: [embed], components: [button] });
+    const message = await webhook.send({
+      embeds: [embed],
+      components: [button],
+    });
 
-    await message.react("⭐");
-    await message.react("🔥");
+    await message.react('⭐');
+    await message.react('🔥');
 
     await interaction.editReply({
-      content: `Media sent to <#${channelId}>!`,
+      content: `Media sent to the <#${config.mediaChannel.id}> channel!`,
     });
   },
   permissions: PermissionFlagsBits.ManageGuild,
