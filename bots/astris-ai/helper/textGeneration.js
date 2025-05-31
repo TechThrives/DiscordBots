@@ -89,4 +89,102 @@ const summarizeText = async (text) => {
   }
 };
 
-module.exports = { summarizeText };
+const describeImage = async (imageUrl) => {
+  const imageResponse = await axios.get(imageUrl, {
+    responseType: "arraybuffer",
+  });
+
+  const mimeType = imageResponse.headers["content-type"] || "image/jpeg";
+  if (mimeType.includes(";")) {
+    mimeType = mimeType.split(";")[0];
+  }
+
+  if (!imageResponse.data) {
+    throw new Error("Invalid image response");
+  }
+
+  const imageDataBase64 = Buffer.from(imageResponse.data).toString("base64");
+
+  try {
+    const requestBody = {
+      system_instruction: {
+        parts: [
+          {
+            text: `You are a visual intelligence assistant specialized in understanding and describing images in plain English.
+
+            Your task is to generate a short and accurate description of the visual content in the image, as if explaining it to someone who cannot see it.
+
+            Instructions:
+            1. Describe the main objects or scene clearly and concisely.
+            2. Avoid over-interpreting or making guesses — focus on what is visually obvious.
+            3. Keep the output very short (1-2 sentences), suitable for use in a Discord bot.
+            4. Be neutral and descriptive, not poetic or opinionated.`,
+          },
+        ],
+      },
+      contents: [
+        {
+          parts: [
+            {
+              text: "Describe this image",
+            },
+            {
+              inlineData: {
+                mimeType: mimeType,
+                data: imageDataBase64,
+              },
+            },
+          ],
+        },
+      ],
+      generationConfig: {
+        temperature: 0.2,
+        topK: 32,
+        topP: 1,
+        maxOutputTokens: 200,
+      },
+      safetySettings: [
+        {
+          category: "HARM_CATEGORY_HARASSMENT",
+          threshold: "BLOCK_MEDIUM_AND_ABOVE",
+        },
+        {
+          category: "HARM_CATEGORY_HATE_SPEECH",
+          threshold: "BLOCK_MEDIUM_AND_ABOVE",
+        },
+        {
+          category: "HARM_CATEGORY_SEXUALLY_EXPLICIT",
+          threshold: "BLOCK_MEDIUM_AND_ABOVE",
+        },
+        {
+          category: "HARM_CATEGORY_DANGEROUS_CONTENT",
+          threshold: "BLOCK_MEDIUM_AND_ABOVE",
+        },
+      ],
+    };
+
+    const response = await axios.post(
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${config.geminiKey}`,
+      requestBody,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        timeout: 30000,
+      },
+    );
+
+    if (response.data && response.data.candidates && response.data.candidates[0]) {
+      const description = response.data.candidates[0].content.parts[0].text;
+      log("INFO", `Image described successfully.`);
+      return description.trim();
+    }
+
+    throw new Error("Failed to generate image description. Please try again.");
+  } catch (error) {
+    log("ERROR", `Error describing image: ${error.message}`);
+    throw new Error("Failed to generate image description. Please try again.");
+  }
+};
+
+module.exports = { summarizeText, describeImage };

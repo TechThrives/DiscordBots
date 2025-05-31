@@ -49,7 +49,7 @@ const scrapeWallpaper = async (url) => {
     };
   } catch (error) {
     console.error("Error scraping wallpaper:", error);
-    throw error;
+    throw new Error("Failed to scrape wallpaper. Please try again.");
   }
 };
 
@@ -77,7 +77,7 @@ const getImdbData = async (imdbID) => {
     };
   } catch (error) {
     console.error("Error fetching media data:", error.message);
-    throw error;
+    throw new Error("Failed to fetch IMDB data. Please try again.");
   }
 };
 
@@ -124,7 +124,7 @@ const scrapeTemplate = async (url) => {
     };
   } catch (error) {
     console.error("Error scraping template:", error.message);
-    throw error;
+    throw new Error("Failed to scrape template. Please try again.");
   }
 };
 

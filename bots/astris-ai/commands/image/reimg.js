@@ -17,7 +17,12 @@ module.exports = {
     const userTag = interaction.user.tag;
     const attachment = interaction.options.getAttachment("image");
 
-    if (attachment && attachment.contentType?.startsWith("image") && attachment.url) {
+    if (
+      attachment &&
+      attachment.contentType?.startsWith("image") &&
+      attachment.contentType !== "image/gif" &&
+      attachment.url
+    ) {
       const imageUrl = attachment.url;
 
       const generatedImageBuffers = await reGenerate(prompt, imageUrl);
