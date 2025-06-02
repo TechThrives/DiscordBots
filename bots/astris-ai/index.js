@@ -4,6 +4,7 @@ const { deployCommands } = require("./deploy-commands");
 const { log } = require("./utils/common");
 const config = require("./config");
 const express = require("express");
+const { connectToDatabase } = require("./mongodb");
 
 const client = new Client({
   intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent],
@@ -47,15 +48,26 @@ for (const file of eventFiles) {
   log("SUCCESS", `Event loaded: ${file.replace(".js", "")}`);
 }
 
-client
-  .login(config.token)
-  .then(async () => {
+async function main() {
+  try {
+    // Connect to MongoDB
+    await connectToDatabase();
+
+    // Login to Discord
+    await client.login(config.token);
+    log("INFO", "Logged in to Discord.");
+
+    // Deploy slash commands
     await deployCommands();
-    log("SUCCESS", `Bot successfully logged in as ${client.user.tag}`);
-  })
-  .catch((err) => {
-    log("ERROR", `Failed to login: ${err.message}`);
-  });
+    log("SUCCESS", `Bot ready as ${client.user.tag}`);
+  } catch (err) {
+    log("ERROR", `Startup failed: ${err.message}`);
+    console.error(err);
+    process.exit(1);
+  }
+}
+
+main();
 
 const app = express();
 const port = config.port;
@@ -63,7 +75,7 @@ const port = config.port;
 app.use(express.json());
 
 app.get("/", (req, res) => {
-  res.json({ message: "AstrisAI is running!" });
+  res.json({ message: `${client.user.username} is running!` });
 });
 
 app.listen(port, () => {

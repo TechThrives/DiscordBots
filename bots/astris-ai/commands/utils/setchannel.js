@@ -4,18 +4,6 @@ const { getCollection } = require("../../mongodb");
 const { log } = require("../../utils/common");
 
 const CHANNEL_TYPES = {
-  template: {
-    webhookName: "TemplateDrop",
-    webhookAvatar: "https://i.postimg.cc/vBCy7F2W/T.png",
-    dbField: "templateChannel",
-    replyMsg: "Template channel set",
-  },
-  wallpaper: {
-    webhookName: "WallpaperAlert",
-    webhookAvatar: "https://i.postimg.cc/Pf8TXJNK/W.png",
-    dbField: "wallpaperChannel",
-    replyMsg: "Wallpaper channel set",
-  },
   log: {
     webhookName: "Logger",
     webhookAvatar: "https://i.postimg.cc/NftDLpKV/L.png",
@@ -29,30 +17,6 @@ module.exports = {
     .setName("setchannel")
     .setDescription("Set a specific channel to send messages via webhook")
     .setDefaultMemberPermissions(PermissionFlagsBits.ManageGuild)
-    .addSubcommand((sub) =>
-      sub
-        .setName("template")
-        .setDescription("Set the template channel")
-        .addChannelOption((option) =>
-          option
-            .setName("channel")
-            .setDescription("The text channel to send templates")
-            .setRequired(true)
-            .addChannelTypes(ChannelType.GuildText),
-        ),
-    )
-    .addSubcommand((sub) =>
-      sub
-        .setName("wallpaper")
-        .setDescription("Set the wallpaper channel")
-        .addChannelOption((option) =>
-          option
-            .setName("channel")
-            .setDescription("The text channel to send wallpapers")
-            .setRequired(true)
-            .addChannelTypes(ChannelType.GuildText),
-        ),
-    )
     .addSubcommand((sub) =>
       sub
         .setName("log")

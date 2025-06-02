@@ -17,7 +17,7 @@ async function connectToDatabase() {
     client = new MongoClient(uri);
 
     await client.connect();
-    db = client.db(); // Default DB from URI
+    db = client.db();
     log("INFO", "Connected to MongoDB.");
   } catch (err) {
     log("ERROR", "Failed to connect to MongoDB.");
