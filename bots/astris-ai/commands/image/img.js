@@ -17,6 +17,8 @@ module.exports = {
           { name: "Square", value: "IMAGE_ASPECT_RATIO_SQUARE" },
           { name: "Portrait (16:9)", value: "IMAGE_ASPECT_RATIO_PORTRAIT" },
           { name: "Landscape (9:16)", value: "IMAGE_ASPECT_RATIO_LANDSCAPE" },
+          { name: "Landscape (4:3)", value: "IMAGE_ASPECT_RATIO_LANDSCAPE_FOUR_THREE" },
+          { name: "Portrait (3:4)", value: "IMAGE_ASPECT_RATIO_PORTRAIT_THREE_FOUR" },
         ),
     )
     .addNumberOption((option) =>

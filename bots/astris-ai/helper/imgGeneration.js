@@ -1,6 +1,7 @@
 const axios = require("axios");
 const config = require("../config");
-const { log } = require("../utils/common");
+const { log, loadJSON, getErrorMessage } = require("../utils/common");
+const { updateAuthTokenImageFx } = require("../utils/authUtils");
 
 const generateGoogleFx = async (prompt, imageCount = 1, aspectRatio = "IMAGE_ASPECT_RATIO_SQUARE") => {
   const data = {
@@ -18,10 +19,22 @@ const generateGoogleFx = async (prompt, imageCount = 1, aspectRatio = "IMAGE_ASP
   };
 
   try {
+    let jsonData = loadJSON("./data/tokens.json");
+
+    if (
+      !jsonData.googleImageFxKey ||
+      !jsonData.googleImageFxKeyExpiry ||
+      new Date(jsonData.googleImageFxKeyExpiry) < new Date()
+    ) {
+      log("INFO", `Google ImageFX token is expired.`);
+      await updateAuthTokenImageFx();
+      jsonData = loadJSON("./data/tokens.json");
+    }
+
     const response = await axios.post(config.googleImageFxEndpoint, data, {
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${config.googleImageFxKey}`,
+        Authorization: `Bearer ${jsonData.googleImageFxKey}`,
       },
       maxBodyLength: Infinity,
     });
@@ -42,7 +55,10 @@ const generateGoogleFx = async (prompt, imageCount = 1, aspectRatio = "IMAGE_ASP
 
     return base64Images;
   } catch (error) {
-    log("ERROR", `ImageFX Error: ${error.response.data?.error?.message || error?.response?.data || error.message}`);
+    if (error.response?.status === 401) {
+      await updateAuthTokenImageFx();
+    }
+    log("ERROR", `ImageFX Error: ${getErrorMessage(error)}`);
     throw new Error("Failed to generate images. Please try again.");
   }
 };
@@ -72,7 +88,7 @@ const generateFlux = async (prompt, aspectRatio = "1024:1024") => {
 
     return base64Images;
   } catch (error) {
-    log("ERROR", `Flux Error: ${error?.response?.data || error.message}`);
+    log("ERROR", `Flux Error: ${getErrorMessage(error)}`);
     throw new Error("Failed to generate images. Please try again.");
   }
 };
@@ -102,7 +118,7 @@ const reGenerate = async (prompt, imageUrl) => {
 
     return base64Images;
   } catch (error) {
-    log("ERROR", `GPT Error: ${error?.response?.data || error.message}`);
+    log("ERROR", `GPT Error: ${getErrorMessage(error)}`);
     throw new Error("Failed to generate images. Please try again.");
   }
 };

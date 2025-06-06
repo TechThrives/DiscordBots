@@ -1,15 +1,31 @@
 const fs = require("fs");
 const config = require("../config");
 
+function ensureDirectoryExists(filePath) {
+  const lastSlash = Math.max(filePath.lastIndexOf("/"), filePath.lastIndexOf("\\"));
+  if (lastSlash > 0) {
+    const dir = filePath.substring(0, lastSlash);
+    if (!fs.existsSync(dir)) {
+      fs.mkdirSync(dir, { recursive: true });
+    }
+  }
+}
+
 function loadJSON(file) {
   try {
     if (fs.existsSync(file)) {
-      return JSON.parse(fs.readFileSync(file, "utf8"));
+      const content = fs.readFileSync(file, "utf8");
+      return content.trim() ? JSON.parse(content) : {};
+    } else {
+      ensureDirectoryExists(file);
+      fs.writeFileSync(file, "{}", "utf8");
+      console.log(`Created new JSON file: ${file}`);
+      return {};
     }
   } catch (err) {
     console.error(`Failed to read JSON file: ${file}`, err);
+    return {};
   }
-  return {};
 }
 
 function updateJSON(key, value, file) {
@@ -18,8 +34,24 @@ function updateJSON(key, value, file) {
 
   try {
     fs.writeFileSync(file, JSON.stringify(data, null, 2), "utf8");
+    console.log(`Updated ${key} in ${file}`);
   } catch (err) {
     console.error(`Failed to write to JSON file: ${file}`, err);
+  }
+}
+
+function deleteJSON(key, file) {
+  let data = loadJSON(file);
+  if (key in data) {
+    delete data[key];
+    try {
+      fs.writeFileSync(file, JSON.stringify(data, null, 2), "utf8");
+      console.log(`Deleted ${key} from ${file}`);
+    } catch (err) {
+      console.error(`Failed to delete key from JSON file: ${file}`, err);
+    }
+  } else {
+    console.log(`Key ${key} not found in ${file}`);
   }
 }
 
@@ -35,7 +67,13 @@ const writeLogToFile = (message) => {
 };
 
 function saveJSON(file, data) {
-  fs.writeFileSync(file, JSON.stringify(data, null, 4));
+  try {
+    ensureDirectoryExists(file);
+    fs.writeFileSync(file, JSON.stringify(data, null, 2), "utf8");
+    console.log(`Saved data to ${file}`);
+  } catch (err) {
+    console.error(`Failed to save JSON file: ${file}`, err);
+  }
 }
 
 const log = (type, message) => {
@@ -57,4 +95,8 @@ const log = (type, message) => {
   }
 };
 
-module.exports = { updateJSON, loadJSON, saveJSON, getTimestamp, writeLogToFile, log };
+function getErrorMessage(error) {
+  return error?.response?.data?.error?.message || error?.response?.data?.message || error?.message || "Unknown error";
+}
+
+module.exports = { updateJSON, loadJSON, deleteJSON, saveJSON, getTimestamp, writeLogToFile, log, getErrorMessage };

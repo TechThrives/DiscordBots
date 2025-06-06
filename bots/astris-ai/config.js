@@ -7,7 +7,7 @@ module.exports = {
   geminiKey: process.env.GEMINI_KEY,
   imageEndpoint: process.env.IMAGE_ENDPOINT,
   googleImageFxEndpoint: process.env.GOOGLE_IMAGE_FX_ENDPOINT,
-  googleImageFxKey: process.env.GOOGLE_IMAGE_FX_KEY,
+  googleImageFxCookie: process.env.GOOGLE_IMAGE_FX_COOKIE,
   port: process.env.PORT || 8080,
   mongodbUri: process.env.MONGODB_URI,
 };
