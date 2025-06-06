@@ -1,0 +1,27 @@
+{
+  "name": "muzer",
+  "version": "1.0.0",
+  "description": "A Discord music bot using Riffy and Lavalink",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "format": "prettier --write ."
+  },
+  "keywords": [
+    "discord",
+    "music",
+    "bot",
+    "riffy",
+    "lavalink"
+  ],
+  "dependencies": {
+    "axios": "^1.9.0",
+    "discord.js": "^14.19.3",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "mongodb": "^6.16.0",
+    "node-fetch": "^3.3.2",
+    "riffy": "^1.0.6"
+  }
+}
