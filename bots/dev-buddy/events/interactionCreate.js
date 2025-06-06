@@ -1,6 +1,7 @@
 const { MessageFlags, EmbedBuilder } = require("discord.js");
 const { log } = require("../utils/common");
 const { getCollection } = require("../mongodb");
+const store = require("../store");
 
 module.exports = {
   name: "interactionCreate",
@@ -95,6 +96,11 @@ module.exports = {
 
           const embed = new EmbedBuilder()
             .setTitle("Command Log")
+            .setAuthor({
+              name: "Logged by DevBuddy",
+              iconURL: store.headerIcon,
+            })
+            .setColor(store.embedColor)
             .addFields(
               { name: "Command", value: `/${interaction.commandName}`, inline: true },
               { name: "User", value: `${interaction.user.tag}`, inline: true },

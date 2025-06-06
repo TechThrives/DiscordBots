@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, AttachmentBuilder } = require("discord.js");
+const { SlashCommandBuilder, AttachmentBuilder, flatten, MessageFlags } = require("discord.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -6,7 +6,7 @@ module.exports = {
     .setDescription("Shows a user's avatar.")
     .addUserOption((option) => option.setName("user").setDescription("Choose a user").setRequired(false)),
   async execute(interaction) {
-    await interaction.deferReply();
+    await interaction.deferReply({ flags: MessageFlags.Ephemeral });
 
     const user = interaction.options.getUser("user") || interaction.user;
 

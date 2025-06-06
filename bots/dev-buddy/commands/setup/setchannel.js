@@ -16,6 +16,12 @@ const CHANNEL_TYPES = {
     dbField: "wallpaperChannel",
     replyMsg: "Wallpaper channel set",
   },
+  website: {
+    webhookName: "WebsiteNews",
+    webhookAvatar: "https://i.postimg.cc/Pf8TXJNK/W.png",
+    dbField: "websiteChannel",
+    replyMsg: "Website channel set",
+  },
   log: {
     webhookName: "Logger",
     webhookAvatar: "https://i.postimg.cc/NftDLpKV/L.png",
@@ -61,6 +67,18 @@ module.exports = {
           option
             .setName("channel")
             .setDescription("The text channel to send logs")
+            .setRequired(true)
+            .addChannelTypes(ChannelType.GuildText),
+        ),
+    )
+    .addSubcommand((sub) =>
+      sub
+        .setName("website")
+        .setDescription("Set the website channel")
+        .addChannelOption((option) =>
+          option
+            .setName("channel")
+            .setDescription("The text channel to send website news")
             .setRequired(true)
             .addChannelTypes(ChannelType.GuildText),
         ),

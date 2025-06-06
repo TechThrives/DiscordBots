@@ -1,9 +1,9 @@
-const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
+const { SlashCommandBuilder, EmbedBuilder, MessageFlags } = require("discord.js");
 
 module.exports = {
   data: new SlashCommandBuilder().setName("serverinfo").setDescription("Displays server info."),
   async execute(interaction) {
-    await interaction.deferReply();
+    await interaction.deferReply({ flags: MessageFlags.Ephemeral });
 
     const { guild } = interaction;
 

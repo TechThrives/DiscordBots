@@ -1,9 +1,9 @@
-const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
+const { SlashCommandBuilder, EmbedBuilder, MessageFlags } = require("discord.js");
 
 module.exports = {
   data: new SlashCommandBuilder().setName("ping").setDescription("Displays bot latency."),
   async execute(interaction) {
-    const sent = await interaction.deferReply();
+    const sent = await interaction.deferReply({ flags: MessageFlags.Ephemeral });
 
     const latency = sent.createdTimestamp - interaction.createdTimestamp;
     const apiPing = interaction.client.ws.ping;

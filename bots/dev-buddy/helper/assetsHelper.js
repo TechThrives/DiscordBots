@@ -128,4 +128,20 @@ const scrapeTemplate = async (url) => {
   }
 };
 
-module.exports = { scrapeWallpaper, getImdbData, scrapeTemplate };
+const websiteInfo = async (url) => {
+  try {
+    const response = await axios.get(`https://api.microlink.io/?url=${encodeURIComponent(url)}&screenshot=true`);
+    const data = response.data?.data;
+
+    return {
+      title: data.title || "New Website",
+      description: data.description || "Check out this website",
+      screenshotUrl: data.screenshot?.url,
+    };
+  } catch (error) {
+    console.error("Error fetching website info:", error);
+    throw new Error("Failed to fetch website info.");
+  }
+};
+
+module.exports = { scrapeWallpaper, getImdbData, scrapeTemplate, websiteInfo };

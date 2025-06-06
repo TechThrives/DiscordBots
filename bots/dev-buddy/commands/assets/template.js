@@ -11,7 +11,7 @@ const {
 const axios = require("axios");
 const { getCollection } = require("../../mongodb");
 const { scrapeTemplate } = require("../../helper/assetsHelper");
-const emojis = require("../../emojis");
+const store = require("../../store");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -74,6 +74,8 @@ module.exports = {
 
     const embed = new EmbedBuilder()
       .setTitle("NEW TEMPLATE DROP")
+      .setColor(store.embedColor)
+      .setAuthor({ name: "Use Now", iconURL: store.headerIcon })
       .setDescription(
         [
           `**${title}**`,
@@ -89,7 +91,7 @@ module.exports = {
       .setThumbnail(`attachment://thumbnail.${originalExtension}`)
       .setFooter({
         text: `Posted by ${webhook.name}`,
-        iconURL: emojis.footerIcon,
+        iconURL: store.footerIcon,
       })
       .setTimestamp();
 

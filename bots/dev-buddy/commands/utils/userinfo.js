@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
+const { SlashCommandBuilder, EmbedBuilder, MessageFlags } = require("discord.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -6,7 +6,7 @@ module.exports = {
     .setDescription("Displays user info.")
     .addUserOption((option) => option.setName("user").setDescription("The target member").setRequired(false)),
   async execute(interaction) {
-    await interaction.deferReply();
+    await interaction.deferReply({ flags: MessageFlags.Ephemeral });
 
     const user = interaction.options.getUser("user") || interaction.user;
     const member = interaction.guild.members.cache.get(user.id);
