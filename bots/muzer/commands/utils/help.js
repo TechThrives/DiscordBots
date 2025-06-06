@@ -58,7 +58,7 @@ module.exports = {
       })
       .setThumbnail(client.user.displayAvatarURL({ dynamic: true }))
       .setDescription(
-        `**${botName}** is a multifunctional Discord bot.\n\n` +
+        `**${botName}** is a music Discord bot.\n\n` +
           `**Servers:** ${totalServers}\n` +
           `**Users:** ${totalUsers}\n` +
           `**Uptime:** ${uptimeString}\n` +
