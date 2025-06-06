@@ -18,7 +18,7 @@ module.exports = {
       .setDescription(
         `**Response Time:** ${latency}ms\n**WebSocket Ping:** ${websocketPing}ms\n**Uptime:** ${formatUptime(client.uptime)}`,
       )
-      .setFooter({ text: "Ai Buddy", iconURL: store.footerIcon })
+      .setFooter({ text: "Your Buddy", iconURL: store.footerIcon })
       .setTimestamp();
 
     await interaction.editReply({ content: null, embeds: [embed] });

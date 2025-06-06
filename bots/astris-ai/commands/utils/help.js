@@ -57,7 +57,7 @@ module.exports = {
           `**Ping:** ${ping}ms`,
       )
       .setFooter({
-        text: "Enjoy your music",
+        text: "Ai Buddy",
         iconURL: store.footerIcon,
       })
       .setTimestamp();
