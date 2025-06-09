@@ -19,6 +19,18 @@ module.exports = {
             .setRequired(true)
             .addChannelTypes(ChannelType.GuildText),
         ),
+    )
+    .addSubcommand((sub) =>
+      sub
+        .setName("text_generation")
+        .setDescription("Add an text generation command channel")
+        .addChannelOption((option) =>
+          option
+            .setName("channel")
+            .setDescription("The text channel to allow for text generation")
+            .setRequired(true)
+            .addChannelTypes(ChannelType.GuildText),
+        ),
     ),
 
   async execute(interaction) {

@@ -19,6 +19,17 @@ module.exports = {
             .setRequired(true)
             .addChannelTypes(ChannelType.GuildText),
         ),
+    ).addSubcommand((sub) =>
+      sub
+        .setName("text_generation")
+        .setDescription("Remove a channel from the allowed list for text generation")
+        .addChannelOption((option) =>
+          option
+            .setName("channel")
+            .setDescription("The channel to remove")
+            .setRequired(true)
+            .addChannelTypes(ChannelType.GuildText),
+        ),
     ),
 
   async execute(interaction) {

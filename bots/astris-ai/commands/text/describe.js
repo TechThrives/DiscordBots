@@ -1,5 +1,6 @@
 const { SlashCommandBuilder } = require("discord.js");
 const { describeImage } = require("../../helper/textGeneration");
+const { CHANNELS } = require("../../constants");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -24,10 +25,15 @@ module.exports = {
       const description = await describeImage(imageUrl);
 
       await interaction.editReply({
-        content: `**Requester**\n*@${userTag}*\n\n**Description**\n${description}`,
+        files: [attachment],
       });
+
+      await interaction.followUp({
+        content: `**Description**\n*${description}*\n**Requester**\n*@${userTag}*`,
+      })
     } else {
       throw new Error("Invalid image attachment.");
     }
   },
+  requiresSpecificChannel: CHANNELS.text_generation.dbField,
 };
