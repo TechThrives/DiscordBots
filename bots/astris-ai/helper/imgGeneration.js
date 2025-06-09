@@ -29,8 +29,6 @@ const generateGoogleFx = async (prompt, imageCount = 1, aspectRatio = "IMAGE_ASP
       const expiryDateUTC = new Date(jsonData.googleImageFxKeyExpiry).getTime();
       const currentDateUTC = new Date().getTime();
 
-      console.log(expiryDateUTC, currentDateUTC);
-
       if (currentDateUTC > expiryDateUTC) {
         log("INFO", "Google ImageFX token is expired.");
         await updateAuthTokenImageFx();

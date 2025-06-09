@@ -1,5 +1,6 @@
 const { SlashCommandBuilder, AttachmentBuilder } = require("discord.js");
 const { generateFlux } = require("../../helper/imgGeneration");
+const { CHANNELS } = require("../../constants");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -39,4 +40,5 @@ module.exports = {
       files: attachments,
     });
   },
+  requiresSpecificChannel: CHANNELS.img_generation.dbField,
 };
