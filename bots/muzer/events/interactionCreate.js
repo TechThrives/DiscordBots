@@ -58,7 +58,6 @@ module.exports = {
       success = true;
       log("DEBUG", `Command "${interaction.commandName}" completed successfully for "${interaction.user.tag}"`);
     } catch (error) {
-      console.error(error);
       errorMessage = error.message || "There was an error while executing this command!";
       log(
         "ERROR",

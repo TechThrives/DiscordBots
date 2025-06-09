@@ -9,7 +9,7 @@ function setBotStatus(client) {
       client.user.setPresence({
         activities: [
           {
-            name: "Enjoy your music",
+            name: "Enjoy Your Music",
             type: ActivityType.Custom,
           },
         ],
@@ -29,7 +29,7 @@ function setBotStatus(client) {
     client.user.setPresence({
       activities: [
         {
-          name: "🎵 Now playing: " + trackName,
+          name: "🎵 Now Playing: " + trackName,
           type: ActivityType.Custom,
         },
       ],

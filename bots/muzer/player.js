@@ -570,7 +570,7 @@ function initializePlayer(client) {
   });
 
   client.riffy.on("nodeDisconnect", (node) => {
-    log("WARNING", `Music node disconnected ⚠️ | ${node.host}:${node.port}`);
+    log("WARN", `Music node disconnected ⚠️ | ${node.host}:${node.port}`);
   });
 
   client.riffy.on("nodeError", (node, error) => {

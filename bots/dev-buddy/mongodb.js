@@ -9,7 +9,7 @@ async function connectToDatabase() {
   const uri = config.mongodbUri;
 
   if (!uri) {
-    log("WARNING", "MongoDB URI is not defined in the configuration.");
+    log("WARN", "MongoDB URI is not defined in the configuration.");
     return;
   }
 
