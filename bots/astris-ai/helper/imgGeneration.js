@@ -21,14 +21,21 @@ const generateGoogleFx = async (prompt, imageCount = 1, aspectRatio = "IMAGE_ASP
   try {
     let jsonData = loadJSON("./data/tokens.json");
 
-    if (
-      !jsonData.googleImageFxKey ||
-      !jsonData.googleImageFxKeyExpiry ||
-      new Date(jsonData.googleImageFxKeyExpiry) < new Date()
-    ) {
-      log("INFO", `Google ImageFX token is expired.`);
+    if (!jsonData.googleImageFxKey || !jsonData.googleImageFxKeyExpiry) {
+      log("INFO", "Google ImageFX token or expiry missing, updating token.");
       await updateAuthTokenImageFx();
       jsonData = loadJSON("./data/tokens.json");
+    } else {
+      const expiryDateUTC = new Date(jsonData.googleImageFxKeyExpiry).getTime();
+      const currentDateUTC = new Date().getTime();
+
+      console.log(expiryDateUTC, currentDateUTC);
+
+      if (currentDateUTC > expiryDateUTC) {
+        log("INFO", "Google ImageFX token is expired.");
+        await updateAuthTokenImageFx();
+        jsonData = loadJSON("./data/tokens.json");
+      }
     }
 
     const response = await axios.post(config.googleImageFxEndpoint, data, {
@@ -59,6 +66,7 @@ const generateGoogleFx = async (prompt, imageCount = 1, aspectRatio = "IMAGE_ASP
       await updateAuthTokenImageFx();
     }
     log("ERROR", `ImageFX Error: ${getErrorMessage(error)}`);
+    console.log(error);
     throw new Error("Failed to generate images. Please try again.");
   }
 };
