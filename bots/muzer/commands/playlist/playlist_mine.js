@@ -4,7 +4,9 @@ const icons = require("../../icons");
 const { createMyPlaylistPagination } = require("../../helper/pagination");
 
 module.exports = {
-  data: new SlashCommandBuilder().setName("playlist_mine").setDescription("View your list of playlists you have created"),
+  data: new SlashCommandBuilder()
+    .setName("playlist_mine")
+    .setDescription("View your list of playlists you have created"),
 
   async execute(interaction) {
     const userId = interaction.user.id;

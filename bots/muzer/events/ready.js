@@ -56,7 +56,7 @@ module.exports = {
       });
 
       setInterval(() => setBotStatus(client), 5000);
-      
+
       client.riffy.init(client.user.id);
     } catch (error) {
       console.error("Error setting presence:", error);

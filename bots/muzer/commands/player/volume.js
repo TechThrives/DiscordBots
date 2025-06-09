@@ -28,7 +28,7 @@ module.exports = {
     player.setVolume(volume);
 
     const embed = new EmbedBuilder()
-    .setColor("#00ff00")
+      .setColor("#00ff00")
       .setAuthor({ name: "Volume Updated", iconURL: icons.headerIcon })
       .setDescription(`The volume is now set to **${volume}%**.`)
       .setFooter({ text: "Enjoy your music", iconURL: icons.footerIcon });

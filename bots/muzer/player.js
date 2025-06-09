@@ -50,7 +50,7 @@ const permissionValidator = {
 const messageManager = {
   sendNotification: async (channel, content) => {
     const notification = new EmbedBuilder()
-    .setColor("#fe8a7a")
+      .setColor("#fe8a7a")
       .setAuthor({ name: "Music Notification", iconURL: icons.headerIcon })
       .setDescription(content)
       .setFooter({ text: "Enjoy your music", iconURL: icons.footerIcon });
@@ -86,7 +86,7 @@ const messageManager = {
 const embedCreator = {
   buildTrackEmbed: (trackInfo, requesterInfo, thumbnail) => {
     return new EmbedBuilder()
-    .setColor("#fe8a7a")
+      .setColor("#fe8a7a")
       .setAuthor({
         name: "Now Playing",
         iconURL: icons.headerIcon,
@@ -357,7 +357,7 @@ const lyricsService = {
     const trackDurationSeconds = Math.floor(trackData.length / 1000);
 
     const lyricsEmbed = new EmbedBuilder()
-    .setColor("#fe8a7a")
+      .setColor("#fe8a7a")
       .setAuthor({ name: "Lyrics", iconURL: icons.headerIcon })
       .setTitle(`🎵 Live Lyrics: ${trackData.title}`)
       .setDescription("🔄 Synchronizing lyrics...")

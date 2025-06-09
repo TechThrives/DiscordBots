@@ -2,9 +2,7 @@ const { SlashCommandBuilder, EmbedBuilder, MessageFlags } = require("discord.js"
 const icons = require("../../icons");
 
 module.exports = {
-  data: new SlashCommandBuilder()
-    .setName("ping")
-    .setDescription("Check the bot's latency and uptime"),
+  data: new SlashCommandBuilder().setName("ping").setDescription("Check the bot's latency and uptime"),
 
   async execute(interaction) {
     const client = interaction.client;
@@ -16,9 +14,11 @@ module.exports = {
       const websocketPing = client.ws.ping;
 
       const embed = new EmbedBuilder()
-      .setColor("#fe8a7a")
+        .setColor("#fe8a7a")
         .setAuthor({ name: "Pong!", iconURL: icons.headerIcon })
-        .setDescription(`**Response Time:** ${latency}ms\n**WebSocket Ping:** ${websocketPing}ms\n**Uptime:** ${formatUptime(client.uptime)}`)
+        .setDescription(
+          `**Response Time:** ${latency}ms\n**WebSocket Ping:** ${websocketPing}ms\n**Uptime:** ${formatUptime(client.uptime)}`,
+        )
         .setFooter({ text: "Enjoy your music", iconURL: icons.footerIcon })
         .setTimestamp();
 

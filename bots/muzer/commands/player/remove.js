@@ -52,7 +52,7 @@ module.exports = {
     const removedTrack = player.queue.splice(position - 1, 1)[0];
 
     const embed = new EmbedBuilder()
-    .setColor("#00ff00")
+      .setColor("#00ff00")
       .setAuthor({
         name: "Song removed",
         iconURL: icons.headerIcon,

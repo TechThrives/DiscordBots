@@ -20,7 +20,7 @@ module.exports = {
         .setFooter({ text: "Enjoy your music", iconURL: icons.footerIcon })
         .setTimestamp();
 
-      await interaction.reply({ embeds: [noPlaylistsEmbed], flags: MessageFlags.Ephemeral, });
+      await interaction.reply({ embeds: [noPlaylistsEmbed], flags: MessageFlags.Ephemeral });
       return;
     }
 

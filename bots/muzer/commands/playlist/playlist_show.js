@@ -48,7 +48,6 @@ module.exports = {
       return;
     }
 
-    
     if (playlist.songs.length === 0) {
       const embed = new EmbedBuilder()
         .setColor("#00ff00")
@@ -59,7 +58,7 @@ module.exports = {
         .setDescription("This playlist has no songs.")
         .setFooter({ text: "Enjoy your music", iconURL: icons.footerIcon });
 
-      await interaction.reply({ embeds: [embed], flags: MessageFlags.Ephemeral, });
+      await interaction.reply({ embeds: [embed], flags: MessageFlags.Ephemeral });
       return;
     }
 

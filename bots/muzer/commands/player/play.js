@@ -64,65 +64,65 @@ module.exports = {
 
     await interaction.deferReply({ flags: MessageFlags.Ephemeral });
 
-      const resolve = await client.riffy.resolve({
-        query,
-        requester: interaction.user.username,
-      });
+    const resolve = await client.riffy.resolve({
+      query,
+      requester: interaction.user.username,
+    });
 
-      if (!resolve || typeof resolve !== "object" || !Array.isArray(resolve.tracks)) {
-        throw new TypeError("Invalid response from Riffy API.");
+    if (!resolve || typeof resolve !== "object" || !Array.isArray(resolve.tracks)) {
+      throw new TypeError("Invalid response from Riffy API.");
+    }
+
+    let addedTracks = 0;
+    let isPlaylist = false;
+
+    if (resolve.loadType === "playlist") {
+      isPlaylist = true;
+      for (const track of resolve.tracks) {
+        track.info.requester = interaction.user.username;
+        player.queue.add(track);
+        addedTracks++;
       }
-
-      let addedTracks = 0;
-      let isPlaylist = false;
-
-      if (resolve.loadType === "playlist") {
-        isPlaylist = true;
-        for (const track of resolve.tracks) {
-          track.info.requester = interaction.user.username;
-          player.queue.add(track);
-          addedTracks++;
-        }
-      } else if (resolve.loadType === "search" || resolve.loadType === "track") {
-        const track = resolve.tracks[0];
-        if (track) {
-          track.info.requester = interaction.user.username;
-          player.queue.add(track);
-          addedTracks = 1;
-        }
-      } else {
-        const errorEmbed = new EmbedBuilder()
-          .setColor("#ff0000")
-          .setAuthor({
-            name: "Error",
-            iconURL: icons.headerIcon,
-          })
-          .setFooter({
-            text: "Enjoy your music",
-            iconURL: icons.footerIcon,
-          })
-          .setDescription("No results found.");
-
-        await interaction.followUp({ embeds: [errorEmbed] });
-        return;
+    } else if (resolve.loadType === "search" || resolve.loadType === "track") {
+      const track = resolve.tracks[0];
+      if (track) {
+        track.info.requester = interaction.user.username;
+        player.queue.add(track);
+        addedTracks = 1;
       }
-
-      if (!player.playing && !player.paused) {
-        player.play();
-      }
-
-      const successEmbed = new EmbedBuilder()
-        .setColor("#fe8a7a")
+    } else {
+      const errorEmbed = new EmbedBuilder()
+        .setColor("#ff0000")
         .setAuthor({
-          name: isPlaylist ? "Playlist added to queue!" : "Song added to queue!",
+          name: "Error",
           iconURL: icons.headerIcon,
         })
-        .setDescription(`${addedTracks} song${addedTracks !== 1 ? 's' : ''} added to the queue.`)
         .setFooter({
           text: "Enjoy your music",
           iconURL: icons.footerIcon,
-        });
+        })
+        .setDescription("No results found.");
 
-      await interaction.followUp({ embeds: [successEmbed] });
+      await interaction.followUp({ embeds: [errorEmbed] });
+      return;
+    }
+
+    if (!player.playing && !player.paused) {
+      player.play();
+    }
+
+    const successEmbed = new EmbedBuilder()
+      .setColor("#fe8a7a")
+      .setAuthor({
+        name: isPlaylist ? "Playlist added to queue!" : "Song added to queue!",
+        iconURL: icons.headerIcon,
+      })
+      .setDescription(`${addedTracks} song${addedTracks !== 1 ? "s" : ""} added to the queue.`)
+      .setFooter({
+        text: "Enjoy your music",
+        iconURL: icons.footerIcon,
+      });
+
+    await interaction.followUp({ embeds: [successEmbed] });
   },
 };

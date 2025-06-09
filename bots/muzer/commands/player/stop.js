@@ -23,7 +23,7 @@ module.exports = {
     player.destroy();
 
     const embed = new EmbedBuilder()
-    .setColor("#00ff00")
+      .setColor("#00ff00")
       .setAuthor({ name: "Music Stopped", iconURL: icons.headerIcon })
       .setDescription("Playback has been stopped and the player has been destroyed.")
       .setFooter({ text: "Enjoy your music", iconURL: icons.footerIcon });

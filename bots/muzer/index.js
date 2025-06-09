@@ -71,7 +71,6 @@ async function main() {
       if (![GatewayDispatchEvents.VoiceStateUpdate, GatewayDispatchEvents.VoiceServerUpdate].includes(d.t)) return;
       client.riffy.updateVoiceState(d);
     });
-    
   } catch (err) {
     log("ERROR", `Startup failed: ${err.message}`);
     console.error(err);
