@@ -29,9 +29,7 @@ module.exports = {
         continue;
       }
 
-      const channelMentions = channels
-        .map((id) => `<#${id}>`)
-        .join(" ");
+      const channelMentions = channels.map((id) => `<#${id}>`).join(" ");
 
       responseLines.push(`**${value.displayName}s**\n ${channelMentions}`);
     }

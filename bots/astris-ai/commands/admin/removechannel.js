@@ -19,7 +19,8 @@ module.exports = {
             .setRequired(true)
             .addChannelTypes(ChannelType.GuildText),
         ),
-    ).addSubcommand((sub) =>
+    )
+    .addSubcommand((sub) =>
       sub
         .setName("text_generation")
         .setDescription("Remove a channel from the allowed list for text generation")

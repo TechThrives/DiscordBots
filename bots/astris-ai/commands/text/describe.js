@@ -30,7 +30,7 @@ module.exports = {
 
       await interaction.followUp({
         content: `**Description**\n*${description}*\n**Requester**\n*@${userTag}*`,
-      })
+      });
     } else {
       throw new Error("Invalid image attachment.");
     }

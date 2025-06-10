@@ -39,7 +39,7 @@ module.exports = {
     const imageCount = interaction.options.getNumber("image-count");
     const userTag = interaction.user.tag;
 
-    const generatedImageBuffers = await generateGoogleFx(prompt, imageCount, aspectRatio);
+    const generatedImageBuffers = await generateGoogleFx(prompt, imageCount, aspectRatio, interaction.guild.id);
 
     const attachments = generatedImageBuffers.map((base64Data, i) => {
       const buffer = Buffer.from(base64Data, "base64");
