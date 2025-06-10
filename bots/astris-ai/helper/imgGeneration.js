@@ -21,7 +21,7 @@ const generateGoogleFx = async (prompt, imageCount = 1, aspectRatio = "IMAGE_ASP
   };
 
   try {
-    const guildDatas = getCollection("GuildData");
+    const guildDatas = getCollection("GuildDatas");
     let guildData = await guildDatas.findOne({ guildId });
 
     if (!guildData?.[DATA.image_fx_key.dbFieldKey] || !guildData?.[DATA.image_fx_key.dbFieldExpiry]) {

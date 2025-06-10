@@ -23,7 +23,7 @@ module.exports = {
     const value = interaction.options.getString(config.option);
     const guildId = interaction.guild.id;
 
-    const guildDatas = getCollection("GuildData");
+    const guildDatas = getCollection("GuildDatas");
 
     try {
       await guildDatas.updateOne({ guildId }, { $set: { [config.dbField]: value } }, { upsert: true });

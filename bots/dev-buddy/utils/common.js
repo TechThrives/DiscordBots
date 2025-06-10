@@ -99,4 +99,30 @@ function getErrorMessage(error) {
   return error?.response?.data?.error?.message || error?.response?.data?.message || error?.message || "Unknown error";
 }
 
-module.exports = { updateJSON, loadJSON, deleteJSON, saveJSON, getTimestamp, writeLogToFile, log, getErrorMessage };
+const formatOptions = (optionsData) => {
+  if (!optionsData || optionsData.length === 0) {
+    return "None";
+  }
+
+  const formatOption = (opt) => {
+    if (opt.options && opt.options.length > 0) {
+      const subOptions = opt.options.map((subOpt) => `${subOpt.name}: ${subOpt.value ?? "No value"}`).join(", ");
+      return `${opt.name} -> ${subOptions}`;
+    }
+    return `${opt.name}: ${opt.value ?? "No value"}`;
+  };
+
+  return optionsData.map(formatOption).join(", ");
+};
+
+module.exports = {
+  updateJSON,
+  loadJSON,
+  deleteJSON,
+  saveJSON,
+  getTimestamp,
+  writeLogToFile,
+  log,
+  getErrorMessage,
+  formatOptions,
+};

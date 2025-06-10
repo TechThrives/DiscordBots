@@ -16,7 +16,7 @@ const DATA = {
     displayName: "Image Fx Cookie",
   },
   image_fx_key: {
-    dbFielFdKey: "imageFxKey",
+    dbFieldKey: "imageFxKey",
     dbFieldExpiry: "imageFxKeyExpiry",
     displayName: "Image Fx Key",
   },

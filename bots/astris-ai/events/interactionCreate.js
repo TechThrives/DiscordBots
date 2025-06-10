@@ -1,5 +1,5 @@
 const { MessageFlags } = require("discord.js");
-const { log } = require("../utils/common");
+const { log, formatOptions } = require("../utils/common");
 const { getCollection } = require("../mongodb");
 
 async function getAllowedChannel(interaction, configField) {
@@ -33,10 +33,7 @@ module.exports = {
       return;
     }
 
-    const options =
-      interaction.options.data.length > 0
-        ? interaction.options.data.map((opt) => `${opt.name}: ${opt.value ?? "No value"}`).join("\n")
-        : "None";
+    const options = formatOptions(interaction.options.data);
 
     try {
       if (interaction.client.setBotStatus) {

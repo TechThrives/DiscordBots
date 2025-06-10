@@ -7,7 +7,7 @@ const updateAuthTokenImageFx = async (guildId) => {
   try {
     log("INFO", "Generating new access token...");
 
-    const guildDatas = getCollection("GuildData");
+    const guildDatas = getCollection("GuildDatas");
     const guildData = await guildDatas.findOne({ guildId });
 
     if (!guildData?.[DATA.image_fx_cookie.dbField]) {
