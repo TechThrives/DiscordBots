@@ -15,9 +15,6 @@ module.exports = {
 
     const options = formatOptions(interaction.options.data);
 
-    let success = false;
-    let errorMessage = null;
-
     try {
       if (command.permissions) {
         if (!interaction.member) {
@@ -52,10 +49,9 @@ module.exports = {
       );
 
       await command.execute(interaction);
-      success = true;
       log("DEBUG", `Command "${interaction.commandName}" completed successfully for "${interaction.user.tag}"`);
     } catch (error) {
-      errorMessage = error.message || "There was an error while executing this command!";
+      const errorMessage = error.message || "There was an error while executing this command!";
       log(
         "ERROR",
         `Command execution failed: "${interaction.commandName}" by "${interaction.user.tag}" - ${errorMessage}`,
@@ -72,43 +68,6 @@ module.exports = {
         }
       } catch (replyError) {
         log("ERROR", `Failed to send error message: ${replyError.message}`);
-      }
-    }
-
-    // Send log via webhook
-    const guildId = interaction.guild?.id;
-    if (guildId) {
-      try {
-        const guildConfigs = getCollection("GuildConfigs");
-        const config = await guildConfigs.findOne({ guildId });
-
-        if (config?.logChannel?.webhook) {
-          const { id: webhookId, token: webhookToken } = config.logChannel.webhook;
-          const webhook = await interaction.client.fetchWebhook(webhookId, webhookToken);
-
-          const embed = new EmbedBuilder()
-            .setTitle("Command Log")
-            .addFields(
-              { name: "Command", value: `/${interaction.commandName}`, inline: true },
-              { name: "User", value: `${interaction.user.tag}`, inline: true },
-              { name: "Channel", value: interaction.channel?.name || "DM", inline: true },
-              { name: "Options", value: options },
-              {
-                name: "Status",
-                value: success ? "Success" : `Failed - ${errorMessage}`,
-                inline: false,
-              },
-            )
-            .setFooter({
-              text: interaction.client.user.username,
-              iconURL: interaction.client.user.displayAvatarURL({ dynamic: true }),
-            })
-            .setTimestamp();
-
-          await webhook.send({ embeds: [embed] });
-        }
-      } catch (err) {
-        log("ERROR", `Failed to send command log to webhook: ${err.message}`);
       }
     }
   },

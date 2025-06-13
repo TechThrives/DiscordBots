@@ -119,7 +119,7 @@ async function createPlaylistPagination(interaction, playlists) {
 }
 
 async function createMyPlaylistPagination(interaction, playlists) {
-  const chunkSize = 1;
+  const chunkSize = 10;
   const chunks = [];
 
   // Split playlists into chunks
@@ -228,7 +228,7 @@ async function createMyPlaylistPagination(interaction, playlists) {
 }
 
 async function createPlaylistSongPagination(interaction, playlist) {
-  const chunkSize = 1;
+  const chunkSize = 10;
   const chunks = [];
 
   // Split playlists into chunks
@@ -332,7 +332,7 @@ async function createPlaylistSongPagination(interaction, playlist) {
 }
 
 async function createQueuePagination(interaction, player) {
-  const chunkSize = 1;
+  const chunkSize = 10;
   const chunks = [];
   const currentTrack = player.current;
   const queue = player.queue;

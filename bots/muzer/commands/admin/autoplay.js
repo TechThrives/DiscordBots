@@ -15,7 +15,7 @@ module.exports = {
     const enable = interaction.options.getBoolean("enable");
     const guildId = interaction.guild.id;
 
-    await getCollection("autoplay").updateOne({ guildId }, { $set: { autoplay: enable } }, { upsert: true });
+    await getCollection("guildConfigs").updateOne({ guildId }, { $set: { autoplay: enable } }, { upsert: true });
 
     const embed = new EmbedBuilder()
       .setColor(enable ? "#00ff00" : "#ff0000")

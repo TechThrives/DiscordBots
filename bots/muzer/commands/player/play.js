@@ -1,5 +1,6 @@
 const { SlashCommandBuilder, EmbedBuilder, MessageFlags } = require("discord.js");
 const icons = require("../../icons");
+const { getCollection } = require("../../mongodb");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -13,8 +14,9 @@ module.exports = {
     const client = interaction.client;
     const query = interaction.options.getString("name");
 
-    // Check if user is in voice channel
-    if (!interaction.member.voice.channelId) {
+    const config = await getCollection("guildConfigs").findOne({ guildId: interaction.guild.id });
+
+    if (!config || !config.channelId) {
       const embed = new EmbedBuilder()
         .setColor("#ff0000")
         .setAuthor({
@@ -25,7 +27,27 @@ module.exports = {
           text: "Enjoy your music",
           iconURL: icons.footerIcon,
         })
-        .setDescription("You must be in a voice channel to use this command.");
+        .setDescription("Music channel is not set. Please contact moderator.");
+
+      await interaction.reply({
+        embeds: [embed],
+        flags: MessageFlags.Ephemeral,
+      });
+      return;
+    }
+
+    if (!interaction.member.voice.channelId || interaction.member.voice.channelId !== config.channelId) {
+      const embed = new EmbedBuilder()
+        .setColor("#ff0000")
+        .setAuthor({
+          name: "Error",
+          iconURL: icons.headerIcon,
+        })
+        .setFooter({
+          text: "Enjoy your music",
+          iconURL: icons.footerIcon,
+        })
+        .setDescription(`You must be in <#${config.channelId}> voice channel to use this command.`);
 
       await interaction.reply({
         embeds: [embed],
@@ -57,7 +79,7 @@ module.exports = {
     const player = client.riffy.createConnection({
       defaultVolume: 50,
       guildId: interaction.guildId,
-      voiceChannel: interaction.member.voice.channelId,
+      voiceChannel: config.channelId,
       textChannel: interaction.channelId,
       deaf: true,
     });

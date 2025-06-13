@@ -13,15 +13,60 @@ module.exports = {
     const playlistName = interaction.options.getString("name");
     const userId = interaction.user.id;
 
-    if (!interaction.member.voice.channelId) {
+    const config = await getCollection("guildConfigs").findOne({ guildId: interaction.guild.id });
+
+    if (!config || !config.channelId) {
       const embed = new EmbedBuilder()
         .setColor("#ff0000")
         .setAuthor({
           name: "Error",
           iconURL: icons.headerIcon,
         })
-        .setFooter({ text: "Enjoy your music", iconURL: icons.footerIcon })
-        .setDescription("You must be in a voice channel to use this command.");
+        .setFooter({
+          text: "Enjoy your music",
+          iconURL: icons.footerIcon,
+        })
+        .setDescription("Music channel is not set. Please contact moderator.");
+
+      await interaction.reply({
+        embeds: [embed],
+        flags: MessageFlags.Ephemeral,
+      });
+      return;
+    }
+
+    if (!interaction.member.voice.channelId || interaction.member.voice.channelId !== config.channelId) {
+      const embed = new EmbedBuilder()
+        .setColor("#ff0000")
+        .setAuthor({
+          name: "Error",
+          iconURL: icons.headerIcon,
+        })
+        .setFooter({
+          text: "Enjoy your music",
+          iconURL: icons.footerIcon,
+        })
+        .setDescription(`You must be in <#${config.channelId}> voice channel to use this command.`);
+
+      await interaction.reply({
+        embeds: [embed],
+        flags: MessageFlags.Ephemeral,
+      });
+      return;
+    }
+
+    if (!client.riffy.nodes || client.riffy.nodes.size === 0) {
+      const embed = new EmbedBuilder()
+        .setColor("#ff0000")
+        .setAuthor({
+          name: "Error",
+          iconURL: icons.headerIcon,
+        })
+        .setFooter({
+          text: "Enjoy your music",
+          iconURL: icons.footerIcon,
+        })
+        .setDescription("No Lavalink nodes are available.");
 
       await interaction.reply({
         embeds: [embed],
@@ -86,7 +131,7 @@ module.exports = {
     const player = client.riffy.createConnection({
       defaultVolume: 50,
       guildId: interaction.guildId,
-      voiceChannel: interaction.member.voice.channelId,
+      voiceChannel: config.channelId,
       textChannel: interaction.channelId,
       deaf: true,
     });

@@ -488,7 +488,7 @@ const playerControls = {
       const playerVoiceChannel = player.voiceChannel;
 
       if (!userVoiceChannel || userVoiceChannel.id !== playerVoiceChannel) {
-        messageManager.sendNotification(channel, "**Join the voice channel to use controls!**");
+        messageManager.sendNotification(channel, "**Join the same voice channel to use controls!**");
         return;
       }
 
@@ -496,7 +496,7 @@ const playerControls = {
     });
 
     collector.on("end", () => {
-      console.log("Message collector ended.");
+      log("INFO", "Message collector ended.");
     });
 
     return collector;
@@ -509,7 +509,7 @@ const autoplayHandler = {
     const guildId = player.guildId;
 
     try {
-      const autoplayConfig = await getCollection("autoplay").findOne({ guildId });
+      const autoplayConfig = await getCollection("guildConfigs").findOne({ guildId });
 
       if (autoplayConfig?.autoplay) {
         const nextTrack = await player.autoplay(player);
@@ -521,7 +521,7 @@ const autoplayHandler = {
         }
       } else {
         await messageCleanup.removePreviousMessages(client, guildId);
-        console.log(`Autoplay disabled for guild: ${guildId}`);
+        log("INFO", `Autoplay disabled for guild: ${guildId}`);
         player.destroy();
         messageManager.sendNotification(channel, "**Queue ended. Autoplay is disabled.**");
       }

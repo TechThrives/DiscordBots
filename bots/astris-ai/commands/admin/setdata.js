@@ -6,7 +6,7 @@ const { DATA } = require("../../constants");
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("setdata")
-    .setDescription("Add channel for specific bot commands")
+    .setDescription("Add data to the database")
     .setDefaultMemberPermissions(PermissionFlagsBits.ManageGuild)
     .addSubcommand((sub) =>
       sub
