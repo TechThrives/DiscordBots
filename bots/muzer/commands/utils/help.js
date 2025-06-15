@@ -41,14 +41,6 @@ module.exports = {
     const uptimeString = formatUptime(uptime);
     const ping = client.ws.ping;
 
-    const commandList =
-      Object.entries(allCommands)
-        .map(([folder, commands]) => {
-          const commandsText = commands.map((cmd) => `\`/${cmd.name}\` - ${cmd.description}`).join("\n");
-          return `**${folder.charAt(0).toUpperCase() + folder.slice(1)}**\n${commandsText}`;
-        })
-        .join("\n\n") || "*No commands found.*";
-
     const embed = new EmbedBuilder()
       .setColor("#fe8a7a")
       .setTitle(`${botName} Help`)

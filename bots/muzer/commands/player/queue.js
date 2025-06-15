@@ -9,7 +9,8 @@ module.exports = {
     const client = interaction.client;
 
     const player = client.riffy.players.get(interaction.guildId);
-    if (!player || (!player.queue.current && player.queue.length === 0)) {
+
+    if (!player || (player.queue.length === 0)) {
       const embed = new EmbedBuilder()
         .setColor("#ff0000")
         .setAuthor({
