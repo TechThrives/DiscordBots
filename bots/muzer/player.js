@@ -542,7 +542,7 @@ const nodeManager = {
       password: nodeConfig.password,
       secure: nodeConfig.secure,
       reconnectTimeout: 5000,
-      reconnectTries: Infinity,
+      reconnectTries: 10,
     }));
   },
 };

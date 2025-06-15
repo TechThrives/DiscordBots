@@ -76,13 +76,17 @@ module.exports = {
       return;
     }
 
-    const player = client.riffy.createConnection({
-      defaultVolume: 50,
-      guildId: interaction.guildId,
-      voiceChannel: config.channelId,
-      textChannel: interaction.channelId,
-      deaf: true,
-    });
+    let player = client.riffy.players.get(interaction.guildId);
+
+    if (!player) {
+      player = client.riffy.createConnection({
+        defaultVolume: 50,
+        guildId: interaction.guildId,
+        voiceChannel: config.channelId,
+        textChannel: interaction.channelId,
+        deaf: true,
+      });
+    }
 
     await interaction.deferReply({ flags: MessageFlags.Ephemeral });
 
