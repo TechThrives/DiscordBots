@@ -17,6 +17,8 @@ const updateAuthTokenImageFx = async (guildId) => {
     const response = await axios.get("https://labs.google/fx/api/auth/session", {
       headers: {
         cookie: `__Secure-next-auth.session-token=${guildData[DATA.image_fx_cookie.dbField]};`,
+        Origin: "https://labs.google",
+        Referer: "https://labs.google",
       },
     });
 

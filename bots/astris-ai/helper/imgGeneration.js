@@ -41,8 +41,10 @@ const generateGoogleFx = async (prompt, imageCount = 1, aspectRatio = "IMAGE_ASP
 
     const response = await axios.post(config.googleImageFxEndpoint, data, {
       headers: {
-        "Content-Type": "application/json",
+        Origin: "https://labs.google",
+        Referer: "https://labs.google",
         Authorization: `Bearer ${guildData[DATA.image_fx_key.dbFieldKey]}`,
+        "Content-Type": "application/json",
       },
       maxBodyLength: Infinity,
     });
