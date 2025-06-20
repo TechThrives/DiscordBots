@@ -39,12 +39,6 @@ const summarizeText = async (text) => {
           ],
         },
       ],
-      generationConfig: {
-        temperature: 0.3,
-        topK: 32,
-        topP: 1,
-        maxOutputTokens: 500,
-      },
       safetySettings: [
         {
           category: "HARM_CATEGORY_HARASSMENT",
@@ -137,12 +131,6 @@ const describeImage = async (imageUrl) => {
           ],
         },
       ],
-      generationConfig: {
-        temperature: 0.2,
-        topK: 32,
-        topP: 1,
-        maxOutputTokens: 200,
-      },
       safetySettings: [
         {
           category: "HARM_CATEGORY_HARASSMENT",
