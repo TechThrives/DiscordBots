@@ -1,6 +1,6 @@
 const { SlashCommandBuilder } = require("discord.js");
 const { summarizeText } = require("../../helper/textGeneration");
-const { sendLargeText } = require("../../utils/textHandler");
+const { sendLargeTextToInteraction } = require("../../utils/textHandler");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -35,7 +35,7 @@ module.exports = {
 
     const headerText = `**Summary of last ${userMessages.length} user messages:**\n\n`;
 
-    await sendLargeText(interaction, summary, {
+    await sendLargeTextToInteraction(interaction, summary, {
       prefix: headerText,
     });
   },

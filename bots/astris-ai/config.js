@@ -9,4 +9,5 @@ module.exports = {
   googleImageFxEndpoint: process.env.GOOGLE_IMAGE_FX_ENDPOINT,
   port: process.env.PORT || 8080,
   mongodbUri: process.env.MONGODB_URI,
+  ignorePrefix: "!",
 };

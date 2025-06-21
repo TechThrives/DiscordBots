@@ -1,4 +1,4 @@
-const { Client, GatewayIntentBits, Collection } = require("discord.js");
+const { Client, GatewayIntentBits, Collection, Partials } = require("discord.js");
 const fs = require("fs");
 const { deployCommands } = require("./deploy-commands");
 const { log } = require("./utils/common");
@@ -7,7 +7,13 @@ const express = require("express");
 const { connectToDatabase } = require("./mongodb");
 
 const client = new Client({
-  intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent],
+  intents: [
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.MessageContent,
+    GatewayIntentBits.DirectMessages,
+  ],
+  partials: [Partials.Channel],
 });
 client.commands = new Collection();
 

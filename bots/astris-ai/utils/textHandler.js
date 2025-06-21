@@ -1,6 +1,7 @@
 const { log } = require("./common");
+const { MessageFlags } = require("discord.js");
 
-const sendLargeText = async (interaction, content, options = {}) => {
+const sendLargeTextToInteraction = async (interaction, content, options = {}) => {
   const {
     prefix = "",
     suffix = "",
@@ -8,6 +9,7 @@ const sendLargeText = async (interaction, content, options = {}) => {
     chunkSize = 1900,
     useCodeBlock = false,
     splitBy = "\n",
+    ephemeral = false,
   } = options;
 
   try {
@@ -17,10 +19,15 @@ const sendLargeText = async (interaction, content, options = {}) => {
 
     // If content fits in one message, send it normally
     if (fullText.length <= maxLength) {
+      const replyOptions = { content: fullText};
+      if (ephemeral) {
+        replyOptions.flags = MessageFlags.Ephemeral;
+      }
+      
       if (interaction.deferred || interaction.replied) {
-        return await interaction.editReply(fullText);
+        return await interaction.editReply(replyOptions);
       } else {
-        return await interaction.reply(fullText);
+        return await interaction.reply(replyOptions);
       }
     }
 
@@ -29,33 +36,104 @@ const sendLargeText = async (interaction, content, options = {}) => {
 
     // Send first chunk as reply/edit
     const firstChunk = prefix + chunks[0] + (chunks.length > 1 ? "" : suffix);
+    const firstReplyOptions = { content: firstChunk, ephemeral };
+    
     if (interaction.deferred || interaction.replied) {
-      await interaction.editReply(firstChunk);
+      await interaction.editReply(firstReplyOptions);
     } else {
-      await interaction.reply(firstChunk);
+      await interaction.reply(firstReplyOptions);
     }
 
     // Send remaining chunks as follow-ups
     for (let i = 1; i < chunks.length; i++) {
       const isLastChunk = i === chunks.length - 1;
       const chunk = chunks[i] + (isLastChunk ? suffix : "");
-      await interaction.followUp(chunk);
+      await interaction.followUp({ content: chunk, ephemeral });
     }
 
     return { success: true, chunks: chunks.length };
   } catch (error) {
-    log("ERROR", `Failed to send large text: ${error.message}`);
+    log("ERROR", `Failed to send large text to interaction: ${error.message}`);
+
+    // Try to send error message
+    const errorMsg = "Failed to send message due to length or other issues.";
+    const errorOptions = { content: errorMsg, ephemeral };
+    
+    try {
+      if (interaction.deferred || interaction.replied) {
+        await interaction.editReply(errorOptions);
+      } else {
+        await interaction.reply(errorOptions);
+      }
+    } catch (replyError) {
+      log("ERROR", `Failed to send error message to interaction: ${replyError.message}`);
+    }
+
+    throw error;
+  }
+};
+
+const sendLargeTextToMessage = async (message, content, options = {}) => {
+  const {
+    prefix = "",
+    suffix = "",
+    maxLength = 2000,
+    chunkSize = 1900,
+    useCodeBlock = false,
+    splitBy = "\n",
+    reply = false, // Whether to reply to the original message
+  } = options;
+
+  try {
+    // Apply code block formatting if requested
+    const formattedContent = useCodeBlock ? `\`\`\`\n${content}\n\`\`\`` : content;
+    const fullText = prefix + formattedContent + suffix;
+
+    // If content fits in one message, send it normally
+    if (fullText.length <= maxLength) {
+      if (reply) {
+        return await message.reply(fullText);
+      } else {
+        return await message.channel.send(fullText);
+      }
+    }
+
+    // Content is too long, need to split it
+    const chunks = splitTextIntoChunks(formattedContent, chunkSize, splitBy);
+
+    // Send first chunk
+    const firstChunk = prefix + chunks[0] + (chunks.length > 1 ? "" : suffix);
+    let firstMessage;
+    
+    if (reply) {
+      firstMessage = await message.reply(firstChunk);
+    } else {
+      firstMessage = await message.channel.send(firstChunk);
+    }
+
+    // Send remaining chunks to the same channel
+    const sentMessages = [firstMessage];
+    for (let i = 1; i < chunks.length; i++) {
+      const isLastChunk = i === chunks.length - 1;
+      const chunk = chunks[i] + (isLastChunk ? suffix : "");
+      const sentMessage = await message.channel.send(chunk);
+      sentMessages.push(sentMessage);
+    }
+
+    return { success: true, chunks: chunks.length, messages: sentMessages };
+  } catch (error) {
+    log("ERROR", `Failed to send large text to message: ${error.message}`);
 
     // Try to send error message
     const errorMsg = "Failed to send message due to length or other issues.";
     try {
-      if (interaction.deferred || interaction.replied) {
-        await interaction.editReply(errorMsg);
+      if (reply) {
+        await message.reply(errorMsg);
       } else {
-        await interaction.reply(errorMsg);
+        await message.channel.send(errorMsg);
       }
     } catch (replyError) {
-      log("ERROR", `Failed to send error message: ${replyError.message}`);
+      log("ERROR", `Failed to send error message to channel: ${replyError.message}`);
     }
 
     throw error;
@@ -125,6 +203,7 @@ const forceSplitLongText = (text, maxSize) => {
 };
 
 module.exports = {
-  sendLargeText,
+  sendLargeTextToInteraction,
+  sendLargeTextToMessage,
   splitTextIntoChunks,
 };

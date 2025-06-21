@@ -175,4 +175,92 @@ const describeImage = async (imageUrl) => {
   }
 };
 
-module.exports = { summarizeText, describeImage };
+const replyUserMessage = async (message, context) => {
+  try {
+    // Prepare the request payload
+    const requestBody = {
+      system_instruction: {
+        parts: [
+          {
+            text: `You are Astris AI, a friendly assistant in the TechThrives Community Discord server.
+
+            Your job is to help members with general questions, give useful info, and keep the conversation welcoming.
+
+            - Respond in a natural, polite tone—like a helpful community member.
+            - Don't introduce yourself unless directly asked.
+            - Never answer coding or programming questions. Kindly suggest asking in the right channel.
+            - Use simple language that's easy for everyone to understand.
+            - Keep replies under 1000 characters. Short, clear, and helpful.
+            - Use the last 1-5 messages for context.
+            - Add a light emoji now and then 😊
+            - If unsure, suggest asking a mod or another member.
+            - Follow TechThrives values: respect, learning, and inclusion.
+            - Don't act human or share personal opinions.
+
+            Keep replies friendly and helpful. Avoid sounding robotic or scripted.`,
+          },
+        ],
+      },
+      contents: [
+        {
+          parts: [
+            {
+              text: `Here is the group chat conversation for context:`,
+            },
+            {
+              text: context,
+            },
+            {
+              text: "\n\nNow, please respond to the user's message:",
+            },
+            {
+              text: message,
+            },
+          ],
+        },
+      ],
+      safetySettings: [
+        {
+          category: "HARM_CATEGORY_HARASSMENT",
+          threshold: "BLOCK_MEDIUM_AND_ABOVE",
+        },
+        {
+          category: "HARM_CATEGORY_HATE_SPEECH",
+          threshold: "BLOCK_MEDIUM_AND_ABOVE",
+        },
+        {
+          category: "HARM_CATEGORY_SEXUALLY_EXPLICIT",
+          threshold: "BLOCK_MEDIUM_AND_ABOVE",
+        },
+        {
+          category: "HARM_CATEGORY_DANGEROUS_CONTENT",
+          threshold: "BLOCK_MEDIUM_AND_ABOVE",
+        },
+      ],
+    };
+
+    const response = await axios.post(
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${config.geminiKey}`,
+      requestBody,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        timeout: 30000,
+      },
+    );
+
+    if (response.data && response.data.candidates && response.data.candidates[0]) {
+      const aiResponse = response.data.candidates[0].content.parts[0].text;
+      log("INFO", `User message replied successfully.`);
+      return aiResponse.trim();
+    }
+
+    throw new Error("Unable to Process Message. Please try again.");
+  } catch (error) {
+    log("ERROR", `Error replying user: ${error.message}`);
+    return "Sorry, I couldn't process your message at the moment. Please try again later.";
+  }
+};
+
+module.exports = { summarizeText, describeImage, replyUserMessage };
