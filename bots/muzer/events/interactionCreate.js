@@ -1,11 +1,18 @@
-const { MessageFlags, EmbedBuilder } = require("discord.js");
+const { MessageFlags } = require("discord.js");
 const { log, formatOptions } = require("../utils/common");
-const { getCollection } = require("../mongodb");
 
 module.exports = {
   name: "interactionCreate",
   async execute(interaction) {
     if (!interaction.isChatInputCommand()) return;
+
+    if (!interaction.guild) {
+      await interaction.reply({
+        content: "This command cannot be used in direct messages.",
+        flags: MessageFlags.Ephemeral,
+      });
+      return;
+    }
 
     const command = interaction.client.commands.get(interaction.commandName);
     if (!command) {
@@ -17,14 +24,6 @@ module.exports = {
 
     try {
       if (command.permissions) {
-        if (!interaction.member) {
-          await interaction.reply({
-            content: "This command cannot be used in direct messages.",
-            flags: MessageFlags.Ephemeral,
-          });
-          return;
-        }
-
         if (!interaction.member.permissions.has(command.permissions)) {
           const permissionNames = Array.isArray(command.permissions)
             ? command.permissions.join(", ")

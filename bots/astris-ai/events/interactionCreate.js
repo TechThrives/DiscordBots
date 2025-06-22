@@ -27,6 +27,14 @@ module.exports = {
   async execute(interaction) {
     if (!interaction.isChatInputCommand()) return;
 
+    if (!interaction.guild) {
+      await interaction.reply({
+        content: "This command cannot be used in direct messages.",
+        flags: MessageFlags.Ephemeral,
+      });
+      return;
+    }
+
     const command = interaction.client.commands.get(interaction.commandName);
     if (!command) {
       log("WARN", `Unknown command attempted: "${interaction.commandName}" by "${interaction.user.username}"`);
@@ -41,14 +49,6 @@ module.exports = {
       }
 
       if (command.permissions) {
-        if (!interaction.member) {
-          await interaction.reply({
-            content: "This command cannot be used in direct messages.",
-            flags: MessageFlags.Ephemeral,
-          });
-          return;
-        }
-
         if (!interaction.member.permissions.has(command.permissions)) {
           const permissionNames = Array.isArray(command.permissions)
             ? command.permissions.join(", ")

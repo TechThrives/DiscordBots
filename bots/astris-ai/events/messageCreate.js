@@ -87,7 +87,9 @@ module.exports = {
 
       const userMessagesText = await getRecentMessages(message);
 
-      const aiMessage = await replyUserMessage(message.content, userMessagesText);
+      const currentMessage = `**${message.author.displayName || message.author.username}**: ${message.content}`;
+
+      const aiMessage = await replyUserMessage(currentMessage, userMessagesText);
 
       await sendLargeTextToMessage(message, aiMessage);
     } else if (botWasMentionedOrRepliedTo) {
@@ -101,7 +103,9 @@ module.exports = {
 
       const userMessagesText = await getRecentMessages(message);
 
-      const aiMessage = await replyUserMessage(message.content, userMessagesText);
+      const currentMessage = `**${message.author.displayName || message.author.username}**: ${message.content}`;
+
+      const aiMessage = await replyUserMessage(currentMessage, userMessagesText);
 
       await sendLargeTextToMessage(message, aiMessage);
     }

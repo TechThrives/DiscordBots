@@ -24,7 +24,9 @@ const updateAuthTokenImageFx = async (guildId) => {
 
     const { data } = response;
     if (!data) throw new Error("Invalid response from ImageFX Auth API");
+
     if (data.error) throw new Error(data.error);
+
     if (!data.access_token || !data.expires) {
       throw new Error("Access token or expiry missing from response");
     }
@@ -33,6 +35,13 @@ const updateAuthTokenImageFx = async (guildId) => {
       [DATA.image_fx_key.dbFieldKey]: data.access_token,
       [DATA.image_fx_key.dbFieldExpiry]: data.expires,
     };
+
+    if (response.headers["set-cookie"]) {
+      const cookie = response.headers["set-cookie"].find((c) => c.startsWith("__Secure-next-auth.session-token="));
+      if (cookie) {
+        updateData[DATA.image_fx_cookie.dbField] = cookie.split(";")[0].split("=")[1];
+      }
+    }
 
     await guildDatas.updateOne({ guildId }, { $set: updateData }, { upsert: true });
     log("INFO", `Successfully updated access token for guild ${guildId}`);
