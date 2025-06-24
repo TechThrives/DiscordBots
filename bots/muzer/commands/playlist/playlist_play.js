@@ -132,7 +132,7 @@ module.exports = {
       defaultVolume: 50,
       guildId: interaction.guildId,
       voiceChannel: config.channelId,
-      textChannel: interaction.channelId,
+      textChannel: config.channelId,
       deaf: true,
     });
 
@@ -179,7 +179,7 @@ module.exports = {
         name: "Playing Custom Playlist",
         iconURL: icons.headerIcon,
       })
-      .setDescription(`Now playing **${playlistName}** playlist.`)
+      .setDescription(`Now playing **${playlistName}** playlist. \n Check <#${config.channelId}> for updates.`)
       .setFooter({ text: "Enjoy your music", iconURL: icons.footerIcon });
 
     await interaction.followUp({ embeds: [embed] });

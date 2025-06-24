@@ -83,7 +83,7 @@ module.exports = {
         defaultVolume: 50,
         guildId: interaction.guildId,
         voiceChannel: config.channelId,
-        textChannel: interaction.channelId,
+        textChannel: config.channelId,
         deaf: true,
       });
     }
@@ -143,7 +143,7 @@ module.exports = {
         name: isPlaylist ? "Playlist added to queue!" : "Song added to queue!",
         iconURL: icons.headerIcon,
       })
-      .setDescription(`${addedTracks} song${addedTracks !== 1 ? "s" : ""} added to the queue.`)
+      .setDescription(`${addedTracks} song${addedTracks !== 1 ? "s" : ""} added to the queue. \n Check <#${config.channelId}> for updates.`)
       .setFooter({
         text: "Enjoy your music",
         iconURL: icons.footerIcon,
