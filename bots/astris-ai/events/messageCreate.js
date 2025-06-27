@@ -2,32 +2,81 @@ const { ChannelType } = require("discord.js");
 const { log } = require("../utils/common");
 const { getCollection } = require("../mongodb");
 const config = require("../config");
+const axios = require("axios");
 const { CHANNELS } = require("../constants");
 const { replyUserMessage } = require("../helper/textGeneration");
 const { sendLargeTextToMessage } = require("../utils/textHandler");
 
-const getRecentMessages = async (message, limit = 5) => {
-  try {
-    const allMessages = await message.channel.messages.fetch();
-
-    const userMessages = allMessages.filter((msg) => !msg.author.bot).first(limit);
-
-    if (userMessages.slice(1).length === 0) {
-      return "No context available.";
+const urlToBase64 = (url) =>
+  axios.get(url, { responseType: "arraybuffer" }).then((res) => {
+    if (res.status !== 200) {
+      throw new Error(`Failed to fetch: ${res.status}`);
     }
+    return Buffer.from(res.data, "binary").toString("base64");
+  });
 
-    const userMessagesText = userMessages
-      .slice(1)
-      .reverse()
-      .map((message) => `**${message.author.displayName || message.author.username}**: ${message.content}`)
-      .join("\n");
+async function buildContents(msgs) {
+  const THRESHOLD = 2 * 1000_000; // inline ≤2MB
 
-    return userMessagesText;
+  return Promise.all(
+    msgs.map(async (msg) => {
+      const role = msg.author.id === config.clientId ? "model" : "user";
+      const parts = [];
+
+      // 1) Text part
+      if (msg.cleanContent?.trim()) {
+        const text = role === "model" ? msg.cleanContent : `${msg.author.username}: ${msg.cleanContent}`;
+        parts.push({ text });
+      } else if (msg.content?.trim()) {
+        const text = role === "model" ? msg.content : `${msg.author.username}: ${msg.content}`;
+        parts.push({ text });
+      }
+
+      // 2) Embeds
+      if (msg.embeds.length > 0) {
+        for (const embed of msg.embeds) {
+          if (embed.description) {
+            parts.push({ text: embed.description });
+          }
+        }
+      }
+
+      // 3) Attachments
+      for (const att of msg.attachments.values()) {
+        const mimeType = att.contentType || "application/octet-stream";
+
+        if (att.size && att.size <= THRESHOLD) {
+          // try inline
+          try {
+            const data = await urlToBase64(att.url);
+            parts.push({ inlineData: { mimeType, data } });
+            continue;
+          } catch (err) {
+            console.warn(`Inlining failed for ${att.url}:`, err);
+          }
+        }
+
+        // fallback to fileData
+        const fallbackText = "Unable to load inline attachment: [Attachment: " + att.name + "] So here is the link: " + att.url;
+        parts.push({ text: fallbackText });
+      }
+
+      return { role, parts };
+    }),
+  );
+}
+
+async function getRecentMessages(message, limit = 10) {
+  try {
+    const fetched = await message.channel.messages.fetch({ limit });
+    const msgs = fetched.filter((m) => !m.system).sort((a, b) => a.createdTimestamp - b.createdTimestamp);
+
+    return await buildContents(msgs);
   } catch (error) {
     log("ERROR", `Failed to fetch recent messages: ${error.message}`);
-    return "No context available.";
+    return [];
   }
-};
+}
 
 module.exports = {
   name: "messageCreate",
@@ -85,11 +134,9 @@ module.exports = {
 
       message.channel.sendTyping();
 
-      const userMessagesText = await getRecentMessages(message);
+      const userMessagesContent = await getRecentMessages(message);
 
-      const currentMessage = `**${message.author.displayName || message.author.username}**: ${message.content}`;
-
-      const aiMessage = await replyUserMessage(currentMessage, userMessagesText);
+      const aiMessage = await replyUserMessage(userMessagesContent);
 
       await sendLargeTextToMessage(message, aiMessage);
     } else if (botWasMentionedOrRepliedTo) {
@@ -101,11 +148,9 @@ module.exports = {
 
       message.channel.sendTyping();
 
-      const userMessagesText = await getRecentMessages(message);
-
-      const currentMessage = `**${message.author.displayName || message.author.username}**: ${message.content}`;
-
-      const aiMessage = await replyUserMessage(currentMessage, userMessagesText);
+      const userMessagesContent = await getRecentMessages(message);
+      
+      const aiMessage = await replyUserMessage(userMessagesContent);
 
       await sendLargeTextToMessage(message, aiMessage);
     }
