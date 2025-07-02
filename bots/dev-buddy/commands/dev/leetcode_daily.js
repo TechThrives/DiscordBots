@@ -35,7 +35,7 @@ module.exports = {
     const { id: channelId } = config.leetcodeChannel;
 
     const dailyChallenge = await leetCodeDaily();
-    const leetcodeSolution = await solveLeetCode("two-sum");
+    const leetcodeSolution = await solveLeetCode(dailyChallenge.titleSlug);
 
     const embed = new EmbedBuilder()
       .setTitle("LeetCode Daily Challenge")
@@ -69,6 +69,14 @@ module.exports = {
       autoArchiveDuration: ThreadAutoArchiveDuration.OneDay,
       reason: `Discussion on ${dailyChallenge.date} LeetCode challenge`,
       type: ChannelType.PublicThread,
+    });
+
+    await thread.send({
+      content: `## Problem Statement\n${dailyChallenge.content}`,
+    });
+
+    await thread.send({
+      content: `## AI Generated Code Solutions`,
     });
 
     for (const [key, value] of Object.entries(leetcodeSolution.solution)) {

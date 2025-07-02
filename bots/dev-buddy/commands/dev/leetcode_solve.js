@@ -9,7 +9,7 @@ const {
 } = require("discord.js");
 const { getCollection } = require("../../mongodb");
 const store = require("../../store");
-const { leetCodeDaily, solveLeetCode } = require("../../helper/devHelper");
+const { solveLeetCode } = require("../../helper/devHelper");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -70,6 +70,14 @@ module.exports = {
       type: ChannelType.PublicThread,
     });
 
+    await thread.send({
+      content: `## Problem Statement\n${leetcodeSolution.content}`,
+    });
+
+    await thread.send({
+      content: `## AI Generated Code Solutions`,
+    });
+
     for (const [key, value] of Object.entries(leetcodeSolution.solution)) {
       if (!value) continue;
 
@@ -86,5 +94,4 @@ module.exports = {
       content: `Leetcode daily challenge sent to the <#${config.leetcodeChannel.id}> channel!`,
     });
   },
-  permissions: PermissionFlagsBits.ManageGuild,
 };
