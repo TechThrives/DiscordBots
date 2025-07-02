@@ -7,4 +7,5 @@ module.exports = {
   port: process.env.PORT || 8080,
   omdbApiKey: process.env.OMDB_API_KEY,
   mongodbUri: process.env.MONGODB_URI,
+  geminiKey: process.env.GEMINI_KEY,
 };

@@ -87,7 +87,6 @@ async function createWebhook(channel, config, reason) {
 
 module.exports = {
   data: command,
-  permissions: PermissionFlagsBits.ManageGuild,
 
   async execute(interaction) {
     await interaction.deferReply({ flags: MessageFlags.Ephemeral });
