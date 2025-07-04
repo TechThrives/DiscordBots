@@ -18,18 +18,10 @@ function setBotStatus(client) {
       return;
     }
 
-    const player = activePlayers[0];
-
-    if (!player.current || !player.current.info || !player.current.info.title) {
-      return;
-    }
-
-    const trackName = player.current.info.title;
-
     client.user.setPresence({
       activities: [
         {
-          name: "🎵 Now Playing: " + trackName,
+          name: `Currently Playing in ${activePlayers.length} server`,
           type: ActivityType.Custom,
         },
       ],

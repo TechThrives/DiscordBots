@@ -91,7 +91,7 @@ module.exports = {
     }
 
     await interaction.editReply({
-      content: `Leetcode daily challenge sent to the <#${config.leetcodeChannel.id}> channel!`,
+      content: `Leetcode Solution sent to the <#${config.leetcodeChannel.id}> channel!`,
     });
   },
 };
