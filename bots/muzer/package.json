@@ -22,6 +22,7 @@
     "express": "^5.1.0",
     "mongodb": "^6.16.0",
     "node-fetch": "^3.3.2",
-    "riffy": "^1.0.7-rc.2"
+    "riffy": "^1.0.7-rc.2",
+    "vibesync": "^1.0.6"
   }
 }

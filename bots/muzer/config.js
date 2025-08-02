@@ -13,11 +13,5 @@ module.exports = {
       port: 13592,
       secure: false,
     },
-    {
-      host: "lavalink.beban.tech",
-      port: 80,
-      password: "bytebee_",
-      secure: false,
-    },
   ],
 };

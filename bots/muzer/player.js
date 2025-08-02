@@ -5,6 +5,7 @@ const icons = require("./icons");
 const axios = require("axios");
 const { getCollection } = require("./mongodb.js");
 const { log } = require("./utils/common.js");
+const { VibeSync } = require("VibeSync");
 
 // Constants and configurations
 const PERMISSIONS_REQUIRED = [
@@ -564,6 +565,8 @@ function initializePlayer(client) {
     restVersion: "v4",
   });
 
+  const vcStatus = new VibeSync(client);
+
   // Node connection events
   client.riffy.on("nodeConnect", (node) => {
     log("SUCCESS", `Music node connected ✅ | ${node.host}:${node.port}`);
@@ -580,8 +583,10 @@ function initializePlayer(client) {
   // Track playback events
   client.riffy.on("trackStart", async (player, track) => {
     const channel = client.channels.cache.get(player.textChannel);
+    const voice = client.channels.cache.get(player.voiceChannel);
     const guildId = player.guildId;
     const requesterInfo = track.info.requester || "Autoplay";
+    const status = `${track.info.title} - ${track.info.author}`;
 
     await messageCleanup.removePreviousMessages(client, guildId);
 
@@ -600,6 +605,11 @@ function initializePlayer(client) {
     if (playerMessage) {
       await databaseManager.storeTrackMessage(guildId, playerMessage.id, channel.id);
       playerControls.setupMessageCollector(client, player, channel, playerMessage);
+
+      await vcStatus
+        .setVoiceStatus(voice.id, status)
+        .then(() => log("SUCCESS", `Voice channel status updated: ${status}`))
+        .catch((err) => log("ERROR", `Failed to update voice status: ${err.message}`));
     }
   });
 
@@ -612,6 +622,13 @@ function initializePlayer(client) {
   });
 
   client.riffy.on("queueEnd", async (player) => {
+    const voice = client.channels.cache.get(player.voiceChannel);
+    const status = "Enjoy your music!";
+
+    await vcStatus
+      .setVoiceStatus(voice.id, status)
+      .then(() => log("SUCCESS", `Voice channel status updated: ${status}`))
+      .catch((err) => log("ERROR", `Failed to update voice status: ${err.message}`));
     await autoplayHandler.handleQueueEnd(client, player);
   });
 }
