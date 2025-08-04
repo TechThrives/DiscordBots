@@ -5,7 +5,7 @@ const icons = require("./icons");
 const axios = require("axios");
 const { getCollection } = require("./mongodb.js");
 const { log } = require("./utils/common.js");
-const { VibeSync } = require("VibeSync");
+const { VibeSync } = require("vibesync");
 
 // Constants and configurations
 const PERMISSIONS_REQUIRED = [
