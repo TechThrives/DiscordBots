@@ -10,4 +10,6 @@ module.exports = {
   port: process.env.PORT || 8080,
   mongodbUri: process.env.MONGODB_URI,
   ignorePrefix: "!",
+  infipImageFxEndpoint: process.env.INFIP_IMAGE_FX_ENDPOINT,
+  infipKey: process.env.INFIP_KEY,
 };

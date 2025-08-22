@@ -8,9 +8,21 @@ module.exports = {
   mongodbUri: process.env.MONGODB_URI,
   nodes: [
     {
-      host: "lavalink.jirayu.net",
+      host: "lavalink.serenetia.com",
+      password: "https://dsc.gg/ajidevserver",
+      port: 80,
+      secure: false,
+    },
+    {
+      host: "lavalinkv4-id.serenetia.com",
+      password: "https://dsc.gg/ajidevserver",
+      port: 80,
+      secure: false,
+    },
+    {
       password: "youshallnotpass",
-      port: 13592,
+      host: "vip.visionhost.cloud",
+      port: 7023,
       secure: false,
     },
   ],

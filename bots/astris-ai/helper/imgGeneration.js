@@ -73,6 +73,46 @@ const generateGoogleFx = async (prompt, imageCount = 1, aspectRatio = "IMAGE_ASP
   }
 };
 
+const generateGoogleFxImage = async (prompt, imageCount = 1, aspectRatio = "IMAGE_ASPECT_RATIO_SQUARE", guildId) => {
+  const sizeMap = {
+    IMAGE_ASPECT_RATIO_SQUARE: "1024x1024",
+    IMAGE_ASPECT_RATIO_PORTRAIT: "1024x1792",
+    IMAGE_ASPECT_RATIO_LANDSCAPE: "1792x1024",
+  };
+  const data = {
+    model: "img4",
+    n: imageCount,
+    prompt: prompt,
+    response_format: "b64_json",
+    size: sizeMap[aspectRatio] || sizeMap["IMAGE_ASPECT_RATIO_SQUARE"],
+  };
+
+  try {
+    const response = await axios.post(config.infipImageFxEndpoint, data, {
+      headers: {
+        Authorization: `Bearer ${config.infipKey}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response?.data?.data) {
+      throw new Error("Invalid response from ImageFX");
+    }
+
+    const base64Images = [];
+    response.data.data.forEach((image) => {
+      if (image.b64_json) {
+        base64Images.push(image.b64_json);
+      }
+    });
+
+    return base64Images;
+  } catch (error) {
+    log("ERROR", `ImageFX Error: ${getErrorMessage(error)}`);
+    throw new Error("Failed to generate images. Please try again.");
+  }
+};
+
 const generateFlux = async (prompt, aspectRatio = "1024:1024") => {
   const [width, height] = aspectRatio.split(":").map(Number);
   const params = new URLSearchParams({
@@ -135,6 +175,7 @@ const reGenerate = async (prompt, imageUrl) => {
 
 module.exports = {
   generateGoogleFx,
+  generateGoogleFxImage,
   generateFlux,
   reGenerate,
 };
